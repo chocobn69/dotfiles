@@ -1,0 +1,8 @@
+workspace $wterm output eDP1
+workspace $wweb output HDMI1
+workspace $wdev output HDMI1
+workspace $wslack output eDP1
+workspace $wirc output eDP1
+workspace $wx2go output eDP1
+workspace $wmail output HDMI1
+
