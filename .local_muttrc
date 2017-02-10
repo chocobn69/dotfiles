@@ -1,0 +1,15 @@
+
+set spoolfile = "+choco-bn-gmail-com/INBOX"
+alternates choco.bn@gmail.com nicolas.baccelli@gmail.com nicolas.baccelli@abc-culture.fr
+mailboxes +choco-bn-gmail-com/INBOX \
+          +choco-bn-gmail-com/archive \
+          +choco-bn-gmail-com/sent \
+          +choco-bn-gmail-com/drafts \
+          +temporary/search \
+set mbox      = "+choco-bn-gmail-com/archive"
+set postponed = "+choco-bn-gmail-com/drafts"
+set realname = "Nicolas Baccelli"          # who am i?
+set smtp_url = 'smtps://choco.bn@smtp.gmail.com'
+set from     = "choco.bn@gmail.com"
+macro index,pager e "<save-message>=choco-bn-gmail-com/archive<enter><enter>" "Archive"
+# set editor='nvim +8 -c "set tw=76"'
