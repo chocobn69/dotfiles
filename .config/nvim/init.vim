@@ -47,6 +47,7 @@ set showcmd             " show (partial) command in status line
 set number
 call plug#begin('~/.vim/plugged')
 
+
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-surround'
@@ -64,6 +65,7 @@ Plug 'w0rp/ale'
 Plug 'google/yapf'
 Plug 'timothycrosley/isort'
 Plug 'davidhalter/jedi-vim', {'for': 'python'}
+Plug 'mtth/scratch.vim'
 
 " Initialize plugin system
 call plug#end()
