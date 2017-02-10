@@ -191,6 +191,8 @@ animation-charging-framerate = 750
 type = internal/i3
 format = <label-state> <label-mode>
 
+pin-workspaces = true
+
 index-sort = true
 wrapping-scroll = true
 
