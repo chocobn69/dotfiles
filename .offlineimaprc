@@ -1,0 +1,59 @@
+[general]
+ui = TTY.TTYUI
+accounts = choco
+pythonfile = ~/.mutt/offlineimap.py
+fsync = False
+
+[Account choco]
+localrepository = choco-Local
+remoterepository = choco-Remote
+status_backend = sqlite
+postsynchook = notmuch new
+# Minutes between syncs
+autorefresh = 5
+quick = 24
+
+[Repository choco-Local]
+type = Maildir
+localfolders = ~/.mail/choco-bn-gmail-com
+nametrans = lambda folder: {'drafts':  '[Gmail]/Brouillons',
+                            'sent':    '[Gmail]/Messages envoy&AOk-s',
+                            'trash':   '[Gmail]/Corbeilles',
+                            'flagged': '[Gmail]/Starred',
+                            'important': '[Gmail]/Important',
+                            'archive': '[Gmail]/Tous les messages',
+                            }.get(folder, folder)
+
+[Repository choco-Remote]
+maxconnections = 1
+type = Gmail
+ssl = yes
+remoteuser = choco.bn@gmail.com
+remotepasseval = get_pass()
+realdelete = no
+nametrans = lambda folder: {'[Gmail]/Brouillons':    'drafts',
+                            '[Gmail]/Messages envoy&AOk-s': 'sent',
+                            '[Gmail]/Starred':   'flagged',
+                            '[Gmail]/Important':   'important',
+                            '[Gmail]/Corbeille':     'trash',
+                            '[Gmail]/Tous les messages':  'archive',
+                            }.get(folder, folder)
+folderfilter = lambda folder: folder not in ['[Gmail]/Corbeille',
+                                             '[Gmail]/Tous les messages',
+                                             '[Gmail]/Spam',
+                                             ]
+# Instead of closing the connection once a sync is complete, offlineimap will
+# send empty data to the server to hold the connection open. A value of 60
+# attempts to hold the connection for a minute between syncs (both quick and
+# autorefresh).This setting has no effect if autorefresh and holdconnectionopen
+# are not both set.
+keepalive = 60
+# OfflineIMAP normally closes IMAP server connections between refreshes if
+# the global option autorefresh is specified.  If you wish it to keep the
+# connection open, set this to true. This setting has no effect if autorefresh
+# is not set.
+holdconnectionopen = yes
+# Necessary as of OfflineIMAP 6.5.4
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+
+# vim: set ft=config:
