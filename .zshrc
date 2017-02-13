@@ -124,8 +124,11 @@ setopt HIST_IGNORE_DUPS
 # Pretty    Obvious.  Right?
 setopt HIST_REDUCE_BLANKS
 
-eval "$(direnv hook zsh)"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
 
 alias config='/usr/bin/git --git-dir=/home/choco/.cfg/ --work-tree=/home/choco'
+
+alias ssh="TERM=xterm LC_ALL=C ssh"
 
 source $HOME/.profile
