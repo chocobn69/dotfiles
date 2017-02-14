@@ -126,6 +126,7 @@ setopt HIST_REDUCE_BLANKS
 
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
+eval "$(direnv hook zsh)"
 
 alias config='/usr/bin/git --git-dir=/home/choco/.cfg/ --work-tree=/home/choco'
 
