@@ -61,11 +61,11 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'jmcantrell/vim-virtualenv', {'for': 'python'}
 Plug 'myusuf3/numbers.vim'
 Plug 'mileszs/ack.vim'
+" async linter
 Plug 'w0rp/ale'
 Plug 'google/yapf'
 Plug 'timothycrosley/isort'
 Plug 'davidhalter/jedi-vim', {'for': 'python'}
-Plug 'mtth/scratch.vim'
 
 " Initialize plugin system
 call plug#end()
