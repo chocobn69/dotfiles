@@ -278,4 +278,6 @@ password =
 ; Default: 1
 interval = 2
 
+label-song-maxlen = 70
+
 ; vim:ft=dosini
