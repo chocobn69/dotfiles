@@ -102,6 +102,10 @@ if [[ ! -d $ZSH_CACHE_DIR ]]; then
 fi
 
 source $ZSH/oh-my-zsh.sh
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+bindkey '^ ' autosuggest-accept
 
 setopt VI
 alias vim=nvim
@@ -129,7 +133,8 @@ eval "$(pyenv virtualenv-init -)"
 eval "$(direnv hook zsh)"
 
 alias config='/usr/bin/git --git-dir=/home/choco/.cfg/ --work-tree=/home/choco'
-
+alias cz='vim ~/.zshrc'
+alias cv='vim ~/.config/nvim/init.vim'
 alias ssh="TERM=xterm LC_ALL=C ssh"
 
 source $HOME/.profile
