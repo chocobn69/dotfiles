@@ -66,6 +66,7 @@ Plug 'w0rp/ale'
 Plug 'google/yapf'
 Plug 'timothycrosley/isort'
 Plug 'davidhalter/jedi-vim', {'for': 'python'}
+Plug 'majutsushi/tagbar'
 
 " Initialize plugin system
 call plug#end()
@@ -95,9 +96,12 @@ let g:ctrlp_cmd = 'CtrlPMixed'
 let g:ctrlp_use_caching = 1
 let g:ctrlp_clear_cache_on_exit = 0
 let g:ctrlp_cache_dir = $HOME.'/.vim/cache/ctrlp'
-"
+
 " NERDTree
 let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
+
+" tagbar
+nmap <silent> <leader>c :TagbarToggle<CR>
 
 set background=dark
 
