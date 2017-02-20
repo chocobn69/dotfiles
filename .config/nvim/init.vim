@@ -67,6 +67,9 @@ Plug 'google/yapf'
 Plug 'timothycrosley/isort'
 Plug 'davidhalter/jedi-vim', {'for': 'python'}
 Plug 'majutsushi/tagbar'
+Plug 'townk/vim-autoclose'
+Plug 'mhinz/vim-startify'
+
 
 " Initialize plugin system
 call plug#end()
