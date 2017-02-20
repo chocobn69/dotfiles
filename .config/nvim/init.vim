@@ -47,7 +47,6 @@ set showcmd             " show (partial) command in status line
 set number
 call plug#begin('~/.vim/plugged')
 
-
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-surround'
@@ -70,8 +69,6 @@ Plug 'majutsushi/tagbar'
 Plug 'townk/vim-autoclose'
 Plug 'mhinz/vim-startify'
 
-
-" Initialize plugin system
 call plug#end()
 
 " markdown
@@ -123,7 +120,7 @@ let python_highlight_all = 1
 " custom shortcuts
 nmap <silent> <leader> :update<CR>
 nmap <silent> <leader>t :NERDTreeToggle<CR>
-nmap <silent> <leader>s :so ~/.config/nvim/init.vim<CR>
+nmap <silent> <leader>s :update<cr>:so ~/.config/nvim/init.vim<CR>
 nmap <silent> <leader>i :e  ~/.config/nvim/init.vim<CR>
 nmap <silent> <leader>x :update<CR>:bd<CR>
 nmap <silent> <leader>h :nohlsearch<CR>
