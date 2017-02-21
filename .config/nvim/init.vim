@@ -62,12 +62,13 @@ Plug 'myusuf3/numbers.vim'
 Plug 'mileszs/ack.vim'
 " async linter
 Plug 'w0rp/ale'
-Plug 'google/yapf'
-Plug 'timothycrosley/isort'
 Plug 'davidhalter/jedi-vim', {'for': 'python'}
 Plug 'majutsushi/tagbar'
 Plug 'townk/vim-autoclose'
 Plug 'mhinz/vim-startify'
+Plug 'ervandew/supertab'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 
 call plug#end()
 
@@ -102,6 +103,18 @@ let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
 
 " tagbar
 nmap <silent> <leader>c :TagbarToggle<CR>
+
+" jedi
+let g:jedi#completions_enabled = 1
+
+" ultisnip and superteb
+let g:SuperTabDefaultCompletionType    = '<C-n>'
+let g:SuperTabCrMapping                = 0
+let g:UltiSnipsExpandTrigger           = '<tab>'
+let g:UltiSnipsJumpForwardTrigger      = '<tab>'
+let g:UltiSnipsJumpBackwardTrigger     = '<s-tab>'
+let g:UltiSnipsListSnippets            = '<leader><tab>' 
+
 
 set background=dark
 
