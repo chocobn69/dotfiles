@@ -64,7 +64,7 @@ Plug 'mileszs/ack.vim'
 Plug 'w0rp/ale'
 Plug 'davidhalter/jedi-vim', {'for': 'python'}
 Plug 'majutsushi/tagbar'
-Plug 'townk/vim-autoclose'
+" Plug 'townk/vim-autoclose'
 Plug 'mhinz/vim-startify'
 Plug 'ervandew/supertab'
 Plug 'SirVer/ultisnips'
