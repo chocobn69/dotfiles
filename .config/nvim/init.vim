@@ -139,6 +139,10 @@ nmap <silent> <leader>x :update<CR>:bd<CR>
 nmap <silent> <leader>h :nohlsearch<CR>
 " copy relative path of current file
 nmap <silent> <leader>f :let @+ = expand("%")<CR>
+" add a line before, then a line after, then go back to initial line
+nnoremap gA O<esc>jo<esc>k
+" paste after line
+nnoremap gP o<esc>p
 
 if executable('ag')
   let g:ackprg = 'ag --vimgrep --smart-case'
