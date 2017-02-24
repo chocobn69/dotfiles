@@ -226,7 +226,7 @@ format-disconnected = <label-disconnected>
 label-connected = %{F#7cafc2} %{F-}%essid%
 label-connected-foreground = ${colors.foreground}
 
-label-disconnected = %{F#7cafc2} %{F-}[not connected]
+label-disconnected = %{F#7cafc2} %{F-}[n/a]
 label-disconnected-foreground = ${colors.foreground}
 
 [module/wired-network]
