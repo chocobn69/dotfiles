@@ -1,0 +1,53 @@
+visualizer_in_stereo = "yes"
+visualizer_fifo_path = "/tmp/mpd.fifo"
+visualizer_output_name = "FIFO"
+visualizer_sync_interval = "30"
+visualizer_type = "spectrum"
+visualizer_look = "◆▋"
+message_delay_time = "3"
+playlist_shorten_total_times = "yes"
+playlist_display_mode = "columns"
+browser_display_mode = "columns"
+search_engine_display_mode = "columns"
+playlist_editor_display_mode = "columns"
+autocenter_mode = "yes"
+centered_cursor = "yes"
+user_interface = "alternative"
+follow_now_playing_lyrics = "yes"
+locked_screen_width_part = "60"
+display_bitrate = "yes"
+external_editor = "vim"
+
+#colors_enabled = yes
+colors_enabled = yes
+
+#
+empty_tag_color = "white"
+#
+header_window_color = "white"
+
+#
+main_window_color = "green"
+#
+color1 = "green"
+#
+color2 = "cyan"
+
+#
+display_remaining_time = "yes"
+
+volume_color = "red"
+state_line_color = "white"
+state_flags_color = "blue"
+progressbar_color = "red"
+statusbar_color = "cyan"
+#visualizer_color = "blue"
+mpd_host = "127.0.0.1"
+mouse_list_scroll_whole_page = "yes"
+lines_scrolled = "1"
+#ask_before_clearing_main_playlist = "yes"
+enable_window_title = "yes"
+song_columns_list_format = "(25)[cyan]{a} (40)[]{f} (30)[red]{b} (7f)[green]{l}"
+mpd_port = "6600"
+mpd_connection_timeout = "5"
+mpd_crossfade_time = "1"
