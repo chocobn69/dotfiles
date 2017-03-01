@@ -62,9 +62,10 @@ Plug 'myusuf3/numbers.vim'
 Plug 'mileszs/ack.vim'
 " async linter
 Plug 'w0rp/ale'
-Plug 'davidhalter/jedi-vim', {'for': 'python'}
+" Plug 'davidhalter/jedi-vim', {'for': 'python'}
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'zchee/deoplete-jedi', {'for': 'python'}
 Plug 'majutsushi/tagbar'
-" Plug 'townk/vim-autoclose'
 Plug 'mhinz/vim-startify'
 Plug 'ervandew/supertab'
 Plug 'SirVer/ultisnips'
@@ -93,9 +94,10 @@ let g:ctrlp_custom_ignore = {
   \ 'file': '\v\.(pyc)$',
   \ }
 map <C-b> :CtrlPBuffer<CR>
-let g:ctrlp_cmd = 'CtrlPMixed'
+let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_working_path_mode = 'rc'
 let g:ctrlp_use_caching = 1
-let g:ctrlp_clear_cache_on_exit = 0
+let g:ctrlp_clear_cache_on_exit = 1
 let g:ctrlp_cache_dir = $HOME.'/.vim/cache/ctrlp'
 
 " NERDTree
@@ -105,7 +107,10 @@ let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
 nmap <silent> <leader>c :TagbarToggle<CR>
 
 " jedi
-let g:jedi#completions_enabled = 1
+" let g:jedi#completions_enabled = 1
+
+" Use deoplete.
+let g:deoplete#enable_at_startup = 1
 
 " ultisnip and superteb
 let g:SuperTabDefaultCompletionType    = '<C-n>'
@@ -113,8 +118,8 @@ let g:SuperTabCrMapping                = 0
 let g:UltiSnipsExpandTrigger           = '<tab>'
 let g:UltiSnipsJumpForwardTrigger      = '<tab>'
 let g:UltiSnipsJumpBackwardTrigger     = '<s-tab>'
-let g:UltiSnipsListSnippets            = '<leader><tab>' 
-
+let g:UltiSnipsListSnippets            = '<c-S>' 
+call deoplete#custom#set('ultisnips', 'matchers', ['matcher_fuzzy'])
 
 set background=dark
 
