@@ -62,7 +62,7 @@ Plug 'myusuf3/numbers.vim'
 Plug 'mileszs/ack.vim'
 " async linter
 Plug 'w0rp/ale'
-" Plug 'davidhalter/jedi-vim', {'for': 'python'}
+Plug 'davidhalter/jedi-vim', {'for': 'python'}
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'zchee/deoplete-jedi', {'for': 'python'}
 Plug 'majutsushi/tagbar'
@@ -107,7 +107,16 @@ let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
 nmap <silent> <leader>c :TagbarToggle<CR>
 
 " jedi
-" let g:jedi#completions_enabled = 1
+let g:jedi#completions_enable = 0
+let g:jedi#auto_vim_configuration = 0
+let g:jedi#goto_assignments_command = '<leader>g'  " dynamically done for ft=python.
+let g:jedi#goto_definitions_command = '<leader>d'  " dynamically done for ft=python.
+let g:jedi#use_tabs_not_buffers = 0  " current default is 1.
+let g:jedi#rename_command = '<Leader>gR'
+let g:jedi#usages_command = '<Leader>gu'
+let g:jedi#completions_enabled = 0
+let g:jedi#smart_auto_mappings = 1
+
 
 " Use deoplete.
 let g:deoplete#enable_at_startup = 1
