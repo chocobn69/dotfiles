@@ -46,7 +46,7 @@ asterisk_column_order = table_order
 
 # Default pager.
 # By default 'PAGER' environment variable is used
-# pager = less -SRXF
+pager = less -SRF
 
 # Timing of sql statments and table rendering.
 timing = True
@@ -59,13 +59,13 @@ table_format = fancy_grid
 # Syntax Style. Possible values: manni, igor, xcode, vim, autumn, vs, rrt,
 # native, perldoc, borland, tango, emacs, friendly, monokai, paraiso-dark,
 # colorful, murphy, bw, pastie, paraiso-light, trac, default, fruity
-syntax_style = default
+syntax_style = vim
 
 # Keybindings:
 # When Vi mode is enabled you can use modal editing features offered by Vi in the REPL.
 # When Vi mode is disabled emacs keybindings such as Ctrl-A for home and Ctrl-E
 # for end are available in the REPL.
-vi = True
+vi = False
 
 # Error handling
 # When one of multiple SQL statements causes an error, choose to either
@@ -78,6 +78,7 @@ row_limit = 1000
 
 # Skip intro on startup and goodbye on exit
 less_chatty = False
+
 [colors]
 Token.Menu.Completions.Completion.Current = "bg:#ffffff #000000"
 Token.Menu.Completions.Completion = "bg:#008888 #ffffff"
@@ -116,6 +117,7 @@ JOIN pg_stat_activity blockinga ON blockingl.pid = blockinga.pid
   AND blockinga.datid = blockeda.datid
 WHERE NOT blockedl.granted
 order by blockeda.pid asc'''
+
 [alias_dsn]
 # example_dsn = postgresql://[user[:password]@][netloc][:port][/dbname]
 docker = postgresql://pricing_dev:pricing_dev69@127.0.0.1:54321/pricing_dev
