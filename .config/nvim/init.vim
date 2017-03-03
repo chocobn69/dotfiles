@@ -47,7 +47,8 @@ set showcmd             " show (partial) command in status line
 set number
 call plug#begin('~/.vim/plugged')
 
-Plug 'ctrlpvim/ctrlp.vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
@@ -59,7 +60,6 @@ Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'jmcantrell/vim-virtualenv', {'for': 'python'}
 Plug 'myusuf3/numbers.vim'
-Plug 'mileszs/ack.vim'
 " async linter
 Plug 'w0rp/ale'
 Plug 'davidhalter/jedi-vim', {'for': 'python'}
@@ -72,6 +72,13 @@ Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 
 call plug#end()
+
+
+" ale
+let g:ale_sign_column_always = 1
+let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
 " markdown
 let g:vim_markdown_folding_disabled = 1
@@ -88,17 +95,10 @@ let g:airline_theme='base16'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 0
 
-" ctrlp
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.(git)$',
-  \ 'file': '\v\.(pyc)$',
-  \ }
-map <C-b> :CtrlPBuffer<CR>
-let g:ctrlp_cmd = 'CtrlP'
-let g:ctrlp_working_path_mode = 'rc'
-let g:ctrlp_use_caching = 1
-let g:ctrlp_clear_cache_on_exit = 1
-let g:ctrlp_cache_dir = $HOME.'/.vim/cache/ctrlp'
+" fzf
+nmap <C-p> :Files<cr>
+nmap <C-b> :Buffers<cr>
+nmap <C-n> :Ag<cr>
 
 " NERDTree
 let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
@@ -120,6 +120,19 @@ let g:jedi#smart_auto_mappings = 1
 
 " Use deoplete.
 let g:deoplete#enable_at_startup = 1
+let g:deoplete#auto_complete_delay = 30 
+" Use smartcase.
+let g:deoplete#enable_smart_case = 1
+
+" <C-h>, <BS>: close popup and delete backword char.
+inoremap <expr><C-h> deoplete#smart_close_popup()."\<C-h>"
+inoremap <expr><BS>  deoplete#smart_close_popup()."\<C-h>"
+
+" <CR>: close popup and save indent.
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function() abort
+    return deoplete#close_popup() . "\<CR>"
+endfunction
 
 " ultisnip and superteb
 let g:SuperTabDefaultCompletionType    = '<C-n>'
@@ -157,10 +170,6 @@ nmap <silent> <leader>f :let @+ = expand("%")<CR>
 nnoremap gA O<esc>jo<esc>k
 " paste after line
 nnoremap gP o<esc>p
-
-if executable('ag')
-  let g:ackprg = 'ag --vimgrep --smart-case'
-endif
 
 autocmd FileType python nnoremap <LocalLeader>i :!isort %<CR><CR>
 autocmd FileType python nnoremap <LocalLeader>= :0,$!yapf<CR>
