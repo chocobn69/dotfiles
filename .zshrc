@@ -138,3 +138,5 @@ alias cv='vim ~/.config/nvim/init.vim'
 alias ssh="TERM=xterm LC_ALL=C ssh"
 
 source $HOME/.profile
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
