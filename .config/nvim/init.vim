@@ -96,7 +96,13 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 0
 
 " fzf
-nmap <C-p> :Files<cr>
+function! s:find_git_root()
+  return system('git rev-parse --show-toplevel 2> /dev/null')[:-2]
+endfunction
+
+command! ProjectFiles execute 'Files' s:find_git_root()
+let $FZF_DEFAULT_COMMAND = 'ag -l -g ""'
+nmap <C-p> :ProjectFiles<cr>
 nmap <C-b> :Buffers<cr>
 nmap <C-n> :Ag<cr>
 
