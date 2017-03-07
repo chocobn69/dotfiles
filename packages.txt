@@ -16,6 +16,7 @@ bzip2
 cairo
 clipit
 cmake
+conky
 coreutils
 cryptsetup
 ctags
@@ -41,7 +42,6 @@ file
 filesystem
 findutils
 firefox
-fish
 flex
 fontconfig
 freetype2
@@ -60,6 +60,13 @@ groff
 groovy
 grub
 gsfonts
+gstreamer
+gstreamer0.10
+gstreamer0.10-base
+gstreamer0.10-base-plugins
+gstreamer0.10-ffmpeg
+gstreamer0.10-good
+gstreamer0.10-good-plugins
 gzip
 hangups-git
 hplip
@@ -174,6 +181,7 @@ urlview
 usbutils
 util-linux
 vi
+vim
 virtualbox
 weechat
 wget
