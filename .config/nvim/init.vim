@@ -105,6 +105,7 @@ let $FZF_DEFAULT_COMMAND = 'ag -l -g ""'
 nmap <C-p> :ProjectFiles<cr>
 nmap <C-b> :Buffers<cr>
 nmap <C-n> :Ag<cr>
+nmap <C-l> :BLines<cr>
 
 " NERDTree
 let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
