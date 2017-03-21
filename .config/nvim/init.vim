@@ -176,6 +176,8 @@ nmap <silent> <leader>f :let @+ = expand("%")<CR>
 nnoremap gA O<esc>jo<esc>k
 " paste after line
 nnoremap gP o<esc>p
+" disable Ex mode
+nnoremap Q <nop>
 
 autocmd FileType python nnoremap <LocalLeader>i :!isort %<CR><CR>
 autocmd FileType python nnoremap <LocalLeader>= :0,$!yapf<CR>
