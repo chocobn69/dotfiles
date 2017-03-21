@@ -1,3 +1,3 @@
 setxkbmap -layout us -variant altgr-intl -option nodeadkeys 
-xrandr --output HDMI1 --right-of eDP1
+xrandr --output HDMI-1 --right-of eDP-1
 exec i3
