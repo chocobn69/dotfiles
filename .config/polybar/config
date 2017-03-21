@@ -37,9 +37,8 @@ font-1 = FontAwesome:size=14
 background = ${colors.background}
 foreground = ${colors.foreground}
 
-; tray-position = center
-; tray-maxsize = 16
-tray-position =
+tray-position = right
+tray-maxsize = 16
 
 modules-left = i3
 modules-center = mpd
