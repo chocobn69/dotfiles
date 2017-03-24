@@ -65,6 +65,7 @@ Plug 'w0rp/ale'
 Plug 'davidhalter/jedi-vim', {'for': 'python'}
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'zchee/deoplete-jedi', {'for': 'python'}
+Plug 'Vimjas/vim-python-pep8-indent', {'for': 'python'}
 Plug 'majutsushi/tagbar'
 Plug 'ervandew/supertab'
 Plug 'SirVer/ultisnips'
@@ -98,6 +99,7 @@ let g:airline_powerline_fonts = 0
 function! s:find_git_root()
   return system('git rev-parse --show-toplevel 2> /dev/null')[:-2]
 endfunction
+let g:fzf_history_dir = '~/.local/share/fzf-history'
 
 command! ProjectFiles execute 'Files' s:find_git_root()
 let $FZF_DEFAULT_COMMAND = 'ag -l -g ""'
@@ -129,6 +131,11 @@ let g:deoplete#enable_at_startup = 1
 let g:deoplete#auto_complete_delay = 30 
 " Use smartcase.
 let g:deoplete#enable_smart_case = 1
+" <CR>: close popup and save indent.
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function() abort
+    return deoplete#close_popup() . "\<CR>"
+endfunction
 
 " <C-h>, <BS>: close popup and delete backword char.
 inoremap <expr><C-h> deoplete#smart_close_popup()."\<C-h>"
