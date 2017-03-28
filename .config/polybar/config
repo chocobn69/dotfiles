@@ -190,7 +190,7 @@ animation-charging-framerate = 750
 type = internal/i3
 format = <label-state> <label-mode>
 
-pin-workspaces = true
+pin-workspaces = false
 
 index-sort = true
 wrapping-scroll = true
@@ -277,6 +277,6 @@ password =
 ; Default: 1
 interval = 2
 
-label-song-maxlen = 60
+label-song-maxlen = 50
 
 ; vim:ft=dosini
