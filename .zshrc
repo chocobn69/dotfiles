@@ -64,7 +64,7 @@ DISABLE_AUTO_UPDATE="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(gitfast archlinux common-aliases docker fasd sudo systemd vi-mode ssh-agent)
+plugins=(gitfast archlinux common-aliases docker fasd sudo systemd vi-mode)
 
 
 # User configuration
@@ -131,6 +131,9 @@ setopt HIST_REDUCE_BLANKS
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 eval "$(direnv hook zsh)"
+
+# eval $(ssh-agent)&>/dev/null
+export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 
 alias config='/usr/bin/git --git-dir=/home/choco/.cfg/ --work-tree=/home/choco'
 alias cz='vim ~/.zshrc'
