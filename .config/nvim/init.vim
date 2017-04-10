@@ -102,7 +102,7 @@ endfunction
 let g:fzf_history_dir = '~/.local/share/fzf-history'
 
 command! ProjectFiles execute 'Files' s:find_git_root()
-let $FZF_DEFAULT_COMMAND = 'ag -l -g ""'
+let $FZF_DEFAULT_COMMAND = 'ag --vimgrep --hidden --smart-case -g ""'
 nmap <C-p> :ProjectFiles<cr>
 nmap <C-b> :Buffers<cr>
 nmap <C-n> :Ag<cr>
