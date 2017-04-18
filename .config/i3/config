@@ -97,13 +97,13 @@ set $wx2go "5:x2go"
 set $wirc "6:irc"
 set $wmail "7:mail"
 
-workspace $wterm output eDP1
-workspace $wweb output HDMI1
-workspace $wdev output HDMI1
-workspace $wslack output eDP1
-workspace $wirc output eDP1
-workspace $wx2go output eDP1
-workspace $wmail output HDMI1
+workspace $wterm output eDP-1
+workspace $wweb output HDMI-1
+workspace $wdev output HDMI-1
+workspace $wslack output eDP-1
+workspace $wirc output eDP-1
+workspace $wx2go output eDP-1
+workspace $wmail output HDMI-1
 
 # import ~/.config/i3/config_local
 
@@ -237,11 +237,11 @@ bindsym $mod+s exec --no-startup-id slack
 bindsym $mod+n exec --no-startup-id termite -e ncmpcpp -t mpc
 
 # mod + x lock screen
-bindsym $mod+x exec --no-startup-id physlock 
+bindsym $mod+x exec --no-startup-id xscreensaver-command -lock 
 
-exec --no-startup-id MONITOR=HDMI1 polybar bottom -r
-exec --no-startup-id MONITOR=eDP1 polybar bottom -r
+exec --no-startup-id MONITOR=HDMI-1 polybar bottom -r
+exec --no-startup-id MONITOR=eDP-1 polybar bottom -r
 exec --no-startup-id dunst -conf ~/.config/dunst/dunstrc
 exec --no-startup-id redshift-gtk -l 45.750000:4.850000
-exec --no-startup-id xautolock -time 2 -locker physlock 
-exec --no-startup-id feh --recursive --randomize --bg-fill ~/.wallpaper
+exec --no-startup-id xscreensaver -nosplash
+exec --no-startup-id feh --recursive --randomize --bg-fill ~/Dropbox/wallpapers

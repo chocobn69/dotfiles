@@ -1,5 +1,6 @@
 [general]
-ui = TTY.TTYUI
+maxsyncaccounts = 1
+# ui = TTY.TTYUI
 accounts = choco
 pythonfile = ~/.mutt/offlineimap.py
 fsync = False

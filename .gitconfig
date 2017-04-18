@@ -64,8 +64,14 @@
 
 [merge]
     stat = true
-    tool = meld
+    tool = vimdiff
     conflictStyle = diff3
+
+[mergetool "vimdiff"]
+    path = nvim
+    prompt = false
+    keepBackup = false
+    keepTemporaries = false
 
 [mergetool]
     keepBackup = false
@@ -85,6 +91,11 @@
     mnemonicPrefix = true
     wordRegex = .
     algorithm = histogram
+    tool = vimdiff
+
+; [difftool "vimdiff"]
+;     prompt = false
+;     path = nvim
 
 [status]
     submoduleSummary = true
@@ -105,4 +116,4 @@
     helper = cache --timeout=3600
 
 [gui]
-    editor = subl3
+    editor = vim
