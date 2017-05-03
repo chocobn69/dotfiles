@@ -97,15 +97,15 @@ set $wx2go "5:x2go"
 set $wirc "6:irc"
 set $wmail "7:mail"
 
-workspace $wterm output eDP-1
-workspace $wweb output HDMI-1
-workspace $wdev output HDMI-1
-workspace $wslack output eDP-1
-workspace $wirc output eDP-1
-workspace $wx2go output eDP-1
-workspace $wmail output HDMI-1
 
-# import ~/.config/i3/config_local
+
+workspace $wterm output DVI-0
+workspace $wweb output HDMI-0
+workspace $wdev output HDMI-0
+workspace $wslack output DisplayPort-0
+workspace $wirc output DisplayPort-0
+workspace $wx2go output DVI-0
+workspace $wmail output DisplayPort-0
 
 # bindsym $mod+ampersand workspace $wterm
 # bindsym $mod+eacute workspace $wweb
@@ -239,8 +239,9 @@ bindsym $mod+n exec --no-startup-id termite -e ncmpcpp -t mpc
 # mod + x lock screen
 bindsym $mod+x exec --no-startup-id xscreensaver-command -lock 
 
-exec --no-startup-id MONITOR=HDMI-1 polybar bottom -r
-exec --no-startup-id MONITOR=eDP-1 polybar bottom -r
+exec --no-startup-id MONITOR=HDMI-0 polybar bottom -r
+exec --no-startup-id MONITOR=DisplayPort-0 polybar bottom -r
+exec --no-startup-id MONITOR=DVI-0 polybar bottom -r
 exec --no-startup-id dunst -conf ~/.config/dunst/dunstrc
 exec --no-startup-id redshift-gtk -l 45.750000:4.850000
 exec --no-startup-id xscreensaver -nosplash
