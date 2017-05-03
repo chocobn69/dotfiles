@@ -144,3 +144,8 @@ alias ssh="TERM=xterm LC_ALL=C ssh"
 source $HOME/.profile
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+export GTK_IM_MODULE=ibus
+export XMODIFIERS=@im=ibus
+export QT_IM_MODULE=ibus
+ibus-daemon -drx
