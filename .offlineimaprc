@@ -8,7 +8,6 @@ fsync = False
 [Account choco]
 localrepository = choco-Local
 remoterepository = choco-Remote
-status_backend = sqlite
 postsynchook = notmuch new
 # Minutes between syncs
 autorefresh = 5
