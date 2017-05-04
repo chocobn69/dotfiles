@@ -70,6 +70,7 @@ Plug 'majutsushi/tagbar'
 Plug 'ervandew/supertab'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
+Plug 'ivalkeen/vim-simpledb', {'for': 'sql'}
 
 call plug#end()
 
