@@ -1,8 +1,8 @@
 # XScreenSaver Preferences File
-# Written by xscreensaver-demo 5.36 for choco on Thu May  4 09:46:31 2017.
+# Written by xscreensaver-demo 5.36 for choco on Tue May 16 10:11:40 2017.
 # https://www.jwz.org/xscreensaver/
 
-timeout:	0:02:00
+timeout:	0:03:00
 cycle:		0:01:00
 lock:		True
 lockTimeout:	0:00:00
@@ -29,15 +29,15 @@ dpmsQuickOff:	False
 dpmsStandby:	0:20:00
 dpmsSuspend:	0:30:00
 dpmsOff:	0:45:00
-grabDesktopImages:  True
+grabDesktopImages:  False
 grabVideoFrames:    False
 chooseRandomImages: False
 imageDirectory:	
 
 mode:		one
-selected:	89
+selected:	78
 
-textMode:	program
+textMode:	date
 textLiteral:	XScreenSaver
 textFile:	
 textProgram:	fortune
