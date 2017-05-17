@@ -110,7 +110,7 @@ nmap <C-n> :Ag<cr>
 nmap <C-l> :BLines<cr>
 
 " NERDTree
-let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
+let NERDTreeIgnore=['\.pyc$', '\~$', '__pycache__'] "ignore files in NERDTree
 
 " tagbar
 nmap <silent> <leader>c :TagbarToggle<CR>
