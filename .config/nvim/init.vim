@@ -142,8 +142,8 @@ let g:deoplete#sources#jedi#show_docstring = 1
 " <CR>: close popup and save indent.
 inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
 function! s:my_cr_function() abort
-    return deoplete#close_popup() 
-    " return deoplete#close_popup() . "\<CR>"
+    " return deoplete#close_popup() 
+    return deoplete#close_popup() . "\<CR>"
 endfunction
 
 " <C-h>, <BS>: close popup and delete backword char.
