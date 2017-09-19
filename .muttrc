@@ -88,6 +88,11 @@ auto_view text/html
 alternative_order text/plain text/enriched text/html
 
 # Pager Key Bindings ---------------------------------
+bind pager g noop
+bind index g noop
+bind attach g noop
+bind index d noop
+
 bind pager k  previous-line
 bind pager j  next-line
 bind pager gg top
