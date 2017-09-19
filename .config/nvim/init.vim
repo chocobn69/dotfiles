@@ -76,6 +76,9 @@ Plug 'honza/vim-snippets'
 Plug 'ivalkeen/vim-simpledb', {'for': 'sql'}
 " echo doc signature
 Plug 'Shougo/echodoc.vim'
+Plug 'mattn/emmet-vim'
+Plug 'wellle/targets.vim'
+Plug 'michaeljsmith/vim-indent-object'
 
 call plug#end()
 
