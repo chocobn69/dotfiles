@@ -1,5 +1,5 @@
 # XScreenSaver Preferences File
-# Written by xscreensaver-demo 5.36 for choco on Tue May 16 10:11:40 2017.
+# Written by xscreensaver-demo 5.37 for choco on Wed Oct  4 11:56:00 2017.
 # https://www.jwz.org/xscreensaver/
 
 timeout:	0:03:00
@@ -34,7 +34,7 @@ grabVideoFrames:    False
 chooseRandomImages: False
 imageDirectory:	
 
-mode:		one
+mode:		blank
 selected:	78
 
 textMode:	date
@@ -270,6 +270,7 @@ programs:								      \
   GL: 				raverhoop -root				    \n\
   GL: 				splodesic -root				    \n\
   GL: 				unicrud -root				    \n\
+  GL: 				vigilance -root				    \n\
 
 
 pointerPollTime:    0:00:05
