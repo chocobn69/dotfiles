@@ -18,6 +18,9 @@ set t_Co=256
 set ignorecase
 set smartcase
 
+" 2 lines for cmd line
+set cmdheight=2
+
 set undodir=~/.vim/tmp/undo/     " undo files
 set backupdir=~/.vim/tmp/backup/ " backups
 set directory=~/.vim/tmp/swap/   " swap files
@@ -75,6 +78,11 @@ Plug 'honza/vim-snippets'
 Plug 'tpope/vim-fireplace'
 Plug 'guns/vim-clojure-static'
 Plug 'tpope/vim-classpath'
+" echo doc signature
+Plug 'Shougo/echodoc.vim'
+Plug 'mattn/emmet-vim'
+Plug 'wellle/targets.vim'
+Plug 'michaeljsmith/vim-indent-object'
 
 call plug#end()
 
@@ -132,25 +140,22 @@ let g:jedi#smart_auto_mappings = 1
 
 
 " Use deoplete.
+set completeopt=menu,menuone
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#auto_complete_delay = 30 
 " Use smartcase.
 let g:deoplete#enable_smart_case = 1
+let g:deoplete#sources#jedi#show_docstring = 1
 " <CR>: close popup and save indent.
 inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
 function! s:my_cr_function() abort
+    " return deoplete#close_popup() 
     return deoplete#close_popup() . "\<CR>"
 endfunction
 
 " <C-h>, <BS>: close popup and delete backword char.
 inoremap <expr><C-h> deoplete#smart_close_popup()."\<C-h>"
 inoremap <expr><BS>  deoplete#smart_close_popup()."\<C-h>"
-
-" <CR>: close popup and save indent.
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-function! s:my_cr_function() abort
-    return deoplete#close_popup() . "\<CR>"
-endfunction
 
 " ultisnip and superteb
 let g:SuperTabDefaultCompletionType    = '<C-n>'
@@ -160,6 +165,9 @@ let g:UltiSnipsJumpForwardTrigger      = '<tab>'
 let g:UltiSnipsJumpBackwardTrigger     = '<s-tab>'
 let g:UltiSnipsListSnippets            = '<c-S>' 
 call deoplete#custom#set('ultisnips', 'matchers', ['matcher_fuzzy'])
+
+" echodoc
+let g:echodoc#enable_at_startup = 1
 
 set background=dark
 
