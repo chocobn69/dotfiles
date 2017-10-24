@@ -1,5 +1,5 @@
+let g:python3_host_prog = '/home/choco/.pyenv/versions/neovim3/bin/python'
 set clipboard=unnamedplus
-
 syntax on
 
 filetype indent plugin on
@@ -70,7 +70,11 @@ Plug 'majutsushi/tagbar'
 Plug 'ervandew/supertab'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
-Plug 'ivalkeen/vim-simpledb', {'for': 'sql'}
+
+" Clojure
+Plug 'tpope/vim-fireplace'
+Plug 'guns/vim-clojure-static'
+Plug 'tpope/vim-classpath'
 
 call plug#end()
 
@@ -173,7 +177,7 @@ let python_highlight_all = 1
 
 " custom shortcuts
 nmap <silent> <leader> :update<CR>
-nmap <silent> <leader>t :NERDTreeToggle<CR>
+nmap <silent> <leader>t :NERDTreeFind<CR>
 nmap <silent> <leader>s :update<cr>:so ~/.config/nvim/init.vim<CR>
 nmap <silent> <leader>i :e  ~/.config/nvim/init.vim<CR>
 nmap <silent> <leader>x :update<CR>:bd<CR>
