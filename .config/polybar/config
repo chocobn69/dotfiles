@@ -5,7 +5,8 @@
 ;           ██       ██████  ███████ ██    ██████  ██   ██ ██   ██
 
 [colors]
-background = #282C34
+; background = #282C34
+background = #181818
 foreground = #f7ca88
 foreground-alt= #Ff0000
 black = #000000
