@@ -144,3 +144,12 @@ source $HOME/.profile
 source $HOME/.local_path
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# autosuggestions
+source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+bindkey '^ ' autosuggest-accept
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=3"
+ZSH_AUTOSUGGEST_USE_ASYNC='yes'
+
+# syntax highlighting
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
