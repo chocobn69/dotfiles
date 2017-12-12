@@ -41,6 +41,9 @@ set smarttab
 
 set colorcolumn=120
 
+" folding
+autocmd FileType python setlocal softtabstop=4 tabstop=4 shiftwidth=4 textwidth=79 foldmethod=indent foldnestmax=2
+
 let mapleader = "\<Space>"
 
 " make backspaces more powerfull
