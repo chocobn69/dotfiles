@@ -25,7 +25,7 @@ font pango:Fira  Mono 12
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec termite
+bindsym $mod+Return exec kitty
 
 # kill focused window
 bindsym $mod+Shift+x kill
@@ -63,10 +63,10 @@ bindsym $mod+Shift+m move right
 # bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
-bindsym $mod+g split h;exec termite
+bindsym $mod+g split h;exec kitty
 
 # split in vertical orientation
-bindsym $mod+v split v;exec termite
+bindsym $mod+v split v;exec kitty
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen
@@ -205,21 +205,16 @@ bindsym $mod+r mode "resize"
 #     }
 # }
 
-hide_edge_borders both
+# hide_edge_borders both
 new_window pixel 1
 
 
 focus_follows_mouse yes
 
-for_window [class="Chromium"] border none
-assign [class="Chromium"] $wweb
 assign [class="Firefox"] $wweb
-assign [class="jetbrains-pycharm"] $wdev
 assign [class="Slack"] $wslack
 assign [title="weechat"] $wirc
 assign [title="mutt"] $wmail
-assign [class="x2goclient"] $wx2go
-assign [class="Atom"] $wdev
 assign [class="Keepassx"] $wx2go
 
 # volume control
@@ -228,13 +223,10 @@ bindsym XF86AudioRaiseVolume exec /usr/bin/pactl set-sink-volume @DEFAULT_SINK@ 
 bindsym XF86AudioMute exec /usr/bin/pactl set-sink-mute @DEFAULT_SINK@ toggle
 
 # launch several app
-bindsym $mod+m exec --no-startup-id termite -e mutt -t mutt
-bindsym $mod+c exec --no-startup-id chromium
+bindsym $mod+m exec --no-startup-id kitty --class mutt --title mutt -c mutt
 bindsym $mod+w exec --no-startup-id firefox
-bindsym $mod+i exec --no-startup-id termite -e weechat -t weechat
-bindsym $mod+a exec --no-startup-id atom
+bindsym $mod+i exec --no-startup-id kitty --class weechat --title weechat -c weechat
 bindsym $mod+s exec --no-startup-id slack
-bindsym $mod+n exec --no-startup-id termite -e ncmpcpp -t mpc
 
 # mod + x lock screen
 bindsym $mod+x exec --no-startup-id xscreensaver-command -lock 
