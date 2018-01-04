@@ -133,7 +133,7 @@ eval "$(pyenv virtualenv-init -)"
 eval "$(direnv hook zsh)"
 
 # eval $(ssh-agent)&>/dev/null
-export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+# export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 
 alias config='/usr/bin/git --git-dir=/home/choco/.cfg/ --work-tree=/home/choco'
 alias cz='vim ~/.zshrc'
