@@ -223,9 +223,9 @@ bindsym XF86AudioRaiseVolume exec /usr/bin/pactl set-sink-volume @DEFAULT_SINK@ 
 bindsym XF86AudioMute exec /usr/bin/pactl set-sink-mute @DEFAULT_SINK@ toggle
 
 # launch several app
-bindsym $mod+m exec --no-startup-id kitty --class mutt --title mutt -c mutt
+bindsym $mod+m exec --no-startup-id kitty --class mutt env TERM="xterm-256color" neomutt
 bindsym $mod+w exec --no-startup-id firefox
-bindsym $mod+i exec --no-startup-id kitty --class weechat --title weechat -c weechat
+bindsym $mod+i exec --no-startup-id kitty --class weechat weechat
 bindsym $mod+s exec --no-startup-id slack
 
 # mod + x lock screen
@@ -234,6 +234,6 @@ bindsym $mod+x exec --no-startup-id xscreensaver-command -lock
 exec --no-startup-id MONITOR=HDMI-1 polybar bottom -r
 exec --no-startup-id MONITOR=eDP-1 polybar bottom -r
 exec --no-startup-id dunst -conf ~/.config/dunst/dunstrc
-exec --no-startup-id redshift-gtk -l 45.750000:4.850000
+exec --no-startup-id redshift -l 45.750000:4.850000
 exec --no-startup-id xscreensaver -nosplash
 exec --no-startup-id feh --recursive --randomize --bg-fill ~/Dropbox/wallpapers
