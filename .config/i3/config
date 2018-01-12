@@ -213,8 +213,8 @@ focus_follows_mouse yes
 
 assign [class="Firefox"] $wweb
 assign [class="Slack"] $wslack
-assign [title="weechat"] $wirc
-assign [title="mutt"] $wmail
+assign [class="weechat"] $wirc
+assign [class="mutt"] $wmail
 assign [class="Keepassx"] $wx2go
 
 # volume control
