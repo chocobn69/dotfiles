@@ -126,6 +126,7 @@ nmap <C-p> :ProjectFiles<cr>
 nmap <C-b> :Buffers<cr>
 nmap <C-n> :Ag<cr>
 nmap <C-l> :BLines<cr>
+nmap <C-k> :History<cr>
 
 " NERDTree
 let NERDTreeIgnore=['\.pyc$', '\~$', '__pycache__'] "ignore files in NERDTree
