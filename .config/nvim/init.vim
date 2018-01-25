@@ -1,20 +1,17 @@
 let g:python3_host_prog = '/home/choco/.pyenv/versions/neovim/bin/python'
 let g:python2_host_prog = '/home/choco/.pyenv/versions/neovim2/bin/python'
 set clipboard=unnamedplus
-syntax on
 
-filetype indent plugin on
 set ttyfast
 set hlsearch
 set cursorline
-set ruler
 set undofile
 set history=100
 set noswapfile
 set autoread
 set hidden
 set linespace=0
-set t_Co=256
+" set t_Co=256
 
 set ignorecase
 set smartcase
@@ -37,17 +34,13 @@ set expandtab           " enter spaces when tab is pressed
 set tabstop=4           " use 4 spaces to represent tab
 set softtabstop=4
 set shiftwidth=4        " number of spaces to use for auto indent
-set smarttab
 
 set colorcolumn=120
 
 " folding
-autocmd FileType python setlocal softtabstop=4 tabstop=4 shiftwidth=4 textwidth=119 foldmethod=indent foldnestmax=2
+" autocmd FileType python setlocal softtabstop=4 tabstop=4 shiftwidth=4 textwidth=119 foldmethod=indent foldnestmax=2
 
 let mapleader = "\<Space>"
-
-" make backspaces more powerfull
-set backspace=indent,eol,start
 
 set showcmd             " show (partial) command in status line
 
@@ -61,6 +54,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-sensible'
 Plug 'plasticboy/vim-markdown', {'for': 'markdown'}
 Plug 'ap/vim-css-color'
 Plug 'tpope/vim-commentary'
