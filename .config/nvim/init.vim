@@ -1,5 +1,6 @@
 let g:python3_host_prog = '/home/choco/.pyenv/versions/neovim/bin/python'
 let g:python2_host_prog = '/home/choco/.pyenv/versions/neovim2/bin/python'
+let g:jedi#force_py_version = 3
 set clipboard=unnamedplus
 
 set ttyfast
