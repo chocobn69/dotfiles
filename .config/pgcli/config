@@ -46,7 +46,8 @@ asterisk_column_order = table_order
 
 # Default pager.
 # By default 'PAGER' environment variable is used
-pager = less -SRF
+# pager = less -SRF
+pager = less -iMSx4FXRe
 
 # Timing of sql statments and table rendering.
 timing = True
@@ -65,7 +66,7 @@ syntax_style = vim
 # When Vi mode is enabled you can use modal editing features offered by Vi in the REPL.
 # When Vi mode is disabled emacs keybindings such as Ctrl-A for home and Ctrl-E
 # for end are available in the REPL.
-vi = False
+vi = True
 
 # Error handling
 # When one of multiple SQL statements causes an error, choose to either
@@ -121,6 +122,7 @@ order by blockeda.pid asc'''
 [alias_dsn]
 # example_dsn = postgresql://[user[:password]@][netloc][:port][/dbname]
 docker = postgresql://pricing_dev:pricing_dev69@127.0.0.1:54321/pricing_dev
+prod = postgresql://postgres@db1-vrack.abc-culture.fr:6432/pricing
 
 [data_formats]
 decimal = ""
