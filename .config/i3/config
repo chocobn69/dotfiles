@@ -8,6 +8,8 @@
 # i3 config file (v4)
 #
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
+set_from_resource $monitor1 i3.MONITOR1 HDMI-1
+set_from_resource $monitor2 i3.MONITOR2 eDP-1
 
 set $mod Mod4
 
@@ -99,13 +101,13 @@ set $wmail "7:mail"
 
 
 
-workspace $wterm output eDP-1
-workspace $wweb output HDMI-1
-workspace $wdev output HDMI-1
-workspace $wslack output eDP-1
-workspace $wirc output eDP-1
-workspace $wx2go output eDP-1
-workspace $wmail output eDP-1
+workspace $wterm output $monitor2
+workspace $wweb output $monitor1
+workspace $wdev output $monitor1
+workspace $wslack output $monitor2
+workspace $wirc output $monitor2
+workspace $wx2go output $monitor2
+workspace $wmail output $monitor2
 
 # bindsym $mod+ampersand workspace $wterm
 # bindsym $mod+eacute workspace $wweb
@@ -231,8 +233,9 @@ bindsym $mod+s exec --no-startup-id slack
 # mod + x lock screen
 bindsym $mod+x exec --no-startup-id xscreensaver-command -lock 
 
-exec --no-startup-id MONITOR=HDMI-1 polybar bottom -r
-exec --no-startup-id MONITOR=eDP-1 polybar bottom -r
+# exec --no-startup-id MONITOR=$monitor1 polybar bottom -r
+# exec --no-startup-id MONITOR=$monitor2 polybar bottom -r
+exec --no-startup-id ~/.config/polybar/launch.sh
 exec --no-startup-id dunst -conf ~/.config/dunst/dunstrc
 exec --no-startup-id redshift -l 45.750000:4.850000
 exec --no-startup-id xscreensaver -nosplash
