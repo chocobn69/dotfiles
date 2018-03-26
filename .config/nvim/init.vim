@@ -1,6 +1,5 @@
 let g:python3_host_prog = '/home/choco/.pyenv/versions/neovim/bin/python'
 let g:python2_host_prog = '/home/choco/.pyenv/versions/neovim2/bin/python'
-let g:jedi#force_py_version = 3
 set clipboard=unnamedplus
 
 set ttyfast
@@ -56,7 +55,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-sensible'
-Plug 'plasticboy/vim-markdown', {'for': 'markdown'}
+" Plug 'plasticboy/vim-markdown', {'for': 'markdown'}
 Plug 'ap/vim-css-color'
 Plug 'tpope/vim-commentary'
 Plug 'chriskempson/base16-vim'
@@ -137,8 +136,9 @@ let g:jedi#goto_definitions_command = '<leader>d'  " dynamically done for ft=pyt
 let g:jedi#use_tabs_not_buffers = 0  " current default is 1.
 let g:jedi#rename_command = '<Leader>gR'
 let g:jedi#usages_command = '<Leader>gu'
-let g:jedi#completions_enabled = 0
+let g:jedi#completions_enabled = 1
 let g:jedi#smart_auto_mappings = 1
+let g:jedi#force_py_version = 3
 
 
 " Use deoplete.
