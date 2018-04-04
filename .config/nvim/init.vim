@@ -1,5 +1,5 @@
 let g:python3_host_prog = '/home/choco/.pyenv/versions/neovim/bin/python'
-let g:python2_host_prog = '/home/choco/.pyenv/versions/neovim2/bin/python'
+let g:python_host_prog = '/home/choco/.pyenv/versions/neovim2/bin/python'
 set clipboard=unnamedplus
 
 set ttyfast
@@ -55,6 +55,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-dadbod'
 " Plug 'plasticboy/vim-markdown', {'for': 'markdown'}
 Plug 'ap/vim-css-color'
 Plug 'tpope/vim-commentary'
