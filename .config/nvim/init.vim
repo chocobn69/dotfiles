@@ -25,6 +25,9 @@ set directory=~/.vim/tmp/swap/   " swap files
 
 set encoding=utf-8
 
+" allow per project settings file
+set exrc
+
 if has('mouse')
   set mouse=a
 endif
@@ -74,16 +77,9 @@ Plug 'majutsushi/tagbar'
 Plug 'ervandew/supertab'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
-
-" Clojure
-Plug 'tpope/vim-fireplace'
-Plug 'guns/vim-clojure-static'
-Plug 'tpope/vim-classpath'
 " echo doc signature
 Plug 'Shougo/echodoc.vim'
 Plug 'mattn/emmet-vim'
-Plug 'wellle/targets.vim'
-Plug 'michaeljsmith/vim-indent-object'
 
 call plug#end()
 
@@ -205,3 +201,6 @@ nnoremap Q <nop>
 autocmd FileType python nnoremap <LocalLeader>i :!isort %<CR><CR>
 autocmd FileType python nnoremap <LocalLeader>= :0,$!yapf<CR>
 autocmd FileType python autocmd BufWritePre <buffer> %s/\s\+$//e
+
+" disable unesafe cmd in per projects settings file
+set secure
