@@ -99,8 +99,6 @@ set $wx2go "5:x2go"
 set $wirc "6:irc"
 set $wmail "7:mail"
 
-
-
 workspace $wterm output $monitor2
 workspace $wweb output $monitor1
 workspace $wdev output $monitor1
@@ -120,13 +118,13 @@ workspace $wmail output $monitor2
 # bindsym $mod+ccedilla workspace 9
 # bindsym $mod+agrave workspace 10
 
-bindsym $mod+1 workspace $wterm
-bindsym $mod+2 workspace $wweb
-bindsym $mod+3 workspace $wdev
-bindsym $mod+4 workspace $wslack
-bindsym $mod+5 workspace $wx2go
-bindsym $mod+6 workspace $wirc
-bindsym $mod+7 workspace $wmail
+bindsym $mod+1 workspace number 1 $wterm
+bindsym $mod+2 workspace number 2 $wweb
+bindsym $mod+3 workspace number 3 $wdev
+bindsym $mod+4 workspace number 4 $wslack
+bindsym $mod+5 workspace number 5 $wx2go
+bindsym $mod+6 workspace number 6 $wirc
+bindsym $mod+7 workspace number 7 $wmail
 bindsym $mod+8 workspace 8
 bindsym $mod+9 workspace 9
 bindsym $mod+0 workspace 10
