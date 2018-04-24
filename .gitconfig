@@ -116,4 +116,4 @@
     helper = cache --timeout=3600
 
 [gui]
-    editor = vim
+    editor = nvim
