@@ -110,7 +110,7 @@ source $ZSH/oh-my-zsh.sh
 
 setopt VI
 alias vim=nvim
-export EDITOR="vim"
+export EDITOR="nvim"
 setopt NO_FLOW_CONTROL
 
 # Where it gets saved
