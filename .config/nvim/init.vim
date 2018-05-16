@@ -43,9 +43,9 @@ set colorcolumn=120
 " folding
 " autocmd FileType python setlocal softtabstop=4 tabstop=4 shiftwidth=4 textwidth=119 foldmethod=indent foldnestmax=2
 
-" make vim views automatic
+" make vim views creation / loading automatic
 autocmd BufWinLeave *.* mkview
-autocmd BufWinEnter *.* silent loadview 
+autocmd BufWinEnter *.* silent! loadview 
 
 let mapleader = "\<Space>"
 
