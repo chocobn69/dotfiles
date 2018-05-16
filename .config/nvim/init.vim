@@ -43,6 +43,10 @@ set colorcolumn=120
 " folding
 " autocmd FileType python setlocal softtabstop=4 tabstop=4 shiftwidth=4 textwidth=119 foldmethod=indent foldnestmax=2
 
+" make vim views automatic
+autocmd BufWinLeave *.* mkview
+autocmd BufWinEnter *.* silent loadview 
+
 let mapleader = "\<Space>"
 
 set showcmd             " show (partial) command in status line
