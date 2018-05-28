@@ -10,6 +10,6 @@ set mbox      = "+choco-bn-gmail-com/archive"
 set postponed = "+choco-bn-gmail-com/drafts"
 set realname = "Nicolas Baccelli"          # who am i?
 set smtp_url = 'smtps://choco.bn@smtp.gmail.com'
-set from     = "choco.bn@gmail.com"
+set from     = "nicolas.baccelli@gmail.com"
 macro index,pager e "<save-message>=choco-bn-gmail-com/archive<enter><enter>" "Archive"
 # set editor='nvim +8 -c "set tw=76"'
