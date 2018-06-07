@@ -46,21 +46,12 @@ hdr_order from: to: cc: date: subject:  # and in this order
 # Account Settings -----------------------------------
 
 # Default inbox.
-# set spoolfile = "+choco-bn-gmail-com/INBOX"
 
 # Alternate email addresses.
-# alternates choco.bn@gmail.com nicolas.baccelli@gmail.com nicolas.baccelli@abc-culture.fr
 
 # Mailboxes to show in the sidebar.
-# mailboxes +choco-bn-gmail-com/INBOX \
-#           +choco-bn-gmail-com/archive \
-#           +choco-bn-gmail-com/sent \
-#           +choco-bn-gmail-com/drafts \
-#           +temporary/search \
 
 # Other special folders.
-# set mbox      = "+choco-bn-gmail-com/archive"
-# set postponed = "+choco-bn-gmail-com/drafts"
 
 bind index,pager <F2>   sidebar-next
 bind index,pager <F3>     sidebar-prev
@@ -104,7 +95,6 @@ bind pager R  group-reply
 bind attach <return> view-mailcap
 
 # Compose View Options -------------------------------
-# set realname = "Nicolas Baccelli"          # who am i?
 set envelope_from                    # which from?
 set sig_dashes                       # dashes before sig
 set edit_headers                     # show headers when composing
@@ -120,11 +110,9 @@ set reverse_name                     # reply as whomever it was to
 set include                          # include message in replies
 set forward_quote                    # include message in forwards
 
-# set smtp_url = 'smtps://choco.bn@smtp.gmail.com'
 source ~/.mutt/passwords
 set record=""
 
-# set from     = "choco.bn@gmail.com"
 set sendmail_wait = 0
 unset record
 
@@ -156,7 +144,6 @@ macro index S "<enter-command>unset wait_key<enter><shell-escape>read -p 'notmuc
 macro index a "<limit>all\n" "show all messages (undo limit)"
 
 # archive message
-# macro index,pager e "<save-message>=choco-bn-gmail-com/archive<enter><enter>" "Archive"
 
 # goobook : gmail contact
 set query_command="goobook query %s"
