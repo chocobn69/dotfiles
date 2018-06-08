@@ -38,6 +38,8 @@
     unstage = reset HEAD --
     # list untracked files
     showtool = "!showci () { rev=${1:-HEAD}; git meld $rev~1 $rev; }; showci $1"
+    graph = log --oneline --graph
+    oneline = log --oneline
 
 [color]
     branch = auto
@@ -117,3 +119,12 @@
 
 [gui]
     editor = nvim
+
+[rebase]
+  autosquash = true
+  # for fixup hotness later
+
+[rerere]
+  enabled = true
+  # Reuse recorded resolution of conflicted merges
+  # see `man git-rerere'
