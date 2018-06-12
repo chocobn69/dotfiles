@@ -73,6 +73,7 @@ Plug 'jmcantrell/vim-virtualenv', {'for': 'python'}
 Plug 'myusuf3/numbers.vim'
 " async linter
 Plug 'w0rp/ale'
+Plug 'ambv/black'
 Plug 'davidhalter/jedi-vim', {'for': 'python'}
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'zchee/deoplete-jedi', {'for': 'python'}
