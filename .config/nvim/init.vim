@@ -73,11 +73,12 @@ Plug 'jmcantrell/vim-virtualenv', {'for': 'python'}
 Plug 'myusuf3/numbers.vim'
 " async linter
 Plug 'w0rp/ale'
-Plug 'ambv/black'
+" python dev
 Plug 'davidhalter/jedi-vim', {'for': 'python'}
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'zchee/deoplete-jedi', {'for': 'python'}
 Plug 'Vimjas/vim-python-pep8-indent', {'for': 'python'}
+
 Plug 'majutsushi/tagbar'
 Plug 'ervandew/supertab'
 Plug 'SirVer/ultisnips'
@@ -120,11 +121,12 @@ let g:fzf_history_dir = '~/.local/share/fzf-history'
 
 command! ProjectFiles execute 'Files' s:find_git_root()
 let $FZF_DEFAULT_COMMAND = 'ag --vimgrep --hidden --smart-case -g ""'
-nmap <C-p> :ProjectFiles<cr>
+nmap <C-p> :FZF<cr>
 nmap <C-b> :Buffers<cr>
 nmap <C-n> :Ag<cr>
 nmap <C-l> :BLines<cr>
 nmap <C-k> :History<cr>
+nmap <C-t> :Tags<cr>
 
 " NERDTree
 let NERDTreeIgnore=['\.pyc$', '\~$', '__pycache__'] "ignore files in NERDTree
