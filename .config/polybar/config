@@ -41,9 +41,9 @@ foreground = ${colors.foreground}
 tray-position = right
 tray-maxsize = 16
 
-modules-left = i3
-modules-center = mpd
-modules-right = keyboard volume battery wireless-network cpu memory calendar clock
+modules-left = i3 xwindow
+modules-center = 
+modules-right = keyboard alsa battery wireless-network cpu memory calendar clock
 
 scroll-up = i3wm-wsnext
 scroll-down = i3wm-wsprev
@@ -58,7 +58,7 @@ label = %title%
 label-maxlen = 75
 
 format-foreground = ${colors.background}
-format-background = ${colors.magenta}
+format-background = ${colors.foreground}
 format-prefix = " "
 format-suffix = " "
 
@@ -97,8 +97,8 @@ format-prefix = " "
 
 label = %date%
 
-[module/volume]
-type = internal/volume
+[module/alsa]
+type = internal/alsa
 master-mixer = Master
 
 format-volume-foreground = ${colors.foreground}
@@ -266,18 +266,5 @@ interval = 1
 
 format = <label>
 label = " %{F#7cafc2}%{F-} %percentage_used%% "
-
-[module/mpd]
-type = internal/mpd
-
-host = 127.0.0.1
-port = 6600
-password = 
-
-; Seconds to sleep between progressbar/song timer sync
-; Default: 1
-interval = 2
-
-label-song-maxlen = 50
 
 ; vim:ft=dosini
