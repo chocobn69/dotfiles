@@ -54,6 +54,7 @@ set number
 call plug#begin('~/.vim/plugged')
 
 Plug 'AaronLasseigne/yank-code'
+Plug 'google/vim-searchindex'
 Plug 'airblade/vim-gitgutter'
 Plug 'Yggdroot/indentLine'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
