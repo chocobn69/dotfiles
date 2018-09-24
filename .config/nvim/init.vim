@@ -1,5 +1,4 @@
 let g:python3_host_prog = '/home/choco/.pyenv/versions/neovim/bin/python'
-let g:python_host_prog = '/home/choco/.pyenv/versions/neovim2/bin/python'
 set clipboard=unnamedplus
 
 set ttyfast
@@ -54,6 +53,7 @@ set showcmd             " show (partial) command in status line
 set number
 call plug#begin('~/.vim/plugged')
 
+Plug 'AaronLasseigne/yank-code'
 Plug 'airblade/vim-gitgutter'
 Plug 'Yggdroot/indentLine'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -62,14 +62,12 @@ Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-sensible'
-Plug 'tpope/vim-dadbod'
-" Plug 'plasticboy/vim-markdown', {'for': 'markdown'}
 Plug 'ap/vim-css-color'
 Plug 'tpope/vim-commentary'
 Plug 'chriskempson/base16-vim'
 Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'jmcantrell/vim-virtualenv', {'for': 'python'}
+" Plug 'jmcantrell/vim-virtualenv', {'for': 'python'}
 Plug 'myusuf3/numbers.vim'
 " async linter
 Plug 'w0rp/ale'
@@ -78,16 +76,13 @@ Plug 'davidhalter/jedi-vim', {'for': 'python'}
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'zchee/deoplete-jedi', {'for': 'python'}
 Plug 'Vimjas/vim-python-pep8-indent', {'for': 'python'}
-
 Plug 'majutsushi/tagbar'
 Plug 'ervandew/supertab'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
-" echo doc signature
-Plug 'Shougo/echodoc.vim'
 Plug 'mattn/emmet-vim'
 " haskell
-Plug 'neovimhaskell/haskell-vim'
+" Plug 'neovimhaskell/haskell-vim'
 
 call plug#end()
 
@@ -172,7 +167,7 @@ let g:UltiSnipsExpandTrigger           = '<tab>'
 let g:UltiSnipsJumpForwardTrigger      = '<tab>'
 let g:UltiSnipsJumpBackwardTrigger     = '<s-tab>'
 let g:UltiSnipsListSnippets            = '<c-S>' 
-call deoplete#custom#source('ultisnips', 'matchers', ['matcher_fuzzy'])
+" call deoplete#custom#source('ultisnips', 'matchers', ['matcher_fuzzy'])
 
 " echodoc
 let g:echodoc#enable_at_startup = 1
@@ -219,6 +214,9 @@ let g:haskell_enable_pattern_synonyms = 1 " to enable highlighting of `pattern`
 let g:haskell_enable_typeroles = 1        " to enable highlighting of type roles
 let g:haskell_enable_static_pointers = 1  " to enable highlighting of `static`
 let g:haskell_backpack = 1                " to enable highlighting of backpack keywords
+
+" yank code plugin
+vmap <leader>y :YankCode<CR>
 
 " disable unesafe cmd in per projects settings file
 set secure
