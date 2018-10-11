@@ -117,18 +117,18 @@ let g:fzf_history_dir = '~/.local/share/fzf-history'
 
 command! ProjectFiles execute 'Files' s:find_git_root()
 let $FZF_DEFAULT_COMMAND = 'ag --vimgrep --hidden --smart-case -g ""'
-nmap <C-p> :FZF<cr>
-nmap <C-b> :Buffers<cr>
-nmap <C-n> :Ag<cr>
-nmap <C-l> :BLines<cr>
-nmap <C-k> :History<cr>
-nmap <C-t> :Tags<cr>
+nnoremap <C-p> :FZF<cr>
+nnoremap <C-b> :Buffers<cr>
+nnoremap <C-n> :Ag<cr>
+nnoremap <C-l> :BLines<cr>
+nnoremap <C-k> :History<cr>
+nnoremap <C-t> :Tags<cr>
 
 " NERDTree
 let NERDTreeIgnore=['\.pyc$', '\~$', '__pycache__'] "ignore files in NERDTree
 
 " tagbar
-nmap <silent> <leader>c :TagbarToggle<CR>
+nnoremap <silent> <leader>c :TagbarToggle<CR>
 
 " jedi
 let g:jedi#completions_enable = 0
@@ -188,20 +188,22 @@ endif
 let python_highlight_all = 1
 
 " custom shortcuts
-nmap <silent> <leader> :update<CR>
-nmap <silent> <leader>t :NERDTreeFind<CR>
-nmap <silent> <leader>s :update<cr>:so ~/.config/nvim/init.vim<CR>
-nmap <silent> <leader>i :e  ~/.config/nvim/init.vim<CR>
-nmap <silent> <leader>x :update<CR>:bd<CR>
-nmap <silent> <leader>h :nohlsearch<CR>
+nnoremap <silent> <leader> :update<CR>
+nnoremap <silent> <leader>t :NERDTreeFind<CR>
+nnoremap <silent> <leader>s :update<cr>:so ~/.config/nvim/init.vim<CR>
+nnoremap <silent> <leader>i :e  ~/.config/nvim/init.vim<CR>
+nnoremap <silent> <leader>x :update<CR>:bd<CR>
+nnoremap <silent> <leader>h :nohlsearch<CR>
 " copy relative path of current file
-nmap <silent> <leader>f :let @+ = expand("%")<CR>
+nnoremap <silent> <leader>f :let @+ = expand("%")<CR>
 " add a line before, then a line after, then go back to initial line
 nnoremap gA O<esc>jo<esc>k
 " paste after line
 nnoremap gP o<esc>p
 " disable Ex mode
 nnoremap Q <nop>
+" Use kj as escape
+inoremap kj <ESC>
 
 autocmd FileType python nnoremap <LocalLeader>i :!isort %<CR><CR>
 autocmd FileType python nnoremap <LocalLeader>= :0,$!yapf<CR>
