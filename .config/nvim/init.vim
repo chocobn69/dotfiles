@@ -68,7 +68,6 @@ Plug 'tpope/vim-commentary'
 Plug 'chriskempson/base16-vim'
 Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-" Plug 'jmcantrell/vim-virtualenv', {'for': 'python'}
 Plug 'myusuf3/numbers.vim'
 " async linter
 Plug 'w0rp/ale'
@@ -101,7 +100,6 @@ nnoremap gs :Gstatus<CR>
 nnoremap gw :Gwrite<CR>
 nnoremap go :Gcommit<CR>
 nnoremap gD :Gdiff<CR>
-nnoremap gl :Glog<CR>
 set diffopt+=vertical
 
 " airline
@@ -131,7 +129,6 @@ let NERDTreeIgnore=['\.pyc$', '\~$', '__pycache__'] "ignore files in NERDTree
 nnoremap <silent> <leader>c :TagbarToggle<CR>
 
 " jedi
-let g:jedi#completions_enable = 0
 let g:jedi#auto_vim_configuration = 0
 let g:jedi#goto_assignments_command = '<leader>g'  " dynamically done for ft=python.
 let g:jedi#goto_definitions_command = '<leader>d'  " dynamically done for ft=python.
@@ -206,7 +203,6 @@ nnoremap Q <nop>
 inoremap kj <ESC>
 
 autocmd FileType python nnoremap <LocalLeader>i :!isort %<CR><CR>
-autocmd FileType python nnoremap <LocalLeader>= :0,$!yapf<CR>
 autocmd FileType python autocmd BufWritePre <buffer> %s/\s\+$//e
 
 " haskell
