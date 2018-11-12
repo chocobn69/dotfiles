@@ -84,6 +84,9 @@ Plug 'mattn/emmet-vim'
 " haskell
 " Plug 'neovimhaskell/haskell-vim'
 
+" Jinja
+Plug 'lepture/vim-jinja'
+
 call plug#end()
 
 
@@ -216,6 +219,9 @@ let g:haskell_backpack = 1                " to enable highlighting of backpack k
 
 " yank code plugin
 vmap <leader>y :YankCode<CR>
+
+" Jinja
+au BufNewFile,BufRead *.jinja set ft=jinja
 
 " disable unesafe cmd in per projects settings file
 set secure
