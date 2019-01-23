@@ -1,3 +1,5 @@
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
 export TERM="xterm-256color"
 
 BASE16_SHELL=$HOME/.config/base16-shell/
