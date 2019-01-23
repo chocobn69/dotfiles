@@ -76,6 +76,8 @@ Plug 'davidhalter/jedi-vim', {'for': 'python'}
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'zchee/deoplete-jedi', {'for': 'python'}
 Plug 'Vimjas/vim-python-pep8-indent', {'for': 'python'}
+Plug 'tweekmonster/braceless.vim'
+Plug 'tweekmonster/django-plus.vim'
 Plug 'majutsushi/tagbar'
 Plug 'ervandew/supertab'
 Plug 'SirVer/ultisnips'
@@ -89,6 +91,8 @@ Plug 'lepture/vim-jinja'
 
 call plug#end()
 
+" braceless
+autocmd FileType python BracelessEnable +highlight-cc
 
 " ale
 let g:ale_sign_column_always = 1
