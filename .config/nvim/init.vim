@@ -76,23 +76,20 @@ Plug 'davidhalter/jedi-vim', {'for': 'python'}
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'zchee/deoplete-jedi', {'for': 'python'}
 Plug 'Vimjas/vim-python-pep8-indent', {'for': 'python'}
-Plug 'tweekmonster/braceless.vim'
 Plug 'tweekmonster/django-plus.vim'
+Plug 'airblade/vim-rooter'
 Plug 'majutsushi/tagbar'
 Plug 'ervandew/supertab'
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
+Plug 'Shougo/neosnippet.vim'
+Plug 'Shougo/neosnippet-snippets'
 Plug 'mattn/emmet-vim'
 " haskell
 " Plug 'neovimhaskell/haskell-vim'
 
-" Jinja
-Plug 'lepture/vim-jinja'
-
 call plug#end()
 
-" braceless
-autocmd FileType python BracelessEnable +highlight-cc
+" supertab
+let g:SuperTabDefaultCompletionType = "<c-n>"
 
 " ale
 let g:ale_sign_column_always = 1
@@ -115,13 +112,9 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 
 " fzf
-function! s:find_git_root()
-  return system('git rev-parse --show-toplevel 2> /dev/null')[:-2]
-endfunction
 let g:fzf_history_dir = '~/.local/share/fzf-history'
 
-command! ProjectFiles execute 'Files' s:find_git_root()
-let $FZF_DEFAULT_COMMAND = 'ag --vimgrep --hidden --smart-case -g ""'
+let $FZF_DEFAULT_COMMAND = 'ag --vimgrep --ignore .git --hidden --smart-case -g ""'
 nnoremap <C-p> :FZF<cr>
 nnoremap <C-b> :Buffers<cr>
 nnoremap <C-n> :Ag<cr>
@@ -146,7 +139,6 @@ let g:jedi#completions_enabled = 1
 let g:jedi#smart_auto_mappings = 1
 let g:jedi#force_py_version = 3
 
-
 " Use deoplete.
 set completeopt=menu,menuone
 let g:deoplete#enable_at_startup = 1
@@ -165,14 +157,14 @@ endfunction
 inoremap <expr><C-h> deoplete#smart_close_popup()."\<C-h>"
 inoremap <expr><BS>  deoplete#smart_close_popup()."\<C-h>"
 
-" ultisnip and superteb
-let g:SuperTabDefaultCompletionType    = '<C-n>'
-let g:SuperTabCrMapping                = 0
-let g:UltiSnipsExpandTrigger           = '<tab>'
-let g:UltiSnipsJumpForwardTrigger      = '<tab>'
-let g:UltiSnipsJumpBackwardTrigger     = '<s-tab>'
-let g:UltiSnipsListSnippets            = '<c-S>' 
-" call deoplete#custom#source('ultisnips', 'matchers', ['matcher_fuzzy'])
+" neosnippet
+" Plugin key-mappings.
+" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
+" Tell Neosnippet about the other snippets
+let g:neosnippet#snippets_directory='/home/choco/.vim/mysnippets'
 
 " echodoc
 let g:echodoc#enable_at_startup = 1
@@ -209,8 +201,14 @@ nnoremap Q <nop>
 " Use kj as escape
 inoremap kj <ESC>
 
-autocmd FileType python nnoremap <LocalLeader>i :!isort %<CR><CR>
 autocmd FileType python autocmd BufWritePre <buffer> %s/\s\+$//e
+autocmd Filetype python set tabstop=4
+autocmd Filetype python set shiftwidth=4
+autocmd Filetype python set textwidth=120
+autocmd Filetype python set colorcolumn=120
+autocmd Filetype python set softtabstop=4
+autocmd Filetype python set expandtab
+autocmd Filetype python set autoindent
 
 " haskell
 let g:haskell_enable_quantification = 1   " to enable highlighting of `forall`
