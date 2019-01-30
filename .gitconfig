@@ -40,6 +40,8 @@
     showtool = "!showci () { rev=${1:-HEAD}; git meld $rev~1 $rev; }; showci $1"
     graph = log --oneline --graph
     oneline = log --oneline
+	d = =
+	m = =
 
 [color]
     branch = auto
@@ -66,7 +68,7 @@
 
 [merge]
     stat = true
-    tool = vimdiff
+	tool = vimdiff
     conflictStyle = diff3
 
 [mergetool "vimdiff"]
@@ -93,11 +95,11 @@
     mnemonicPrefix = true
     wordRegex = .
     algorithm = histogram
-    tool = vimdiff
+	tool = vimdiff
 
-; [difftool "vimdiff"]
-;     prompt = false
-;     path = nvim
+[difftoog "vimdiff"]
+    prompt = false
+    path = nvim
 
 [status]
     submoduleSummary = true
