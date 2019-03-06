@@ -54,6 +54,7 @@ set number
 call plug#begin('~/.vim/plugged')
 
 Plug 'RRethy/vim-illuminate'
+Plug 'cohama/lexima.vim'
 Plug 'AaronLasseigne/yank-code'
 Plug 'google/vim-searchindex'
 Plug 'airblade/vim-gitgutter'
