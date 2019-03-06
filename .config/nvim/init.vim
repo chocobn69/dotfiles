@@ -53,6 +53,7 @@ set showcmd             " show (partial) command in status line
 set number
 call plug#begin('~/.vim/plugged')
 
+Plug 'RRethy/vim-illuminate'
 Plug 'AaronLasseigne/yank-code'
 Plug 'google/vim-searchindex'
 Plug 'airblade/vim-gitgutter'
@@ -79,7 +80,7 @@ Plug 'Vimjas/vim-python-pep8-indent', {'for': 'python'}
 Plug 'tweekmonster/django-plus.vim'
 Plug 'airblade/vim-rooter'
 Plug 'majutsushi/tagbar'
-Plug 'ervandew/supertab'
+" Plug 'ervandew/supertab'
 Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
 Plug 'mattn/emmet-vim'
@@ -89,7 +90,7 @@ Plug 'mattn/emmet-vim'
 call plug#end()
 
 " supertab
-let g:SuperTabDefaultCompletionType = "<c-n>"
+" let g:SuperTabDefaultCompletionType = "<c-n>"
 
 " ale
 let g:ale_sign_column_always = 1
@@ -163,6 +164,12 @@ inoremap <expr><BS>  deoplete#smart_close_popup()."\<C-h>"
 imap <C-k>     <Plug>(neosnippet_expand_or_jump)
 smap <C-k>     <Plug>(neosnippet_expand_or_jump)
 xmap <C-k>     <Plug>(neosnippet_expand_target)
+imap <expr><TAB>
+ \ pumvisible() ? "\<C-n>" :
+ \ neosnippet#expandable_or_jumpable() ?
+ \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+ \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 " Tell Neosnippet about the other snippets
 let g:neosnippet#snippets_directory='/home/choco/.vim/mysnippets'
 
@@ -224,6 +231,9 @@ vmap <leader>y :YankCode<CR>
 
 " Jinja
 au BufNewFile,BufRead *.jinja set ft=jinja
+
+" vim-illuminate
+hi illuminatedWord cterm=underline gui=underline
 
 " disable unesafe cmd in per projects settings file
 set secure
