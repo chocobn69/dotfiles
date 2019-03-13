@@ -169,3 +169,7 @@ ZSH_AUTOSUGGEST_USE_ASYNC='yes'
 
 # syntax highlighting
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+function dangdangmd5 {
+    echo -n '$1' | md5sum | tr '[:lower:]' '[:upper:]'
+}
