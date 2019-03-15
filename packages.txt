@@ -79,7 +79,6 @@ jre8-openjdk
 keepassx
 kitty
 less
-lib32-gtk-engines
 libcdr
 libe-book
 libfbclient
@@ -121,7 +120,6 @@ pandoc
 patch
 pavucontrol
 pciutils
-pcmciautils
 perl
 perl-clone
 perl-dbi

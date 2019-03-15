@@ -2,7 +2,11 @@ export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 export TERM="xterm-256color"
 
-BASE16_SHELL=$HOME/.config/base16-shell/
+# Base16 Shell
+BASE16_SHELL="$HOME/.config/base16-shell/"
+[ -n "$PS1" ] && \
+    [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
+        eval "$("$BASE16_SHELL/profile_helper.sh")"
 
 [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
 base16_default-dark
@@ -112,6 +116,7 @@ source $ZSH/oh-my-zsh.sh
 
 setopt VI
 alias vim=nvim
+alias sudo='sudo '
 export EDITOR="nvim"
 setopt NO_FLOW_CONTROL
 

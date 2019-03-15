@@ -143,7 +143,7 @@ null_string = '<null>'
 enable_pager = True
 
 # Use keyring to automatically save and load password in a secure manner 
-keyring = True
+keyring = False
 
 [colors]
 completion-menu.completion.current = 'bg:#ffffff #000000'
@@ -195,7 +195,7 @@ order by blockeda.pid asc'''
 [alias_dsn]
 # example_dsn = postgresql://[user[:password]@][netloc][:port][/dbname]
 docker = postgresql://pricing_dev:pricing_dev69@127.0.0.1:54321/pricing_dev
-prod = postgresql://postgres@db1-vrack.abc-culture.fr:6432/pricing
+prod = postgresql://postgres@db2-vrack.abc-culture.fr:6432/pricing
 
 [data_formats]
 decimal = ""

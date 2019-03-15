@@ -53,10 +53,7 @@ set showcmd             " show (partial) command in status line
 set number
 call plug#begin('~/.vim/plugged')
 
-Plug 'RRethy/vim-illuminate'
-Plug 'cohama/lexima.vim'
 Plug 'AaronLasseigne/yank-code'
-Plug 'google/vim-searchindex'
 Plug 'airblade/vim-gitgutter'
 Plug 'Yggdroot/indentLine'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -232,9 +229,6 @@ vmap <leader>y :YankCode<CR>
 
 " Jinja
 au BufNewFile,BufRead *.jinja set ft=jinja
-
-" vim-illuminate
-hi illuminatedWord cterm=underline gui=underline
 
 " disable unesafe cmd in per projects settings file
 set secure
