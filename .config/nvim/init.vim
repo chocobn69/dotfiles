@@ -46,7 +46,7 @@ set colorcolumn=120
 autocmd BufWinLeave *.* mkview
 autocmd BufWinEnter *.* silent! loadview 
 
-let mapleader = "\<Space>"
+let maplocalleader = "\<Space>"
 
 set showcmd             " show (partial) command in status line
 
@@ -84,6 +84,8 @@ Plug 'Shougo/neosnippet-snippets'
 Plug 'mattn/emmet-vim'
 " haskell
 " Plug 'neovimhaskell/haskell-vim'
+" todo.txt
+Plug 'freitass/todo.txt-vim'
 
 call plug#end()
 
@@ -125,16 +127,16 @@ nnoremap <C-t> :Tags<cr>
 let NERDTreeIgnore=['\.pyc$', '\~$', '__pycache__'] "ignore files in NERDTree
 
 " tagbar
-nnoremap <silent> <leader>c :TagbarToggle<CR>
+nnoremap <silent> <localleader>c :TagbarToggle<CR>
 
 " jedi
 let g:jedi#auto_vim_configuration = 0
-let g:jedi#goto_assignments_command = '<leader>g'  " dynamically done for ft=python.
-let g:jedi#goto_definitions_command = '<leader>d'  " dynamically done for ft=python.
+let g:jedi#goto_assignments_command = '<localleader>g'  " dynamically done for ft=python.
+let g:jedi#goto_definitions_command = '<localleader>d'  " dynamically done for ft=python.
 let g:jedi#use_tabs_not_buffers = 0  " current default is 1.
-let g:jedi#rename_command = '<Leader>gR'
-let g:jedi#usages_command = '<Leader>gu'
-let g:jedi#completions_enabled = 1
+let g:jedi#rename_command = '<localleader>gR'
+let g:jedi#usages_command = '<localleader>gu'
+let g:jedi#completions_enabled = 0
 let g:jedi#smart_auto_mappings = 1
 let g:jedi#force_py_version = 3
 
@@ -189,14 +191,14 @@ endif
 let python_highlight_all = 1
 
 " custom shortcuts
-nnoremap <silent> <leader> :update<CR>
-nnoremap <silent> <leader>t :NERDTreeToggle<CR>
-nnoremap <silent> <leader>s :update<cr>:so ~/.config/nvim/init.vim<CR>
-nnoremap <silent> <leader>i :e  ~/.config/nvim/init.vim<CR>
-nnoremap <silent> <leader>x :update<CR>:bd<CR>
-nnoremap <silent> <leader>h :nohlsearch<CR>
+nnoremap <silent> <localleader> :update<CR>
+nnoremap <silent> <localleader>t :NERDTreeToggle<CR>
+nnoremap <silent> <localleader>s :update<cr>:so ~/.config/nvim/init.vim<CR>
+nnoremap <silent> <localleader>i :e  ~/.config/nvim/init.vim<CR>
+nnoremap <silent> <localleader>x :update<CR>:bd<CR>
+nnoremap <silent> <localleader>h :nohlsearch<CR>
 " copy relative path of current file
-nnoremap <silent> <leader>f :let @+ = expand("%")<CR>
+nnoremap <silent> <localleader>f :let @+ = expand("%")<CR>
 " add a line before, then a line after, then go back to initial line
 nnoremap gA O<esc>jo<esc>k
 " paste after line
@@ -225,7 +227,7 @@ let g:haskell_enable_static_pointers = 1  " to enable highlighting of `static`
 let g:haskell_backpack = 1                " to enable highlighting of backpack keywords
 
 " yank code plugin
-vmap <leader>y :YankCode<CR>
+vmap <localleader>y :YankCode<CR>
 
 " Jinja
 au BufNewFile,BufRead *.jinja set ft=jinja
