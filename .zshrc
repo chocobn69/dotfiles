@@ -178,3 +178,5 @@ source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zs
 function dangdangmd5 {
     echo -n "$1" | md5sum | tr '[:lower:]' '[:upper:]'
 }
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
