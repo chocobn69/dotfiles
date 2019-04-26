@@ -41,16 +41,16 @@ set tabstop=4           " use 4 spaces to represent tab
 set softtabstop=4
 set shiftwidth=4        " number of spaces to use for auto indent
 
-set colorcolumn=120
+set colorcolumn=88
 
 " folding
 " autocmd FileType python setlocal softtabstop=4 tabstop=4 shiftwidth=4 textwidth=119 foldmethod=indent foldnestmax=2
 
 " make vim views creation / loading automatic
-autocmd BufWinLeave *.* mkview
-autocmd BufWinEnter *.* silent! loadview 
+" autocmd BufWinLeave *.* mkview
+" autocmd BufWinEnter *.* silent! loadview 
 
-let mapleader = "\<Space>"
+let mapleader = ","
 
 set showcmd             " show (partial) command in status line
 
@@ -59,8 +59,8 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'AaronLasseigne/yank-code'
 Plug 'Yggdroot/indentLine'
-Plug 'junegunn/fzf.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
@@ -69,13 +69,16 @@ Plug 'ap/vim-css-color'
 Plug 'tpope/vim-commentary'
 Plug 'chriskempson/base16-vim'
 Plug 'itchyny/lightline.vim'
+Plug 'mengelbrecht/lightline-bufferline'
 Plug 'myusuf3/numbers.vim'
+" Plug 'cohama/lexima.vim'
 " python dev
 Plug 'davidhalter/jedi-vim'
 Plug 'Vimjas/vim-python-pep8-indent', {'for': 'python'}
 Plug 'airblade/vim-rooter'
 Plug 'majutsushi/tagbar'
 Plug 'mattn/emmet-vim'
+Plug 'janko/vim-test'
 " haskell
 " Plug 'neovimhaskell/haskell-vim'
 
@@ -147,8 +150,8 @@ inoremap kj <ESC>
 autocmd FileType python autocmd BufWritePre <buffer> %s/\s\+$//e
 autocmd Filetype python set tabstop=4
 autocmd Filetype python set shiftwidth=4
-autocmd Filetype python set textwidth=120
-autocmd Filetype python set colorcolumn=120
+autocmd Filetype python set textwidth=88
+autocmd Filetype python set colorcolumn=88
 autocmd Filetype python set softtabstop=4
 autocmd Filetype python set expandtab
 autocmd Filetype python set autoindent
@@ -169,11 +172,43 @@ vmap <leader>y :YankCode<CR>
 au BufNewFile,BufRead *.jinja set ft=jinja
 
 " " jedi
+let g:jedi#auto_initialization = 0
 let g:jedi#auto_vim_configuration = 0
 let g:jedi#use_tabs_not_buffers = 0  " current default is 1.
 let g:jedi#completions_enabled = 0
 let g:jedi#smart_auto_mappings = 0
+let g:jedi#popup_on_dot = 0
 let g:jedi#force_py_version = 3
+
+" vim-test
+let test#strategy = 'neovim'
+let test#python#runner = 'pytest'
+let test#python#pytest#executable = 'runtest'
+nmap <silent> t<C-n> :TestNearest<CR>
+nmap <silent> t<C-f> :TestFile<CR>
+nmap <silent> t<C-s> :TestSuite<CR>
+nmap <silent> t<C-l> :TestLast<CR>
+nmap <silent> t<C-g> :TestVisit<CR>
+
+" lightline
+set showtabline=2
+let g:lightline = {
+      \ 'colorscheme': 'wombat',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'gitbranch', 'cocstatus', 'readonly', 'relativepath', 'modified' ] ]
+      \ },
+      \ 'component_function': {
+      \   'gitbranch': 'fugitive#head',
+      \   'cocstatus': 'coc#status'
+      \ },
+      \ }
+let g:lightline#bufferline#show_number  = 1
+let g:lightline#bufferline#shorten_path = 1
+let g:lightline#bufferline#unnamed      = '[No Name]'
+let g:lightline.tabline          = {'left': [['buffers']], 'right': [['close']]}
+let g:lightline.component_expand = {'buffers': 'lightline#bufferline#buffers'}
+let g:lightline.component_type   = {'buffers': 'tabsel'}
 
 " do not conceal anything !
 set conceallevel=0
