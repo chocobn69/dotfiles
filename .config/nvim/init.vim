@@ -127,7 +127,6 @@ if filereadable(expand("~/.vimrc_background"))
   source ~/.vimrc_background
 endif
 
-let python_highlight_all = 1
 
 " custom shortcuts
 nnoremap <silent> <leader> :update<CR>
@@ -147,6 +146,7 @@ nnoremap Q <nop>
 " Use kj as escape
 inoremap kj <ESC>
 
+" python
 autocmd FileType python autocmd BufWritePre <buffer> %s/\s\+$//e
 autocmd Filetype python set tabstop=4
 autocmd Filetype python set shiftwidth=4
@@ -155,6 +155,8 @@ autocmd Filetype python set colorcolumn=88
 autocmd Filetype python set softtabstop=4
 autocmd Filetype python set expandtab
 autocmd Filetype python set autoindent
+let python_highlight_all = 1
+autocmd FileType python nnoremap <silent> gB obreakoint()<esc>
 
 " " haskell
 " let g:haskell_enable_quantification = 1   " to enable highlighting of `forall`
