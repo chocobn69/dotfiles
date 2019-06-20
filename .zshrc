@@ -179,4 +179,9 @@ function dangdangmd5 {
     echo -n "$1" | md5sum | tr '[:lower:]' '[:upper:]'
 }
 
+# less with color
+export LESS_TERMCAP_md=$(tput bold; tput setaf 1)
+export LESS_TERMCAP_us=$(tput smul; tput setaf 2)
+export LESS_TERMCAP_ue=$(tput sgr0)
+
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
