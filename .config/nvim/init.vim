@@ -160,7 +160,7 @@ autocmd Filetype python set softtabstop=4
 autocmd Filetype python set expandtab
 autocmd Filetype python set autoindent
 let python_highlight_all = 1
-autocmd FileType python nnoremap <silent> gB obreakoint()<esc>
+autocmd FileType python nnoremap <silent> gB obreakpoint()<esc>
 
 " " haskell
 " let g:haskell_enable_quantification = 1   " to enable highlighting of `forall`
