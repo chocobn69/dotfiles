@@ -58,7 +58,6 @@ set number
 call plug#begin('~/.vim/plugged')
 
 Plug 'AaronLasseigne/yank-code'
-Plug 'Yggdroot/indentLine'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdtree'
@@ -145,6 +144,8 @@ nnoremap gP o<esc>p
 nnoremap Q <nop>
 " Use kj as escape
 inoremap kj <ESC>
+" delete opened file
+nnoremap gD :call delete(expand('%'))<CR>:bdelete!<CR>
 " pg_format selection
 vnoremap g= :!pg_format<CR>
 autocmd FileType sql nnoremap <buffer> g= :%!pg_format<CR>
@@ -263,6 +264,8 @@ let g:lightline_buffer_reservelen = 20
 
 " do not conceal anything !
 set conceallevel=0
+
+autocmd BufNewFile,BufRead *.jinja set syntax=html
 
 " disable unesafe cmd in per projects settings file
 set secure
