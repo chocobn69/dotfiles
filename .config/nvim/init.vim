@@ -63,6 +63,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
+Plug 'cohama/agit.vim'
 Plug 'tpope/vim-sensible'
 Plug 'ap/vim-css-color'
 Plug 'tpope/vim-commentary'
@@ -78,6 +79,7 @@ Plug 'airblade/vim-rooter'
 Plug 'majutsushi/tagbar'
 Plug 'mattn/emmet-vim'
 Plug 'janko/vim-test'
+Plug 'tpope/vim-projectionist'
 " haskell
 " Plug 'neovimhaskell/haskell-vim'
 
@@ -99,7 +101,6 @@ set diffopt+=vertical
 " fzf
 let g:fzf_history_dir = '~/.local/share/fzf-history'
 
-let $FZF_DEFAULT_COMMAND = 'ag --vimgrep --ignore .git --hidden --smart-case -g ""'
 nnoremap <C-p> :FZF<cr>
 nnoremap <C-b> :Buffers<cr>
 nnoremap <C-n> :Ag<cr>
@@ -150,6 +151,7 @@ nnoremap gD :call delete(expand('%'))<CR>:bdelete!<CR>
 vnoremap g= :!pg_format<CR>
 autocmd FileType sql nnoremap <buffer> g= :%!pg_format<CR>
 autocmd FileType python nnoremap <buffer> g= :Format<CR>
+autocmd BufNewFile,BufRead *.jinja set syntax=html
 
 " python
 autocmd FileType python autocmd BufWritePre <buffer> %s/\s\+$//e
@@ -191,11 +193,7 @@ let g:jedi#force_py_version = 3
 let test#strategy = 'neovim'
 let test#python#runner = 'pytest'
 let test#python#pytest#executable = 'runtest'
-nmap <silent> t<C-n> :TestNearest<CR>
-nmap <silent> t<C-f> :TestFile<CR>
-nmap <silent> t<C-s> :TestSuite<CR>
-nmap <silent> t<C-l> :TestLast<CR>
-nmap <silent> t<C-g> :TestVisit<CR>
+nmap <silent> gT :TestFile<CR>
 
 " lightline
 set showtabline=2
@@ -264,8 +262,6 @@ let g:lightline_buffer_reservelen = 20
 
 " do not conceal anything !
 set conceallevel=0
-
-autocmd BufNewFile,BufRead *.jinja set syntax=html
 
 " disable unesafe cmd in per projects settings file
 set secure
