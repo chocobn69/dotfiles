@@ -153,18 +153,14 @@ source $HOME/.local_path
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# Use fd (https://github.com/sharkdp/fd) instead of the default find
-# command for listing path candidates.
-# - The first argument to the function ($1) is the base path to start traversal
-# - See the source code (completion.{bash,zsh}) for the details.
-_fzf_compgen_path() {
-  fd --hidden --follow --exclude ".git" . "$1"
-}
+export FZF_DEFAULT_OPTS="--height 50% --ansi --multi --reverse --border --inline-info --preview 'bat --color=always --style=header,grid --line-range :20 {} 2> /dev/null' --preview-window=right:50%:wrap"
+export FZF_CTRL_R_OPTS="--no-preview"
+export FZF_CTRL_T_OPTS="--bind 'ctrl-x:execute(subl -a {})'"
+export FZF_DEFAULT_COMMAND="/usr/bin/fd --follow --type file --color=always "
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
-# Use fd to generate the list for directory completion
-_fzf_compgen_dir() {
-  fd --type d --hidden --follow --exclude ".git" . "$1"
-}
+alias gbranch="git checkout \$(git branch -vv | fzf +m | awk '{print \$1}' | sed \"s/.* //\")"
+alias gshow="git show \$(git log --pretty=oneline | fzf +m | awk '{print \$1}')"
 
 # autosuggestions
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
