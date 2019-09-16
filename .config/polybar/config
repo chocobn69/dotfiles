@@ -65,7 +65,7 @@ foreground = ${colors.foreground}
 
 modules-left = 
 modules-center = todo-doing
-modules-right = calendar clock
+modules-right = weather calendar clock
 
 padding-left = 1
 padding-right = 1
@@ -331,4 +331,10 @@ type = custom/script
 exec = todo.sh -pt lsp d|head -n 1|cut -d' ' -f3-
 interval = 10
 format = Doing : <label>
+
+[module/weather]
+type = custom/script
+exec = curl -s "v2.wttr.in/montagnat?lang=fr&format=2"
+interval = 1200
+
 ; vim:ft=dosini
