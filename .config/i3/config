@@ -158,6 +158,8 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec --no-startup-id i3-msg exit
+# clipster integration
+bindsym $mod+c exec clipster -sp
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -211,7 +213,7 @@ new_window pixel 1
 
 focus_follows_mouse yes
 
-assign [class="Firefox"] number $wweb
+assign [class="firefox"] number $wweb
 assign [class="Slack"] number $wslack
 assign [class="weechat"] number $wirc
 assign [class="mutt"] number $wmail
@@ -237,3 +239,4 @@ exec --no-startup-id dunst -conf ~/.config/dunst/dunstrc
 exec --no-startup-id redshift -l 45.750000:4.850000
 exec --no-startup-id xscreensaver -nosplash
 exec --no-startup-id feh --recursive --randomize --bg-fill ~/Dropbox/wallpapers
+exec --no-startup-id clipster -d
