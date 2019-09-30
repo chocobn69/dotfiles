@@ -9,7 +9,7 @@ BASE16_SHELL="$HOME/.config/base16-shell/"
         eval "$("$BASE16_SHELL/profile_helper.sh")"
 
 [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
-base16_default-dark
+base16_chalk
 
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
@@ -153,7 +153,7 @@ source $HOME/.local_path
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-export FZF_DEFAULT_OPTS="--height 50% --ansi --multi --reverse --border --inline-info --preview 'bat --color=always --style=header,grid --line-range :20 {} 2> /dev/null' --preview-window=right:50%:wrap"
+export FZF_DEFAULT_OPTS="--height 50% --ansi --multi --reverse --border --inline-info --preview 'bat --color=always --style=header,grid --line-range :20 {} 2> /dev/null' --preview-window=right:40%"
 export FZF_CTRL_R_OPTS="--no-preview"
 export FZF_CTRL_T_OPTS="--bind 'ctrl-x:execute(subl -a {})'"
 export FZF_DEFAULT_COMMAND="/usr/bin/fd --follow --type file --color=always "
