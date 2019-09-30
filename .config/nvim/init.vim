@@ -132,6 +132,7 @@ endif
 
 " custom shortcuts
 nnoremap <silent> <leader> :update<CR>
+nnoremap <silent> <Space> :update<CR>
 nnoremap <silent> <leader>t :NERDTreeToggle<CR>
 nnoremap <silent> <leader>s :update<cr>:so ~/.config/nvim/init.vim<CR>
 nnoremap <silent> <leader>i :e  ~/.config/nvim/init.vim<CR>
