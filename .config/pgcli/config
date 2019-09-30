@@ -7,7 +7,7 @@ smart_completion = True
 
 # Display the completions in several columns. (More completions will be
 # visible.)
-wider_completion_menu = False
+wider_completion_menu = True
 
 # Multi-line mode allows breaking up the sql statements into multiple lines. If
 # this is set to True, then the end of the statements must have a semi-colon.
@@ -66,7 +66,7 @@ history_file = default
 
 # Default log level. Possible values: "CRITICAL", "ERROR", "WARNING", "INFO"
 # and "DEBUG". "NONE" disables logging.
-log_level = INFO
+log_level = WARNING
 
 # Order of columns when expanding * to column list
 # Possible values: "table_order" and "alphabetic"
