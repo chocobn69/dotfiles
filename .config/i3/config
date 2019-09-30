@@ -91,13 +91,13 @@ bindsym $mod+q focus parent
 #bindsym $mod+d focus child
 
 # switch to workspace
-set $wterm "1: term"
-set $wweb "2: web"
-set $wdev "3: dev"
-set $wslack "4: slack"
-set $wx2go "5: x2go"
-set $wirc "6: irc"
-set $wmail "7: mail"
+set $wterm "1"
+set $wweb "2"
+set $wdev "3"
+set $wslack "4"
+set $wx2go "5"
+set $wirc "6"
+set $wmail "7"
 
 workspace $wterm output $monitor2
 workspace $wweb output $monitor1
@@ -216,7 +216,7 @@ focus_follows_mouse yes
 assign [class="firefox"] number $wweb
 assign [class="Slack"] number $wslack
 assign [class="weechat"] number $wirc
-assign [class="mutt"] number $wmail
+assign [class="Thunderbird"] number $wmail
 
 # volume control
 bindsym XF86AudioLowerVolume exec /usr/bin/pactl set-sink-volume @DEFAULT_SINK@ '-5%'
@@ -224,7 +224,7 @@ bindsym XF86AudioRaiseVolume exec /usr/bin/pactl set-sink-volume @DEFAULT_SINK@ 
 bindsym XF86AudioMute exec /usr/bin/pactl set-sink-mute @DEFAULT_SINK@ toggle
 
 # launch several app
-bindsym $mod+m exec --no-startup-id kitty --class mutt env TERM="xterm-256color" neomutt --single-instance
+bindsym $mod+m exec --no-startup-id thunderbird
 bindsym $mod+w exec --no-startup-id firefox
 bindsym $mod+i exec --no-startup-id kitty --class weechat zsh -c weechat --single-instance
 bindsym $mod+s exec --no-startup-id slack
