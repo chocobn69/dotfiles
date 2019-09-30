@@ -68,6 +68,7 @@ Plug 'tpope/vim-sensible'
 Plug 'ap/vim-css-color'
 Plug 'tpope/vim-commentary'
 Plug 'chriskempson/base16-vim'
+Plug 'flazz/vim-colorschemes'
 Plug 'itchyny/lightline.vim'
 Plug 'taohexxx/lightline-buffer'
 Plug 'myusuf3/numbers.vim'
@@ -128,6 +129,7 @@ if filereadable(expand("~/.vimrc_background"))
 endif
 
 
+
 " custom shortcuts
 nnoremap <silent> <leader> :update<CR>
 nnoremap <silent> <leader>t :NERDTreeToggle<CR>
@@ -150,7 +152,9 @@ nnoremap gD :call delete(expand('%'))<CR>:bdelete!<CR>
 " pg_format selection
 vnoremap g= :!pg_format<CR>
 autocmd FileType sql nnoremap <buffer> g= :%!pg_format<CR>
+autocmd FileType sql setlocal equalprg=pg_format
 autocmd FileType python nnoremap <buffer> g= :Format<CR>
+autocmd FileType json setlocal equalprg=python\ -m\ json.tool
 autocmd BufNewFile,BufRead *.jinja set syntax=html
 
 " python
@@ -194,6 +198,7 @@ let test#strategy = 'neovim'
 let test#python#runner = 'pytest'
 let test#python#pytest#executable = 'runtest'
 nmap <silent> gT :TestFile<CR>
+nmap <silent> gt :TestNearest<CR>
 
 " lightline
 set showtabline=2
