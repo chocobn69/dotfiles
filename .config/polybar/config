@@ -290,7 +290,7 @@ label-disconnected-foreground = ${colors.foreground}
 
 [module/wired-network]
 type = internal/network
-interface = eth0
+interface = enp0s20f0u1u4
 
 format-connected-prefix = " "
 format-disconnected-prefix = " "
