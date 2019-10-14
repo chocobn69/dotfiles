@@ -230,13 +230,13 @@ bindsym $mod+i exec --no-startup-id kitty --class weechat zsh -c weechat --singl
 bindsym $mod+s exec --no-startup-id slack
 
 # mod + x lock screen
-bindsym $mod+x exec --no-startup-id xscreensaver-command -lock 
+bindsym $mod+x exec --no-startup-id xautolock -locknow
 
 # exec --no-startup-id MONITOR=$monitor1 polybar bottom -r
 # exec --no-startup-id MONITOR=$monitor2 polybar bottom -r
 exec --no-startup-id ~/.config/polybar/launch.sh
 exec --no-startup-id dunst -conf ~/.config/dunst/dunstrc
 exec --no-startup-id redshift -l 45.750000:4.850000
-exec --no-startup-id xscreensaver -nosplash
+exec --no-startup-id xautolock -time 3 -notify 3 -notifier 'notify-send "lock incoming"' -locker /home/choco/bin/lock
 exec --no-startup-id feh --recursive --randomize --bg-fill ~/Dropbox/wallpapers
 exec --no-startup-id clipster -d
