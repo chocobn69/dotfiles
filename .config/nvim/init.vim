@@ -111,6 +111,7 @@ nnoremap <C-t> :Tags<cr>
 
 " NERDTree
 let NERDTreeIgnore=['\.pyc$', '\~$', '__pycache__'] "ignore files in NERDTree
+nnoremap <silent> <leader>t :NERDTreeFind<CR>
 
 " tagbar
 nnoremap <silent> <leader>c :TagbarToggle<CR>
@@ -133,7 +134,6 @@ endif
 " custom shortcuts
 nnoremap <silent> <leader> :update<CR>
 nnoremap <silent> <Space> :update<CR>
-nnoremap <silent> <leader>t :NERDTreeToggle<CR>
 nnoremap <silent> <leader>s :update<cr>:so ~/.config/nvim/init.vim<CR>
 nnoremap <silent> <leader>i :e  ~/.config/nvim/init.vim<CR>
 nnoremap <silent> <leader>x :update<CR>:bd<CR>
@@ -155,7 +155,7 @@ vnoremap g= :!pg_format<CR>
 autocmd FileType sql nnoremap <buffer> g= :%!pg_format<CR>
 autocmd FileType sql setlocal equalprg=pg_format
 autocmd FileType python nnoremap <buffer> g= :Format<CR>
-autocmd FileType json setlocal equalprg=python\ -m\ json.tool
+" autocmd FileType json setlocal equalprg=python\ -m\ json.tool
 autocmd BufNewFile,BufRead *.jinja set syntax=html
 
 " python
