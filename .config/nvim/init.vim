@@ -12,6 +12,7 @@ set hidden
 set linespace=0
 set laststatus=2
 set noshowmode
+set updatetime=100
 syntax on
 " set t_Co=256
 
@@ -63,6 +64,8 @@ Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
+" git signs
+Plug 'mhinz/vim-signify'
 Plug 'cohama/agit.vim'
 Plug 'tpope/vim-sensible'
 Plug 'ap/vim-css-color'
@@ -86,6 +89,8 @@ Plug 'tpope/vim-projectionist'
 
 " coc : autocompletion
 Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
+
+Plug 'vim-scripts/dbext.vim'
 
 call plug#end()
 
@@ -268,6 +273,9 @@ let g:lightline_buffer_reservelen = 20
 
 " do not conceal anything !
 set conceallevel=0
+
+" dbext
+let g:dbext_default_profile_dev = 'type=PGSQL:user=pricing_dev:passwd=pricing_dev69:host=localhost:port=54321:dbname=pricing_dev'
 
 " disable unesafe cmd in per projects settings file
 set secure
