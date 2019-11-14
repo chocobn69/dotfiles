@@ -5,10 +5,9 @@
 ;           ██       ██████  ███████ ██    ██████  ██   ██ ██   ██
 
 [colors]
-; background = #282C34
-background = #181818
-foreground = #f7ca88
-foreground-alt= #Ff0000
+background = #2e3440
+foreground = #88c0d0
+foreground-alt= #bf616a
 black = #000000
 red = #E06C75
 green = #98C379

@@ -209,7 +209,7 @@ nmap <silent> gt :TestNearest<CR>
 " lightline
 set showtabline=2
 let g:lightline = {
-            \ 'colorscheme': 'wombat',
+            \ 'colorscheme': 'nord',
             \ 'tabline': {
             \   'left': [ [ 'bufferinfo' ],
             \             [ 'separator' ],

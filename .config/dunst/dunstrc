@@ -149,7 +149,7 @@
 
 [frame]
     width = 2
-    color = "#7cafc2"
+    color = "#88c0d0"
 
 [shortcuts]
 
@@ -181,17 +181,17 @@
 
 
 [urgency_low]
-    background = "#383838"
-    foreground = "#f7ca88"
+    background = "#2e3440"
+    foreground = "#88c0d0"
     timeout = 10
 
 [urgency_normal]
-    background = "#383838"
-    foreground = "#f7ca88"
+    background = "#2e3440"
+    foreground = "#88c0d0"
     timeout = 10
 
 [urgency_critical]
-    background = "#383838"
+    background = "#2e3440"
     foreground = "#ab4642"
     timeout = 0
 
@@ -243,15 +243,15 @@
 # vim: ft=cfg
 [base16_low]
     msg_urgency = low
-    background = "#282828"
-    foreground = "#585858"
+    background = "#2e3440"
+    foreground = "#88c0d0"
 
 [base16_normal]
     msg_urgency = normal
-    background = "#383838"
-    foreground = "#d8d8d8"
+    background = "#2e3440"
+    foreground = "#88c0d0"
 
 [base16_critical]
     msg_urgency = critical
     background = "#ab4642"
-    foreground = "#e8e8e8"
+    foreground = "#88c0d0"

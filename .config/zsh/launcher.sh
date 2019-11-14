@@ -1,5 +1,5 @@
 #! /usr/bin/env zsh
 . ~/.zshrc
-base16_default-dark
+base16_icy
 $@
 exit 0
