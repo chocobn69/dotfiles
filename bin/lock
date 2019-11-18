@@ -4,7 +4,6 @@ trap 'rm -f "$image"' SIGINT SIGTERM EXIT
 
 maim -u -m 1 \
     | convert png:- \
-    -sepia-tone 90% \
     -scale 10% -scale 1000% \
     -fill "#282828" -colorize 10% \
     "$image"
