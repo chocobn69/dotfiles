@@ -71,6 +71,7 @@ Plug 'tpope/vim-sensible'
 Plug 'ap/vim-css-color'
 Plug 'tpope/vim-commentary'
 Plug 'chriskempson/base16-vim'
+Plug 'arcticicestudio/nord-vim'
 Plug 'flazz/vim-colorschemes'
 Plug 'itchyny/lightline.vim'
 Plug 'taohexxx/lightline-buffer'
@@ -129,11 +130,11 @@ hi SpellBad cterm=underline
 
 " transparent background
 hi Normal ctermbg=none
-if filereadable(expand("~/.vimrc_background"))
-  let base16colorspace=256
-  source ~/.vimrc_background
-endif
-
+" if filereadable(expand("~/.vimrc_background"))
+"   let base16colorspace=256
+"   source ~/.vimrc_background
+" endif
+colorscheme nord
 
 
 " custom shortcuts

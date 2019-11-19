@@ -38,7 +38,7 @@ bindsym $mod+Shift+x kill
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop --dmenu="dmenu -fn 'Fira Mono-20' -i -p '>>>'"
-bindsym $mod+d exec --no-startup-id rofi -show drun -dpi 150
+bindsym $mod+d exec --no-startup-id rofi -show drun -dpi 150 --theme nord
 
 # change focus
 bindsym $mod+h focus left
@@ -237,6 +237,6 @@ bindsym $mod+x exec --no-startup-id xautolock -locknow
 exec --no-startup-id ~/.config/polybar/launch.sh
 exec --no-startup-id dunst -conf ~/.config/dunst/dunstrc
 exec --no-startup-id redshift -l 45.750000:4.850000
-exec --no-startup-id xautolock -time 3 -notify 3 -notifier 'notify-send "lock incoming"' -locker /home/choco/bin/lock
+exec --no-startup-id xautolock -time 3 -notify 5 -notifier 'notify-send "lock incoming"' -locker /home/choco/bin/lock
 exec --no-startup-id feh --recursive --randomize --bg-fill ~/Dropbox/wallpapers
 exec --no-startup-id clipster -d
