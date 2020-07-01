@@ -1,7 +1,10 @@
 {
-    "python.jediEnabled": true,
+    "python.jediEnabled": false,
+    "tsserver.enable": true,
     "python.formatting.provider": "black",
+    "python.formatting.blackArgs": [
+        "-t", "py38"
+    ],
     "python.linting.enabled": true,
-    "python.linting.flake8Enabled": true,
-    "tsserver.enable": true
+    "python.linting.flake8Enabled": true
 }

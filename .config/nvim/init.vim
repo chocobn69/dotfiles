@@ -27,6 +27,7 @@ set cmdheight=2
 set undodir=~/.vim/tmp/undo/     " undo files
 set backupdir=~/.vim/tmp/backup/ " backups
 set directory=~/.vim/tmp/swap/   " swap files
+set tags=./tags,tags,~/projets_locaux/pricing/tags;
 
 set encoding=utf-8
 
@@ -58,11 +59,15 @@ set showcmd             " show (partial) command in status line
 set number
 call plug#begin('~/.vim/plugged')
 
+" latex editing plugin
+Plug 'lervag/vimtex'
+Plug 'pearofducks/ansible-vim'
+Plug 'wellle/targets.vim'
 Plug 'AaronLasseigne/yank-code'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdtree'
-Plug 'tpope/vim-surround'
+Plug 'machakann/vim-sandwich'
 Plug 'tpope/vim-fugitive'
 " git signs
 Plug 'mhinz/vim-signify'
@@ -76,22 +81,22 @@ Plug 'flazz/vim-colorschemes'
 Plug 'itchyny/lightline.vim'
 Plug 'taohexxx/lightline-buffer'
 Plug 'myusuf3/numbers.vim'
-" Plug 'cohama/lexima.vim'
 " python dev
-Plug 'davidhalter/jedi-vim'
+" Plug 'davidhalter/jedi-vim'
 Plug 'Vimjas/vim-python-pep8-indent', {'for': 'python'}
 Plug 'airblade/vim-rooter'
 Plug 'majutsushi/tagbar'
 Plug 'mattn/emmet-vim'
 Plug 'janko/vim-test'
 Plug 'tpope/vim-projectionist'
-" haskell
-" Plug 'neovimhaskell/haskell-vim'
 
 " coc : autocompletion
-Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 Plug 'vim-scripts/dbext.vim'
+
+" jenkinsfile syntax
+Plug 'martinda/Jenkinsfile-vim-syntax', {'for': 'groovy'}
 
 call plug#end()
 
@@ -163,6 +168,7 @@ autocmd FileType sql setlocal equalprg=pg_format
 autocmd FileType python nnoremap <buffer> g= :Format<CR>
 " autocmd FileType json setlocal equalprg=python\ -m\ json.tool
 autocmd BufNewFile,BufRead *.jinja set syntax=html
+autocmd FileType python set fo-=t
 
 " python
 autocmd FileType python autocmd BufWritePre <buffer> %s/\s\+$//e
@@ -174,7 +180,7 @@ autocmd Filetype python set softtabstop=4
 autocmd Filetype python set expandtab
 autocmd Filetype python set autoindent
 let python_highlight_all = 1
-autocmd FileType python nnoremap <silent> gB obreakpoint()<esc>
+autocmd FileType python nnoremap <silent> gB Obreakpoint()<esc>
 
 " " haskell
 " let g:haskell_enable_quantification = 1   " to enable highlighting of `forall`
@@ -277,6 +283,10 @@ set conceallevel=0
 
 " dbext
 let g:dbext_default_profile_dev = 'type=PGSQL:user=pricing_dev:passwd=pricing_dev69:host=localhost:port=54321:dbname=pricing_dev'
+let g:dbext_default_profile = 'dev'
+
+" ansible-vim
+au BufRead,BufNewFile */playbooks/*.yml set filetype=yaml.ansible
 
 " disable unesafe cmd in per projects settings file
 set secure
