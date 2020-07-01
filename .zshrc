@@ -1,3 +1,11 @@
+GITSTATUS_LOG_LEVEL=DEBUG
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 export TERM="xterm-256color"
@@ -21,16 +29,7 @@ ZSH=/usr/share/oh-my-zsh/
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 
-# POWERLEVEL9K_MODE='awesome-fontconfig'
-POWERLEVEL9K_MODE='nerdfont-complete'
-POWERLEVEL9K_SHOW_CHANGESET=false
-POWERLEVEL9K_PROMPT_ON_NEWLINE=true
-POWERLEVEL9K_SHORTEN_DIR_LENGTH=1
-POWERLEVEL9K_SHORTEN_DELIMITER=""
-POWERLEVEL9K_SHORTEN_STRATEGY="truncate_from_right"
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status time)
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir virtualenv vcs)
-source  /usr/share/zsh-theme-powerlevel9k/powerlevel9k.zsh-theme
+source  /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -75,7 +74,7 @@ ZSH_CUSTOM=~/.oh-my-zsh
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(gitfast archlinux common-aliases docker sudo systemd vi-mode)
+plugins=(archlinux common-aliases docker sudo systemd vi-mode pass)
 # plugins=()
 
 
@@ -143,8 +142,8 @@ eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 eval "$(direnv hook zsh)"
 
-# eval $(ssh-agent)&>/dev/null
-# export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+export GPG_TTY=$(tty) 
+gpg-connect-agent updatestartuptty /bye >> /dev/null
 
 alias config='/usr/bin/git --git-dir=/home/choco/.cfg/ --work-tree=/home/choco'
 alias cz='vim ~/.zshrc'
@@ -184,3 +183,15 @@ export LESS_TERMCAP_us=$(tput smul; tput setaf 2)
 export LESS_TERMCAP_ue=$(tput sgr0)
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+PS1="${CUSTOM_PS1:-default PS1}: "
+export PS1
+
+workpass() {
+  PASSWORD_STORE_DIR=$HOME/Dropbox/.password-store/ pass $@
+}
+compdef _pass workpass
+zstyle ':completion::complete:workpass::' prefix "$HOME/Dropbox/.password-store/"
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
