@@ -1,5 +1,5 @@
 # XScreenSaver Preferences File
-# Written by xscreensaver-demo 5.37 for choco on Wed Oct  4 11:56:00 2017.
+# Written by xscreensaver-demo 5.43 for choco on Wed Oct  9 11:59:10 2019.
 # https://www.jwz.org/xscreensaver/
 
 timeout:	0:03:00
@@ -271,6 +271,17 @@ programs:								      \
   GL: 				splodesic -root				    \n\
   GL: 				unicrud -root				    \n\
   GL: 				vigilance -root				    \n\
+  GL: 				esper -root				    \n\
+  GL: 				crumbler -root				    \n\
+				filmleader -root			    \n\
+				glitchpeg -root				    \n\
+  GL: 				handsy -root				    \n\
+  GL: 				maze3d -root				    \n\
+  GL: 				peepers -root				    \n\
+  GL: 				razzledazzle -root			    \n\
+				vfeedback -root				    \n\
+  GL: 				deepstars -root				    \n\
+  GL: 				gravitywell -root			    \n\
 
 
 pointerPollTime:    0:00:05

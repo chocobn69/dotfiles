@@ -8,8 +8,8 @@
 # i3 config file (v4)
 #
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
-set_from_resource $monitor1 i3.MONITOR1 HDMI1
-set_from_resource $monitor2 i3.MONITOR2 eDP1
+set_from_resource $monitor1 i3.MONITOR1 HDMI-1
+set_from_resource $monitor2 i3.MONITOR2 eDP-1
 
 set $mod Mod4
 
