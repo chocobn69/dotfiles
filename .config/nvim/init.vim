@@ -45,6 +45,11 @@ set shiftwidth=4        " number of spaces to use for auto indent
 
 set colorcolumn=88
 
+augroup ProjectSetup
+    au BufRead,BufEnter backoffice/* set colorcolumn=120
+    au BufRead,BufEnter pricing/* set colorcolumn=88
+augroup END
+
 " folding
 " autocmd FileType python setlocal softtabstop=4 tabstop=4 shiftwidth=4 textwidth=119 foldmethod=indent foldnestmax=2
 
@@ -60,7 +65,6 @@ set number
 call plug#begin('~/.vim/plugged')
 
 " latex editing plugin
-Plug 'lervag/vimtex'
 Plug 'pearofducks/ansible-vim'
 Plug 'wellle/targets.vim'
 Plug 'AaronLasseigne/yank-code'
@@ -97,6 +101,12 @@ Plug 'vim-scripts/dbext.vim'
 
 " jenkinsfile syntax
 Plug 'martinda/Jenkinsfile-vim-syntax', {'for': 'groovy'}
+
+" deal with git conflict
+Plug 'rhysd/conflict-marker.vim'
+
+" Intelligently reopen files at your last edit position
+Plug 'farmergreg/vim-lastplace'
 
 call plug#end()
 
@@ -143,7 +153,7 @@ colorscheme nord
 
 
 " custom shortcuts
-nnoremap <silent> <leader> :update<CR>
+nnoremap <silent> <leader> :update<CR>29626
 nnoremap <silent> <Space> :update<CR>
 nnoremap <silent> <leader>s :update<cr>:so ~/.config/nvim/init.vim<CR>
 nnoremap <silent> <leader>i :e  ~/.config/nvim/init.vim<CR>
@@ -174,8 +184,8 @@ autocmd FileType python set fo-=t
 autocmd FileType python autocmd BufWritePre <buffer> %s/\s\+$//e
 autocmd Filetype python set tabstop=4
 autocmd Filetype python set shiftwidth=4
-autocmd Filetype python set textwidth=88
-autocmd Filetype python set colorcolumn=88
+autocmd Filetype python set textwidth=120
+autocmd Filetype python set colorcolumn=120
 autocmd Filetype python set softtabstop=4
 autocmd Filetype python set expandtab
 autocmd Filetype python set autoindent
