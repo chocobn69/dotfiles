@@ -116,7 +116,7 @@ let g:vim_markdown_folding_disabled = 1
 " fugitive
 nnoremap gs :Gstatus<CR>
 nnoremap gw :Gwrite<CR>
-nnoremap go :Gcommit<CR>
+nnoremap go :Git commit<CR>
 nnoremap gD :Gdiff<CR>
 set diffopt+=vertical
 
@@ -297,6 +297,11 @@ let g:dbext_default_profile = 'dev'
 
 " ansible-vim
 au BufRead,BufNewFile */playbooks/*.yml set filetype=yaml.ansible
+
+" vim-lastplace
+let g:lastplace_ignore = "gitcommit,gitrebase,svn,hgcommit"
+let g:lastplace_ignore_buftype = "quickfix,nofile,help"
+let g:lastplace_open_folds = 0
 
 " disable unesafe cmd in per projects settings file
 set secure
