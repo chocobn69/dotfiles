@@ -39,7 +39,7 @@ foreground = ${colors.foreground}
 
 modules-left = i3 xwindow
 modules-center = 
-modules-right = keyboard alsa battery wired-network wireless-network cpu memory 
+modules-right = keyboard alsa battery wired-network wireless-network system-fan-speed cpu memory 
 
 scroll-up = i3wm-wsnext
 scroll-down = i3wm-wsprev
@@ -335,5 +335,12 @@ format = Doing : <label>
 type = custom/script
 exec = curl -s "v2.wttr.in/montagnat?lang=fr&format=2"
 interval = 1200
+
+[module/system-fan-speed]
+type = custom/script
+exec = sensors | grep cpu_fan | awk '{print $2; exit}'
+interval = 5
+format-prefix = "  "
+format-suffix = " RPM"
 
 ; vim:ft=dosini
