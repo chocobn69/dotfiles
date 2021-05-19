@@ -238,7 +238,7 @@ exec --no-startup-id ~/.config/polybar/launch.sh
 exec --no-startup-id dunst -conf ~/.config/dunst/dunstrc
 exec --no-startup-id redshift -l 45.750000:4.850000
 exec --no-startup-id xautolock -time 3 -notify 5 -notifier 'notify-send "lock incoming"' -locker /home/choco/bin/lock
-# exec --no-startup-id feh --recursive --randomize --bg-fill ~/Dropbox/wallpapers
+exec --no-startup-id xsetroot -solid "#151718"
+exec --no-startup-id feh --recursive --randomize --bg-fill ~/Dropbox/wallpapers
 exec --no-startup-id clipster -d
-exec --no-startup-id xsetroot -solid "#2E3440"
 exec --no-startup-id setxkbmap -layout us -variant altgr-intl -option nodeadkeys ctrl:nocaps

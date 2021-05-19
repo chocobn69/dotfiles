@@ -5,15 +5,15 @@
 ;           ██       ██████  ███████ ██    ██████  ██   ██ ██   ██
 
 [colors]
-background = #2e3440
-foreground = #88c0d0
-foreground-alt= #bf616a
+background = #151718
+foreground = #55b5db
+foreground-alt= #Cd3f45
 black = #000000
-red = #E06C75
+red = #Cd3f45
 green = #98C379
 orange = #D19A66
-blue = #61AEEE
-magenta = #C678DD
+blue = #55b5db
+magenta = #a074c4
 cyan = #56B6C2
 lightgray = #ABB2BF
 darkgray = #5C6370
@@ -348,9 +348,9 @@ type = internal/mpd
 
 ; Host where mpd is running (either ip or domain name)
 ; Can also be the full path to a unix socket where mpd is running.
-host = localhost
-port = 6600
-password = 
+host = /home/choco/.config/mpd/socket
+;port = 6600
+;password = 
 
 ; Seconds to sleep between progressbar/song timer sync
 ; Default: 1

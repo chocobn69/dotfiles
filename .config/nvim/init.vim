@@ -79,9 +79,13 @@ Plug 'cohama/agit.vim'
 Plug 'tpope/vim-sensible'
 Plug 'ap/vim-css-color'
 Plug 'tpope/vim-commentary'
+
+" Themes
 Plug 'chriskempson/base16-vim'
 Plug 'arcticicestudio/nord-vim'
 Plug 'flazz/vim-colorschemes'
+Plug 'daviesjamie/vim-base16-lightline'
+
 Plug 'itchyny/lightline.vim'
 Plug 'taohexxx/lightline-buffer'
 Plug 'myusuf3/numbers.vim'
@@ -145,11 +149,11 @@ hi SpellBad cterm=underline
 
 " transparent background
 hi Normal ctermbg=none
-" if filereadable(expand("~/.vimrc_background"))
-"   let base16colorspace=256
-"   source ~/.vimrc_background
-" endif
-colorscheme nord
+if filereadable(expand("~/.vimrc_background"))
+  let base16colorspace=256
+  source ~/.vimrc_background
+endif
+colorscheme base16-seti
 
 
 " custom shortcuts
@@ -226,7 +230,7 @@ nmap <silent> gt :TestNearest<CR>
 " lightline
 set showtabline=2
 let g:lightline = {
-            \ 'colorscheme': 'nord',
+            \ 'colorscheme': 'base16',
             \ 'tabline': {
             \   'left': [ [ 'bufferinfo' ],
             \             [ 'separator' ],
