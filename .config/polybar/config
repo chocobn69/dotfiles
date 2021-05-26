@@ -374,7 +374,7 @@ interval = 2
 ;   <icon-next>
 ;   <icon-seekb>
 ;   <icon-seekf>
-format-online = <icon-prev> <icon-seekb> <icon-stop> <toggle> <icon-seekf> <icon-next>  <icon-repeat> <icon-random> <label-time>  <label-song>
+format-online = <label-time> <bar-progress>  <label-song>
 ;format-playing = ${self.format-online}
 ;format-paused = ${self.format-online}
 ;format-stopped = ${self.format-online}
@@ -392,6 +392,7 @@ format-online = <icon-prev> <icon-seekb> <icon-stop> <toggle> <icon-seekf> <icon
 ;   %title%
 ; Default: %artist% - %title%
 label-song = 𝄞 %artist% - %title%
+label-song-maxlen = 40
 
 ; Available tokens:
 ;   %elapsed%
@@ -423,7 +424,7 @@ toggle-on-foreground = #ff
 toggle-off-foreground = #55
 
 ; Only applies if <bar-progress> is used
-bar-progress-width = 45
+bar-progress-width = 15
 bar-progress-indicator = |
 bar-progress-fill = ─
 bar-progress-empty = ─
