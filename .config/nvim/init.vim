@@ -1,5 +1,5 @@
 let g:python3_host_prog = '/home/choco/.pyenv/versions/neovim/bin/python'
-set clipboard=unnamedplus
+set clipboard+=unnamedplus
 
 set ttyfast
 set hlsearch
@@ -118,10 +118,9 @@ call plug#end()
 let g:vim_markdown_folding_disabled = 1
 
 " fugitive
-nnoremap gs :Gstatus<CR>
+nnoremap gs :Git<CR>
 nnoremap gw :Gwrite<CR>
 nnoremap go :Git commit<CR>
-nnoremap gD :Gdiff<CR>
 set diffopt+=vertical
 
 " fzf
@@ -155,6 +154,8 @@ if filereadable(expand("~/.vimrc_background"))
 endif
 colorscheme base16-seti
 
+command Light :colorscheme base16-cupertino
+command Dark :colorscheme base16-seti
 
 " custom shortcuts
 nnoremap <silent> <leader> :update<CR>29626

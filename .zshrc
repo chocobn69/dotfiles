@@ -1,4 +1,4 @@
-GITSTATUS_LOG_LEVEL=DEBUG
+GITSTATUS_LOG_LEVEL=INFO
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -188,6 +188,12 @@ workpass() {
 }
 compdef _pass workpass
 zstyle ':completion::complete:workpass::' prefix "$HOME/Dropbox/.password-store/"
+
+autoload -U edit-command-line
+# Emacs style
+zle -N edit-command-line
+bindkey '^xe' edit-command-line
+bindkey '^x^e' edit-command-line
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

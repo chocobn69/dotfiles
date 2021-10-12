@@ -1,7 +1,8 @@
 {
-    "python.jediEnabled": true,
-    "tsserver.enable": false,
+    "pyright.enable": true,
+    "tsserver.enable": true,
     "python.formatting.provider": "black",
+    "python.analysis.typeCheckingMode": "off",
     "python.formatting.blackArgs": [
         "-t", "py38", "--fast", "-q"
     ],
