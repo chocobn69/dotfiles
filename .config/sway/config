@@ -154,10 +154,10 @@ default_border none
 
 focus_follows_mouse yes
 
-assign [class="firefox"] number $wweb
+assign [app_id="firefox"] number $wweb
 assign [class="Slack"] number $wslack
-assign [class="weechat"] number $wirc
-assign [class="Thunderbird"] number $wmail
+assign [app_id="weechat"] number $wirc
+assign [app_id="thunderbird"] number $wmail
 
 # volume control
 bindsym XF86AudioLowerVolume exec /usr/bin/pactl set-sink-volume @DEFAULT_SINK@ '-5%'

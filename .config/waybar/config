@@ -119,7 +119,7 @@
         "on-click-right": "pactl set-source-mute @DEFAULT_SOURCE@ toggle"
     },
     "custom/weather": {
-        "exec": "curl 'https://wttr.in/?format=1'",
+        "exec": "curl 'https://wttr.in/?format=4'",
         "interval": 3600
     },
     "custom/cpugovernor": {

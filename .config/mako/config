@@ -1,3 +1,5 @@
+on-button-left=dismiss
+on-notify=exec mpv /usr/share/sounds/freedesktop/stereo/message.oga
 font=FiraMono Nerd Font 12
 width=400
 height=210
