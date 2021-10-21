@@ -4,7 +4,7 @@
     "python.formatting.provider": "black",
     "python.analysis.typeCheckingMode": "off",
     "python.formatting.blackArgs": [
-        "-t", "py38", "--fast", "-q"
+        "-t", "py39", "--fast", "-q"
     ],
     "python.linting.enabled": true,
     "python.linting.flake8Enabled": true,

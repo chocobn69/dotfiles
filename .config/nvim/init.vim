@@ -90,7 +90,6 @@ Plug 'itchyny/lightline.vim'
 Plug 'taohexxx/lightline-buffer'
 Plug 'myusuf3/numbers.vim'
 " python dev
-" Plug 'davidhalter/jedi-vim'
 Plug 'Vimjas/vim-python-pep8-indent', {'for': 'python'}
 Plug 'airblade/vim-rooter'
 Plug 'majutsushi/tagbar'
@@ -99,7 +98,7 @@ Plug 'janko/vim-test'
 Plug 'tpope/vim-projectionist'
 
 " coc : autocompletion
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'}
 
 Plug 'vim-scripts/dbext.vim'
 
