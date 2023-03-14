@@ -89,7 +89,7 @@
     autosetuprebase = always
 
 [help]
-    autocorrect = 1
+    autocorrect = 30
 
 [diff]
     mnemonicPrefix = true

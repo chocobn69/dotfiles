@@ -117,7 +117,7 @@ font:
     #   - (macOS) Menlo
     #   - (Linux/BSD) monospace
     #   - (Windows) Consolas
-    family: FiraMono Nerd Font
+    family: FuraMono Nerd Font Mono
 
     # The `style` can be specified to pick a specific face.
     style: Regular
@@ -864,7 +864,7 @@ hints:
   # Print all received window events.
   #print_events: false
 # Base16 Seti UI - alacritty color config
-# 
+#
 colors:
   # Default colors
   primary:

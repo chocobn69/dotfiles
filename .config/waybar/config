@@ -4,7 +4,7 @@
     // Choose the order of the modules
     "modules-left": [ "clock", "custom/weather"],
     "modules-center": ["sway/workspaces"],
-    "modules-right": ["cpu", "temperature", "pulseaudio", "bluetooth", "network", "tray"],
+    "modules-right": ["cpu", "memory", "battery", "temperature", "pulseaudio", "network", "tray"],
     // Modules configuration
     "sway/workspaces": {
         "disable-scroll": true,
@@ -31,7 +31,7 @@
     },
     "sway/window": {
         "format": "{}",
-        "max-length": 50, 
+        "max-length": 50,
         "tooltip": false
     },
     "bluetooth": {
@@ -43,11 +43,11 @@
             "disabled": ""
         },
         "on-click": "blueberry"
-    },    
+    },
     "sway/language": {
         "format": "<big></big> {}",
         "max-length": 5,
-        "min-length": 5,        
+        "min-length": 5,
     },
     "idle_inhibitor": {
         "format": "{icon}",
@@ -67,12 +67,15 @@
         "today-format": "<b>{}</b>",
     },
     "cpu": {
-        "interval": "1",      
+        "interval": "1",
         "format": "  {max_frequency}GHz <span color=\"darkgray\">| {usage}%</span>",
         "max-length": 13,
         "min-length": 13,
         "on-click": "alacritty -e htop --sort-key PERCENT_CPU",
         "tooltip": false
+    },
+    "memory": {
+        "format": "{}% "
     },
     "temperature": {
         //"thermal-zone": 1,
@@ -84,6 +87,19 @@
         "format-icons": ["", "", ""],
         "max-length": 7,
         "min-length": 7
+    },
+    "battery": {
+        "full-at": 97,
+        "states": {
+            "good": 95,
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{capacity}% {icon}",
+        "format-charging": "{capacity}% ",
+        "format-plugged": "{capacity}% ",
+        "format-alt": "{time} {icon}",
+        "format-icons": ["", "", "", "", ""]
     },
     "network": {
         // "interface": "wlan0", // (Optional) To force the use of this interface,
@@ -119,7 +135,7 @@
         "on-click-right": "pactl set-source-mute @DEFAULT_SOURCE@ toggle"
     },
     "custom/weather": {
-        "exec": "curl 'https://wttr.in/?format=4'",
+        "exec": "curl 'https://wttr.in/bourg-en-bresse?format=4'",
         "interval": 3600
     },
     "custom/cpugovernor": {
@@ -133,5 +149,5 @@
             "perf": "",
             "sched": ""
         },
-    }    
+    }
 }

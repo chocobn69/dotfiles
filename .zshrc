@@ -1,3 +1,5 @@
+#zmodload zsh/zprof
+
 GITSTATUS_LOG_LEVEL=INFO
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
@@ -12,9 +14,11 @@ export TERM="xterm-256color"
 
 # Base16 Shell
 BASE16_SHELL="$HOME/.config/base16-shell/"
-[ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
-base16_seti
-
+[ -n "$PS1" ] && \
+    [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
+        eval "$("$BASE16_SHELL/profile_helper.sh")"
+# base16_seti
+#
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -82,11 +86,11 @@ plugins=(archlinux common-aliases docker sudo systemd vi-mode pass)
 # export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
+if [[ -n $SSH_CONNECTION ]]; then
+  export EDITOR='vim'
+else
+  export EDITOR='nvim'
+fi
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -134,12 +138,20 @@ setopt HIST_IGNORE_DUPS
 # Pretty    Obvious.  Right?
 setopt HIST_REDUCE_BLANKS
 
+export PYENV_ROOT="$HOME/.pyenv"
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
 eval "$(direnv hook zsh)"
 
-export GPG_TTY=$(tty) 
+export GPG_TTY=$(tty)
 gpg-connect-agent updatestartuptty /bye >> /dev/null
+
+if ! pgrep -u "$USER" ssh-agent > /dev/null; then
+    ssh-agent -t 1h > "$XDG_RUNTIME_DIR/ssh-agent.env"
+fi
+if [[ ! -f "$SSH_AUTH_SOCK" ]]; then
+    source "$XDG_RUNTIME_DIR/ssh-agent.env" >/dev/null
+fi
 
 alias config='/usr/bin/git --git-dir=/home/choco/.cfg/ --work-tree=/home/choco'
 alias cz='vim ~/.zshrc'
@@ -163,11 +175,11 @@ alias gshow="git show \$(git log --pretty=oneline | fzf +m | awk '{print \$1}')"
 # autosuggestions
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 bindkey '^ ' autosuggest-accept
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=3"
-ZSH_AUTOSUGGEST_USE_ASYNC='yes'
+# ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=3"
+# ZSH_AUTOSUGGEST_USE_ASYNC='yes'
 
 # syntax highlighting
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 function dangdangmd5 {
     echo -n "$1" | md5sum | tr '[:lower:]' '[:upper:]'
