@@ -10,8 +10,8 @@
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 set $monitor1 eDP-1
 set $monitor2 HDMI-A-1
-output $monitor2 pos 0 0 res 1920x1080
-# output $monitor2 pos 0 0 res 3440x1440
+# output $monitor2 pos 0 0 res 1920x1080
+output $monitor2 pos 0 0 res 3440x1440
 output $monitor1 pos 1920 0 res 1600x900
 
 bindswitch --locked lid:on output $monitor1 disable
