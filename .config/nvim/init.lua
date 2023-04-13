@@ -125,8 +125,12 @@ require('packer').startup(function(use)
     use 'nvim-treesitter/nvim-treesitter-textobjects'
     -- Collection of configurations for built-in LSP client
     use 'neovim/nvim-lspconfig'
-    use "williamboman/nvim-lsp-installer"
     use 'alexaandru/nvim-lspupdate'
+    use {
+        "williamboman/mason.nvim",
+        run = ":MasonUpdate" -- :MasonUpdate updates registry contents
+    }
+    use 'williamboman/mason-lspconfig.nvim'
     use 'hrsh7th/cmp-buffer'
     use 'hrsh7th/cmp-path'
     use 'hrsh7th/cmp-git'
@@ -171,7 +175,8 @@ require'nvim-treesitter.configs'.setup {
 -- bufferline
 require("bufferline").setup{}
 
-require("nvim-lsp-installer").setup {}
+require("mason").setup {}
+require("mason-lspconfig").setup {}
 --Set statusbar
 require('lualine').setup {
     options = {
@@ -346,16 +351,23 @@ lspconfig['tsserver'].setup{
     capabilities = capabilities,
 }
 
-lspconfig['sqls'].setup{
+lspconfig['sqlls'].setup{
     flags = lsp_flags,
     on_attach = on_attach,
     capabilities = capabilities,
+    cmd = {"sql-language-server", "up", "--method", "stdio"},
+    root_dir = vim.loop.os_homedir,
     settings = {
-        sqls = {
+        sqlLanguageServer = {
             connections = {
                 {
-                    driver = 'postgresql',
-                    dataSourceName = 'host=localhost port=54321 user=pricing_dev password=pricing_dev69 dbname=pricing_dev sslmode=disable',
+                    name = 'postgresql_dev',
+                    adapter = 'postgres',
+                    host = '127.0.0.1',
+                    port = 54321,
+                    user = 'pricing_dev',
+                    password = 'pricing_dev69',
+                    database = 'pricing_dev',
                 },
             },
         },
