@@ -86,7 +86,7 @@ vim.o.softtabstop = 4
 vim.o.shiftwidth = 4
 
 --Set the number of lines to always display
-vim.o.scrolloff = 0
+vim.o.scrolloff = 5
 
 --Make line numbers default
 vim.wo.relativenumber = true
@@ -112,6 +112,9 @@ vim.o.termguicolors = true
 -- get current base16 theme
 base16_theme = vim.env.BASE16_THEME
 
+-- default border style
+local _border = "single"
+
 require('packer').startup(function(use)
     use 'wbthomason/packer.nvim' -- Package manager
     use 'RRethy/nvim-base16' -- base16
@@ -125,7 +128,6 @@ require('packer').startup(function(use)
     use 'nvim-treesitter/nvim-treesitter-textobjects'
     -- Collection of configurations for built-in LSP client
     use 'neovim/nvim-lspconfig'
-    use 'alexaandru/nvim-lspupdate'
     use {
         "williamboman/mason.nvim",
         run = ":MasonUpdate" -- :MasonUpdate updates registry contents
@@ -149,8 +151,15 @@ require('packer').startup(function(use)
     use { 'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' } }
     use {'akinsho/bufferline.nvim', tag = "v2.*", requires = 'kyazdani42/nvim-web-devicons'}
     use 'psf/black' -- black formating
-    use 'ethanholz/nvim-lastplace' -- reopen file at the previous position
     use 'AaronLasseigne/yank-code' -- yank code with file name and line number
+    use 'uga-rosa/ccc.nvim' -- color picker / handling
+    use "lukas-reineke/indent-blankline.nvim" -- visual indentation
+    use {'ojroques/nvim-lspfuzzy',
+      requires = {
+        {'junegunn/fzf'},
+        {'junegunn/fzf.vim'}  -- to enable preview (optional)
+      }
+    }
 end)
 
 vim.cmd('colorscheme base16-' .. base16_theme)
@@ -177,6 +186,7 @@ require("bufferline").setup{}
 
 require("mason").setup {}
 require("mason-lspconfig").setup {}
+
 --Set statusbar
 require('lualine').setup {
     options = {
@@ -250,6 +260,7 @@ local builtin = require("telescope.builtin")
 vim.keymap.set('n', '<C-p>', builtin.find_files)
 vim.keymap.set('n', '<C-n>', builtin.live_grep)
 vim.keymap.set('n', '<C-l>', builtin.current_buffer_fuzzy_find)
+vim.keymap.set('n', '<C-k>', builtin.buffers)
 vim.keymap.set('n', '<C-b>', builtin.buffers)
 vim.keymap.set('n', 'gj', builtin.diagnostics)
 
@@ -319,6 +330,22 @@ local lsp_flags = {
     debounce_text_changes = 150,
 }
 
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
+  vim.lsp.handlers.hover, {
+    border = _border
+  }
+)
+vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
+  vim.lsp.handlers.signature_help, {
+    border = _border
+  }
+)
+vim.diagnostic.config{
+  float={border=_border}
+}
+require('lspconfig.ui.windows').default_options = {
+  border = _border
+}
 
 -- Add additional capabilities supported by nvim-cmp
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -350,29 +377,19 @@ lspconfig['tsserver'].setup{
     flags = lsp_flags,
     capabilities = capabilities,
 }
+lspconfig['jsonls'].setup{}
 
 lspconfig['sqlls'].setup{
-    flags = lsp_flags,
     on_attach = on_attach,
+    flags = lsp_flags,
     capabilities = capabilities,
+    filetypes = { "sql" },
     cmd = {"sql-language-server", "up", "--method", "stdio"},
     root_dir = vim.loop.os_homedir,
-    settings = {
-        sqlLanguageServer = {
-            connections = {
-                {
-                    name = 'postgresql_dev',
-                    adapter = 'postgres',
-                    host = '127.0.0.1',
-                    port = 54321,
-                    user = 'pricing_dev',
-                    password = 'pricing_dev69',
-                    database = 'pricing_dev',
-                },
-            },
-        },
-    },
+    single_file_support = true,
 }
+
+lspconfig['cssls'].setup{}
 
 -- luasnip setup
 local luasnip = require 'luasnip'
@@ -491,8 +508,47 @@ vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
     end
 })
 
+local ccc = require("ccc")
+local mapping = ccc.mapping
 
--- reopen file at previous position
-require'nvim-lastplace'.setup{}
+ccc.setup({
+  -- Your preferred settings
+  -- Example: enable highlighter
+  highlighter = {
+    auto_enable = true,
+    lsp = true,
+  },
+})
+
+require('lspfuzzy').setup {}
+
+-- indent-blankline
+local highlight = {
+    "RainbowRed",
+    "RainbowYellow",
+    "RainbowBlue",
+    "RainbowOrange",
+    "RainbowGreen",
+    "RainbowViolet",
+    "RainbowCyan",
+}
+
+local hooks = require "ibl.hooks"
+-- create the highlight groups in the highlight setup hook, so they are reset
+-- every time the colorscheme changes
+hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
+    vim.api.nvim_set_hl(0, "RainbowRed", { fg = "#E06C75" })
+    vim.api.nvim_set_hl(0, "RainbowYellow", { fg = "#E5C07B" })
+    vim.api.nvim_set_hl(0, "RainbowBlue", { fg = "#61AFEF" })
+    vim.api.nvim_set_hl(0, "RainbowOrange", { fg = "#D19A66" })
+    vim.api.nvim_set_hl(0, "RainbowGreen", { fg = "#98C379" })
+    vim.api.nvim_set_hl(0, "RainbowViolet", { fg = "#C678DD" })
+    vim.api.nvim_set_hl(0, "RainbowCyan", { fg = "#56B6C2" })
+end)
+
+require("ibl").setup {
+    indent = { highlight = highlight, char = "▏" },
+    scope = {show_start = false, show_end = false}
+}
 
 vim.opt.secure = true
