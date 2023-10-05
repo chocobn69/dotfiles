@@ -153,7 +153,7 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-default_border none
+default_border pixel 1
 
 
 focus_follows_mouse yes
@@ -161,7 +161,7 @@ focus_follows_mouse yes
 assign [app_id="brave-browser"] number $wweb
 assign [class="Slack"] number $wslack
 assign [app_id="weechat"] number $wirc
-assign [app_id="thunderbird"] number $wmail
+assign [class="thunderbird"] number $wmail
 
 # volume control
 bindsym XF86AudioLowerVolume exec /usr/bin/pactl set-sink-volume @DEFAULT_SINK@ '-5%'
@@ -194,8 +194,8 @@ exec --no-startup-id clipster -d
 
 # keyboards
 input "type:keyboard" {
-    xkb_layout "us"
-    xkb_variant "altgr-intl"
+    xkb_layout "us_qwerty-fr"
+    #xkb_variant "altgr-intl"
     xkb_options "ctrl:nocaps"
 }
 
