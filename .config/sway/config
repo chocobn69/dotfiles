@@ -158,7 +158,7 @@ default_border pixel 1
 
 focus_follows_mouse yes
 
-assign [app_id="brave-browser"] number $wweb
+assign [app_id="vivaldi-stable"] number $wweb
 assign [class="Slack"] number $wslack
 assign [app_id="weechat"] number $wirc
 assign [class="thunderbird"] number $wmail
@@ -170,7 +170,7 @@ bindsym XF86AudioMute exec /usr/bin/pactl set-sink-mute @DEFAULT_SINK@ toggle
 
 # launch several app
 bindsym $mod+m exec --no-startup-id thunderbird
-bindsym $mod+w exec --no-startup-id brave
+bindsym $mod+w exec --no-startup-id vivaldi-stable
 bindsym $mod+i exec --no-startup-id alacritty --class weechat --command zsh -c weechat
 bindsym $mod+s exec --no-startup-id slack
 
