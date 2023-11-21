@@ -135,7 +135,7 @@ require('packer').startup(function(use)
     use 'williamboman/mason-lspconfig.nvim'
     use 'hrsh7th/cmp-buffer'
     use 'hrsh7th/cmp-path'
-    use 'hrsh7th/cmp-git'
+    use 'petertriho/cmp-git'
     use 'hrsh7th/cmp-nvim-lsp' -- LSP source for nvim-cmp
     use 'saadparwaiz1/cmp_luasnip' -- Snippets source for nvim-cmp
     use 'hrsh7th/cmp-cmdline'
@@ -155,10 +155,10 @@ require('packer').startup(function(use)
     use 'uga-rosa/ccc.nvim' -- color picker / handling
     use "lukas-reineke/indent-blankline.nvim" -- visual indentation
     use {'ojroques/nvim-lspfuzzy',
-      requires = {
-        {'junegunn/fzf'},
-        {'junegunn/fzf.vim'}  -- to enable preview (optional)
-      }
+        requires = {
+            {'junegunn/fzf'},
+            {'junegunn/fzf.vim'}  -- to enable preview (optional)
+        }
     }
 end)
 
@@ -247,11 +247,11 @@ require('telescope').setup {
     },
     extensions = {
         fzf = {
-          fuzzy = true,                    -- false will only do exact matching
-          override_generic_sorter = true,  -- override the generic sorter
-          override_file_sorter = true,     -- override the file sorter
-          case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
-                                           -- the default case_mode is "smart_case"
+            fuzzy = true,                    -- false will only do exact matching
+            override_generic_sorter = true,  -- override the generic sorter
+            override_file_sorter = true,     -- override the file sorter
+            case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
+            -- the default case_mode is "smart_case"
         }
     }
 }
@@ -331,20 +331,20 @@ local lsp_flags = {
 }
 
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
-  vim.lsp.handlers.hover, {
-    border = _border
-  }
+    vim.lsp.handlers.hover, {
+        border = _border
+    }
 )
 vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
-  vim.lsp.handlers.signature_help, {
-    border = _border
-  }
+    vim.lsp.handlers.signature_help, {
+        border = _border
+    }
 )
 vim.diagnostic.config{
-  float={border=_border}
+    float={border=_border}
 }
 require('lspconfig.ui.windows').default_options = {
-  border = _border
+    border = _border
 }
 
 -- Add additional capabilities supported by nvim-cmp
@@ -430,34 +430,46 @@ cmp.setup {
         end, { 'i', 's' }),
     }),
     sources = cmp.config.sources({
+        { name = 'path' },
         { name = 'nvim_lsp' },
         { name = 'luasnip' },
-        { name = 'buffer' },
+        { name = 'buffer' ,
+            option = {
+                get_bufnrs = function()
+                    return vim.api.nvim_list_bufs()
+                end
+            }
+        },
     }),
 }
 
 cmp.setup.filetype('gitcommit', {
     sources = cmp.config.sources({
-        { name = 'cmp_git' }, -- You can specify the `cmp_git` source if you were installed it.
-    }, {
-            { name = 'buffer' },
-        })
+        { name = 'git' }, -- You can specify the `git` source if [you were installed it](https://github.com/petertriho/cmp-git).
+        { name = 'buffer' ,
+            option = {
+                get_bufnrs = function()
+                    return vim.api.nvim_list_bufs()
+                end
+            }
+        },
+    })
 })
 
 cmp.setup.cmdline({ '/', '?' }, {
     mapping = cmp.mapping.preset.cmdline(),
     sources = {
-      { name = 'buffer' }
+        { name = 'buffer' },
+        { name = 'path' },
     }
-  })
+})
 
 cmp.setup.cmdline(':', {
     mapping = cmp.mapping.preset.cmdline(),
     sources = cmp.config.sources({
-        { name = 'path' }
-    }, {
-            { name = 'cmdline' }
-        })
+        { name = 'path' },
+        { name = 'cmdline' }
+    })
 })
 
 vim.api.nvim_create_user_command('Light', 'colorscheme base16-cupertino', {})
@@ -512,12 +524,12 @@ local ccc = require("ccc")
 local mapping = ccc.mapping
 
 ccc.setup({
-  -- Your preferred settings
-  -- Example: enable highlighter
-  highlighter = {
-    auto_enable = true,
-    lsp = true,
-  },
+    -- Your preferred settings
+    -- Example: enable highlighter
+    highlighter = {
+        auto_enable = true,
+        lsp = true,
+    },
 })
 
 require('lspfuzzy').setup {}
