@@ -204,3 +204,5 @@ input "type:keyboard" xkb_model "pc101"
 # wallpaper
 output $monitor2 bg ~/Dropbox/wallpapers/bg-1.jpg stretch
 output $monitor1 bg ~/Dropbox/wallpapers/bg-1.jpg stretch
+
+include /etc/sway/config.d/*

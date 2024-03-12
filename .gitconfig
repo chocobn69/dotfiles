@@ -112,7 +112,7 @@
     abbrevCommit = true
 
 [core]
-    editor = nvim
+	editor = nvim
     whitespace = -trailing-space
     excludesfile = ~/.gitignore_global
 
