@@ -58,7 +58,7 @@ vim.opt.background = 'dark'
 vim.o.updatetime = 250
 vim.o.showcmd = true
 
--- 2 lines for cmd line
+-- 1 line for cmd line
 vim.opt.cmdheight = 1
 
 -- utils directories
@@ -160,6 +160,12 @@ require('packer').startup(function(use)
             {'junegunn/fzf.vim'}  -- to enable preview (optional)
         }
     }
+    use 'chentoast/marks.nvim' -- visual marks
+    use {
+        "chrisgrieser/nvim-recorder",
+        requires = "rcarriga/nvim-notify", -- optional
+        config = function() require("recorder").setup() end,
+    }
 end)
 
 vim.cmd('colorscheme base16-' .. base16_theme)
@@ -260,7 +266,7 @@ local builtin = require("telescope.builtin")
 vim.keymap.set('n', '<C-p>', builtin.find_files)
 vim.keymap.set('n', '<C-n>', builtin.live_grep)
 vim.keymap.set('n', '<C-l>', builtin.current_buffer_fuzzy_find)
-vim.keymap.set('n', '<C-k>', builtin.buffers)
+vim.keymap.set('n', '<C-k>', builtin.lsp_document_symbols)
 vim.keymap.set('n', '<C-b>', builtin.buffers)
 vim.keymap.set('n', 'gj', builtin.diagnostics)
 
@@ -313,7 +319,6 @@ local on_attach = function(client, bufnr)
     vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
     vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
     vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
-    vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
     vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
     vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
     vim.keymap.set('n', '<space>wl', function()
@@ -363,9 +368,9 @@ lspconfig['pylsp'].setup{
             plugins = {
                 pylint = { enabled = false },
                 pyflakes = { enabled = false },
-                black = { enabled = true, cache_config = true, preview = true },
+                black = { enabled = false },
                 isort = { enabled = false },
-                flake8 = { enabled = true },
+                flake8 = { enabled = false },
                 pycodestyle = { enabled = false },
                 mccabe = { enabled = false },
             }
@@ -387,6 +392,16 @@ lspconfig['sqlls'].setup{
     cmd = {"sql-language-server", "up", "--method", "stdio"},
     root_dir = vim.loop.os_homedir,
     single_file_support = true,
+}
+
+require('lspconfig').ruff_lsp.setup {
+  on_attach = on_attach,
+  init_options = {
+    settings = {
+      -- Any extra CLI arguments for `ruff` go here.
+      args = {},
+    }
+  }
 }
 
 lspconfig['cssls'].setup{}
@@ -430,6 +445,7 @@ cmp.setup {
         end, { 'i', 's' }),
     }),
     sources = cmp.config.sources({
+        { name = "copilot", group_index = 2 },
         { name = 'path' },
         { name = 'nvim_lsp' },
         { name = 'luasnip' },
@@ -504,10 +520,10 @@ vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
     pattern = {"*.py"},
     callback = function()
         -- Black formating
-        vim.api.nvim_set_keymap(
+        vim.keymap.set(
             "n",
             "g=",
-            ":Black<cr>",
+            function() vim.lsp.buf.format { async = true } end,
             { noremap = true, silent = false }
         )
         -- add breakpoint()
@@ -515,6 +531,20 @@ vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
             "n",
             "gb",
             "Obreakpoint()<esc>",
+            { noremap = true, silent = false }
+        )
+    end
+})
+
+-- format json
+vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
+    pattern = {"*.json"},
+    callback = function()
+        -- jq formating
+        vim.api.nvim_set_keymap(
+            "n",
+            "g=",
+            ":%!jq '.'<cr>",
             { noremap = true, silent = false }
         )
     end
@@ -561,6 +591,95 @@ end)
 require("ibl").setup {
     indent = { highlight = highlight, char = "▏" },
     scope = {show_start = false, show_end = false}
+}
+
+require'marks'.setup {
+  -- whether to map keybinds or not. default true
+  default_mappings = true,
+  -- which builtin marks to show. default {}
+  builtin_marks = { ".", "<", ">", "^" },
+  -- whether movements cycle back to the beginning/end of buffer. default true
+  cyclic = true,
+  -- whether the shada file is updated after modifying uppercase marks. default false
+  force_write_shada = false,
+  -- how often (in ms) to redraw signs/recompute mark positions.
+  -- higher values will have better performance but may cause visual lag,
+  -- while lower values may cause performance penalties. default 150.
+  refresh_interval = 250,
+  -- sign priorities for each type of mark - builtin marks, uppercase marks, lowercase
+  -- marks, and bookmarks.
+  -- can be either a table with all/none of the keys, or a single number, in which case
+  -- the priority applies to all marks.
+  -- default 10.
+  sign_priority = { lower=10, upper=15, builtin=8, bookmark=20 },
+  -- disables mark tracking for specific filetypes. default {}
+  excluded_filetypes = {},
+  -- marks.nvim allows you to configure up to 10 bookmark groups, each with its own
+  -- sign/virttext. Bookmarks can be used to group together positions and quickly move
+  -- across multiple buffers. default sign is '!@#$%^&*()' (from 0 to 9), and
+  -- default virt_text is "".
+  bookmark_0 = {
+    sign = "⚑",
+    virt_text = "hello world",
+    -- explicitly prompt for a virtual line annotation when setting a bookmark from this group.
+    -- defaults to false.
+    annotate = false,
+  },
+  mappings = {}
+}
+
+-- nvim-recorder
+require("recorder").setup {
+	-- Named registers where macros are saved (single lowercase letters only).
+	-- The first register is the default register used as macro-slot after
+	-- startup.
+	slots = { "a", "b" },
+
+	mapping = {
+		startStopRecording = "q",
+		playMacro = "Q",
+		switchSlot = "<C-q>",
+		editMacro = "cq",
+		deleteAllMacros = "dq",
+		yankMacro = "yq",
+		-- ⚠️ this should be a string you don't use in insert mode during a macro
+		addBreakPoint = "##",
+	},
+
+	-- Clears all macros-slots on startup.
+	clear = false,
+
+	-- Log level used for any notification, mostly relevant for nvim-notify.
+	-- (Note that by default, nvim-notify does not show the levels `trace` & `debug`.)
+	logLevel = vim.log.levels.INFO,
+
+	-- If enabled, only critical notifications are sent.
+	-- If you do not use a plugin like nvim-notify, set this to `true`
+	-- to remove otherwise annoying messages.
+	lessNotifications = false,
+
+	-- Use nerdfont icons in the status bar components and keymap descriptions
+	useNerdfontIcons = true,
+
+	-- Performance optimzations for macros with high count. When `playMacro` is
+	-- triggered with a count higher than the threshold, nvim-recorder
+	-- temporarily changes changes some settings for the duration of the macro.
+	performanceOpts = {
+		countThreshold = 100,
+		lazyredraw = true, -- enable lazyredraw (see `:h lazyredraw`)
+		noSystemClipboard = true, -- remove `+`/`*` from clipboard option
+		autocmdEventsIgnore = { -- temporarily ignore these autocmd events
+			"TextChangedI",
+			"TextChanged",
+			"InsertLeave",
+			"InsertEnter",
+			"InsertCharPre",
+		},
+	},
+
+	-- [experimental] partially share keymaps with nvim-dap.
+	-- (See README for further explanations.)
+	dapSharedKeymaps = false,
 }
 
 vim.opt.secure = true
