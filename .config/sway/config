@@ -171,14 +171,20 @@ bindsym XF86AudioMute exec /usr/bin/pactl set-sink-mute @DEFAULT_SINK@ toggle
 # launch several app
 bindsym $mod+m exec --no-startup-id thunderbird
 bindsym $mod+w exec --no-startup-id vivaldi-stable
-bindsym $mod+i exec --no-startup-id alacritty --class weechat --command zsh -c weechat
+bindsym $mod+i exec --no-startup-id alacritty --class weechat --command nu -e weechat
 bindsym $mod+s exec --no-startup-id slack
 
 # mod + x lock screen
 bindsym $mod+x exec swaylock -f -c 000000
 
-bindsym $mod+d exec alacritty --class 'launcher' --command bash -c 'compgen -c | sort -u | fzf | xargs -r swaymsg -t command exec'
-for_window [app_id="^launcher$"] floating enable, border pixel 1, resize set width 25 ppt height 20 ppt, move position 0 px 0 px
+# bindsym $mod+d exec alacritty --class 'launcher' --command bash -c 'compgen -c | sort -u | fzf | xargs -r swaymsg -t command exec'
+# for_window [app_id="^launcher$"] floating enable, border pixel 1, resize set width 25 ppt height 20 ppt, move position 0 px 0 px
+
+for_window [app_id="^launcher$"] floating enable, sticky enable, resize set 30 ppt 60 ppt, border pixel 10
+set $menu exec alacritty --class 'launcher' --command /usr/bin/sway-launcher-desktop
+bindsym $mod+d exec $menu
+
+for_window [class="Plexamp"] floating enable
 
 exec swayidle -w \
 	timeout 180 'swaylock -f -c 000000' \

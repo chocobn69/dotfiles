@@ -109,15 +109,12 @@ vim.opt.conceallevel = 0
 --Set colorscheme
 vim.o.termguicolors = true
 
--- get current base16 theme
-base16_theme = vim.env.BASE16_THEME
-
 -- default border style
 local _border = "single"
 
 require('packer').startup(function(use)
     use 'wbthomason/packer.nvim' -- Package manager
-    use 'RRethy/nvim-base16' -- base16
+    use 'folke/tokyonight.nvim' -- theme
     use 'tpope/vim-fugitive' -- Git commands in nvim
     use 'nvim-lualine/lualine.nvim' -- Fancier statusline
     -- Highlight, edit, and navigate code using a fast incremental parsing library
@@ -146,7 +143,6 @@ require('packer').startup(function(use)
         config = function()
             require("telescope").load_extension("live_grep_args")
         end }
-    use {'nvim-telescope/telescope-fzf-native.nvim', run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
     -- Add git related info in the signs columns and popups
     use { 'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' } }
     use {'akinsho/bufferline.nvim', tag = "v2.*", requires = 'kyazdani42/nvim-web-devicons'}
@@ -160,15 +156,54 @@ require('packer').startup(function(use)
             {'junegunn/fzf.vim'}  -- to enable preview (optional)
         }
     }
+    use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
     use 'chentoast/marks.nvim' -- visual marks
+    use 'LhKipp/nvim-nu' -- nushell support
     use {
         "chrisgrieser/nvim-recorder",
         requires = "rcarriga/nvim-notify", -- optional
         config = function() require("recorder").setup() end,
     }
+    use 'jose-elias-alvarez/null-ls.nvim'
+    use { "flobilosaurus/theme_reloader.nvim" }
 end)
 
-vim.cmd('colorscheme base16-' .. base16_theme)
+-- get current theme
+require("tokyonight").setup({
+  -- your configuration comes here
+  -- or leave it empty to use the default settings
+  style = "night", -- The theme comes in three styles, `storm`, `moon`, a darker variant `night` and `day`
+  light_style = "day", -- The theme is used when the background is set to light
+  transparent = false, -- Enable this to disable setting the background color
+  terminal_colors = true, -- Configure the colors used when opening a `:terminal` in [Neovim](https://github.com/neovim/neovim)
+  styles = {
+    -- Style to be applied to different syntax groups
+    -- Value is any valid attr-list value for `:help nvim_set_hl`
+    comments = { italic = true },
+    keywords = { italic = true },
+    functions = {},
+    variables = {},
+    -- Background styles. Can be "dark", "transparent" or "normal"
+    sidebars = "dark", -- style for sidebars, see below
+    floats = "dark", -- style for floating windows
+  },
+  sidebars = { "qf", "help" }, -- Set a darker background on sidebar-like windows. For example: `["qf", "vista_kind", "terminal", "packer"]`
+  day_brightness = 0.5, -- Adjusts the brightness of the colors of the **Day** style. Number between 0 and 1, from dull to vibrant colors
+  hide_inactive_statusline = false, -- Enabling this option, will hide inactive statuslines and replace them with a thin border instead. Should work with the standard **StatusLine** and **LuaLine**.
+  dim_inactive = false, -- dims inactive windows
+  lualine_bold = false, -- When `true`, section headers in the lualine theme will be bold
+
+  --- You can override specific color groups to use other groups or a hex color
+  --- function will be called with a ColorScheme table
+  ---@param colors ColorScheme
+  on_colors = function(colors) end,
+
+  --- You can override specific highlights to use other groups or a hex color
+  --- function will be called with a Highlights and ColorScheme table
+  ---@param highlights Highlights
+  ---@param colors ColorScheme
+  on_highlights = function(highlights, colors) end,
+})
 
 -- treesitter
 require'nvim-treesitter.configs'.setup {
@@ -197,7 +232,7 @@ require("mason-lspconfig").setup {}
 require('lualine').setup {
     options = {
         icons_enabled = true,
-        theme = 'base16',
+        theme = 'tokyonight',
         component_separators = '|',
         section_separators = '',
         path = 1,
@@ -488,8 +523,22 @@ cmp.setup.cmdline(':', {
     })
 })
 
-vim.api.nvim_create_user_command('Light', 'colorscheme base16-cupertino', {})
-vim.api.nvim_create_user_command('Dark', 'colorscheme base16-seti', {})
+function theme_light(args)
+    vim.cmd[[set background=light]]
+    vim.cmd[[colorscheme tokyonight-day]]
+end
+function theme_dark(args)
+    vim.cmd[[set background=dark]]
+    vim.cmd[[colorscheme tokyonight-night]]
+end
+
+require("theme_reloader").setup({
+  light = "tokyonight-day",
+  dark = "tokyonight-night"
+})
+
+vim.api.nvim_create_user_command('Light', theme_light, {})
+vim.api.nvim_create_user_command('Dark', theme_dark, {})
 
 vim.api.nvim_create_user_command('Pricing', ':cd /home/choco/projets_locaux/pricing/', {})
 vim.api.nvim_create_user_command('Bo', ':cd /home/choco/projets_locaux/backoffice/', {})
@@ -628,58 +677,6 @@ require'marks'.setup {
   mappings = {}
 }
 
--- nvim-recorder
-require("recorder").setup {
-	-- Named registers where macros are saved (single lowercase letters only).
-	-- The first register is the default register used as macro-slot after
-	-- startup.
-	slots = { "a", "b" },
-
-	mapping = {
-		startStopRecording = "q",
-		playMacro = "Q",
-		switchSlot = "<C-q>",
-		editMacro = "cq",
-		deleteAllMacros = "dq",
-		yankMacro = "yq",
-		-- ⚠️ this should be a string you don't use in insert mode during a macro
-		addBreakPoint = "##",
-	},
-
-	-- Clears all macros-slots on startup.
-	clear = false,
-
-	-- Log level used for any notification, mostly relevant for nvim-notify.
-	-- (Note that by default, nvim-notify does not show the levels `trace` & `debug`.)
-	logLevel = vim.log.levels.INFO,
-
-	-- If enabled, only critical notifications are sent.
-	-- If you do not use a plugin like nvim-notify, set this to `true`
-	-- to remove otherwise annoying messages.
-	lessNotifications = false,
-
-	-- Use nerdfont icons in the status bar components and keymap descriptions
-	useNerdfontIcons = true,
-
-	-- Performance optimzations for macros with high count. When `playMacro` is
-	-- triggered with a count higher than the threshold, nvim-recorder
-	-- temporarily changes changes some settings for the duration of the macro.
-	performanceOpts = {
-		countThreshold = 100,
-		lazyredraw = true, -- enable lazyredraw (see `:h lazyredraw`)
-		noSystemClipboard = true, -- remove `+`/`*` from clipboard option
-		autocmdEventsIgnore = { -- temporarily ignore these autocmd events
-			"TextChangedI",
-			"TextChanged",
-			"InsertLeave",
-			"InsertEnter",
-			"InsertCharPre",
-		},
-	},
-
-	-- [experimental] partially share keymaps with nvim-dap.
-	-- (See README for further explanations.)
-	dapSharedKeymaps = false,
-}
+require'nu'.setup{}
 
 vim.opt.secure = true
