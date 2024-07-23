@@ -2,9 +2,6 @@
 #
 # version = "0.92.2"
 
-$env.LANG = "en_US.utf8"
-$env.LC_ALL = $env.LANG
-
 # For more information on defining custom themes, see
 # https://www.nushell.sh/book/coloring_and_theming.html
 # And here is the theme collection
@@ -237,7 +234,34 @@ $env.config = {
     use_ansi_coloring: true
     bracketed_paste: true # enable bracketed paste, currently useless on windows
     edit_mode: emacs # emacs, vi
-    shell_integration: false # enables terminal shell integration. Off by default, as some terminals have issues with this.
+    shell_integration: {
+        # osc2 abbreviates the path if in the home_dir, sets the tab/window title, shows the running command in the tab/window title
+        osc2: true
+        # osc7 is a way to communicate the path to the terminal, this is helpful for spawning new tabs in the same directory
+        osc7: true
+        # osc8 is also implemented as the deprecated setting ls.show_clickable_links, it shows clickable links in ls output if your terminal supports it. show_clickable_links is deprecated in favor of osc8
+        osc8: true
+        # osc9_9 is from ConEmu and is starting to get wider support. It's similar to osc7 in that it communicates the path to the terminal
+        osc9_9: false
+        # osc133 is several escapes invented by Final Term which include the supported ones below.
+        # 133;A - Mark prompt start
+        # 133;B - Mark prompt end
+        # 133;C - Mark pre-execution
+        # 133;D;exit - Mark execution finished with exit code
+        # This is used to enable terminals to know where the prompt is, the command is, where the command finishes, and where the output of the command is
+        osc133: true
+        # osc633 is closely related to osc133 but only exists in visual studio code (vscode) and supports their shell integration features
+        # 633;A - Mark prompt start
+        # 633;B - Mark prompt end
+        # 633;C - Mark pre-execution
+        # 633;D;exit - Mark execution finished with exit code
+        # 633;E - NOT IMPLEMENTED - Explicitly set the command line with an optional nonce
+        # 633;P;Cwd=<path> - Mark the current working directory and communicate it to the terminal
+        # and also helps with the run recent menu in vscode
+        osc633: true
+        # reset_application_mode is escape \x1b[?1l and was added to help ssh work better
+        reset_application_mode: true
+    }
     render_right_prompt_on_last_line: false # true or false to enable or disable right prompt to be rendered on last line of the prompt.
     use_kitty_protocol: false # enables keyboard enhancement protocol implemented by kitty console, only if your terminal support this.
     highlight_resolved_externals: false # true enables highlighting of external commands in the repl resolved by which.
@@ -406,16 +430,26 @@ $env.config = {
           event: [
             {
               send: ExecuteHostCommand
-              cmd: "commandline (
-                history
-                  | each { |it| $it.command }
-                  | uniq
+              cmd: "do {
+                $env.SHELL = /usr/bin/bash
+                commandline edit --insert (
+                  history
+                  | get command
                   | reverse
+                  | uniq
                   | str join (char -i 0)
-                  | fzf --read0 --layout=reverse --height=40% -q (commandline)
+                  | fzf --scheme=history
+                      --read0
+                      --layout=reverse
+                      --height=40%
+                      --bind 'ctrl-/:change-preview-window(right,70%|right)'
+                      --preview='echo -n {} | nu --stdin -c \'nu-highlight\''
+                      # Run without existing commandline query for now to test composability
+                      # -q (commandline)
                   | decode utf-8
                   | str trim
-              )"
+                )
+              }"
             }
           ]
         }
@@ -426,7 +460,7 @@ $env.config = {
           mode: [emacs, vi_normal, vi_insert]
           event: {
             send: executehostcommand
-            cmd: "commandline edit --insert (fzf --layout=reverse)"
+            cmd: "commandline edit --insert (fd --type f --strip-cwd-prefix | fzf --layout=reverse)"
           }
         }
         {
@@ -550,6 +584,17 @@ $env.config = {
                     { send: historyhintcomplete }
                     { send: menuright }
                     { send: right }
+                ]
+            }
+        }
+        {
+            name: take_history_hint
+            modifier: control
+            keycode: space
+            mode: [emacs, vi_normal, vi_insert]
+            event: {
+                until: [
+                    { send: historyhintcomplete }
                 ]
             }
         }
@@ -957,7 +1002,6 @@ alias op_proxy = zsh -c "source ~/.zshrc ; source ~/openrc/proxy.sh ; pyenv acti
 
 # xdg-mime default pcmanfm.desktop inode/directory
 alias canihazip = curl -4 icanhazip.com
-def pgcli [] { zsh -c "source ~/.zshrc ; pyenv activate pgcli ; pgcli -D prod" }
 alias refresh_wallpaper = sh ~/.config/i3/wallpaper.sh
 
 def 2faovh [] { ^pass otp ovh | ^wl-copy -n }
@@ -967,28 +1011,27 @@ alias checkconnectivity = loop {  ping -c 1 1.1.1.1 -W 1; sleep 1sec }
 
 alias ll = ls -l
 alias gitconfig = /usr/bin/git --git-dir=/home/choco/.cfg/ --work-tree=/home/choco
+alias canigetip = dig +short myip.opendns.com @resolver1.opendns.com
 
 
 # default theme is dark
 def --env dark [] {
     export-env { $env.THEME = "dark" }
-    ln -fs ~/.config/alacritty/themes/themes/pencil_dark.toml ~/.config/alacritty/current_theme.toml
-    use ~/.config/nushell/themes/nu-themes/monokai-dark.nu
+    ln -fs /home/choco/.config/alacritty/themes/themes/pencil_dark.toml /home/choco/.config/alacritty/current_theme.toml
+    use /home/choco/.config/nushell/themes/nu-themes/monokai-dark.nu
     $env.config = ($env.config | merge {color_config: (monokai-dark)})
-    $env.THEME = (open ~/.config/alacritty/current_theme.toml --raw| lines|get 0|split column :|get column2)
-    echo "light" > ~/.config/nvim/theme
+    $env.THEME = (open /home/choco/.config/alacritty/current_theme.toml --raw| lines|get 0|split column :|get column2)
+    'dark' | save -f /home/choco/.config/nvim/theme
 }
 def --env light [] {
     export-env { $env.THEME = "light" }
-    ln -fs ~/.config/alacritty/themes/themes/noctis-lux.toml ~/.config/alacritty/current_theme.toml
-    use ~/.config/nushell/themes/nu-themes/github-light-colorblind.nu
+    ln -fs /home/choco/.config/alacritty/themes/themes/noctis-lux.toml /home/choco/.config/alacritty/current_theme.toml
+    use /home/choco/.config/nushell/themes/nu-themes/github-light-colorblind.nu
     $env.config = ($env.config | merge {color_config: (github-light-colorblind)})
-    $env.THEME = (open ~/.config/alacritty/current_theme.toml --raw| lines|get 0|split column :|get column2)
-    echo "dark" > ~/.config/nvim/theme
+    $env.THEME = (open /home/choco/.config/alacritty/current_theme.toml --raw| lines|get 0|split column :|get column2)
+    'light' | save -f /home/choco/.config/nvim/theme
 }
-$env.THEME = (open ~/.config/alacritty/current_theme.toml --raw| lines|get 0|split column :|get column2)
+$env.THEME = (open /home/choco/.config/alacritty/current_theme.toml --raw| lines|get 0|split column :|get column2)
 if $env.THEME == "dark" { dark } else if $env.THEME == "light" { light }
-
-$env.PATH = ($env.PATH | split row (char esep) | prepend $"(pyenv root)/shims")
 
 source ~/.cache/carapace/init.nu

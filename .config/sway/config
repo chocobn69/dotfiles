@@ -72,7 +72,7 @@ bindsym $mod+v split v;exec alacritty
 bindsym $mod+f fullscreen
 
 # take fullscreen screenshot and copy into clipoard
-bindsym $mod+Shift+s exec grimshot save area - | swappy -f -
+bindsym $mod+Shift+s exec grim -g "$(slurp)" - | swappy -f -
 
 # change container layout (stacked, tabbed, toggle split)
 #bindsym $mod+s layout stacking
@@ -155,9 +155,9 @@ bindsym $mod+r mode "resize"
 
 default_border pixel 1
 
-
 focus_follows_mouse yes
 
+assign [class="Vivaldi-stable"] number $wweb
 assign [app_id="vivaldi-stable"] number $wweb
 assign [class="Slack"] number $wslack
 assign [app_id="weechat"] number $wirc
@@ -171,7 +171,7 @@ bindsym XF86AudioMute exec /usr/bin/pactl set-sink-mute @DEFAULT_SINK@ toggle
 # launch several app
 bindsym $mod+m exec --no-startup-id thunderbird
 bindsym $mod+w exec --no-startup-id vivaldi-stable
-bindsym $mod+i exec --no-startup-id alacritty --class weechat --command nu -e weechat
+bindsym $mod+i exec --no-startup-id alacritty --class weechat --command zsh -c weechat
 bindsym $mod+s exec --no-startup-id slack
 
 # mod + x lock screen
@@ -185,6 +185,8 @@ set $menu exec alacritty --class 'launcher' --command /usr/bin/sway-launcher-des
 bindsym $mod+d exec $menu
 
 for_window [class="Plexamp"] floating enable
+for_window [app_id="audacious"] floating enable
+for_window [app_id="audacious"] border none
 
 exec swayidle -w \
 	timeout 180 'swaylock -f -c 000000' \
@@ -197,6 +199,7 @@ bar {
 exec mako --config ~/.config/mako/config 2>&1 >/tmp/mako.log
 exec --no-startup-id gammastep -l 45.750000:4.850000
 exec --no-startup-id clipster -d
+exec --no-startup-id ianny
 
 # keyboards
 input "type:keyboard" {

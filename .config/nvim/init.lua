@@ -114,7 +114,6 @@ local _border = "single"
 
 require('packer').startup(function(use)
     use 'wbthomason/packer.nvim' -- Package manager
-    use 'folke/tokyonight.nvim' -- theme
     use 'tpope/vim-fugitive' -- Git commands in nvim
     use 'nvim-lualine/lualine.nvim' -- Fancier statusline
     -- Highlight, edit, and navigate code using a fast incremental parsing library
@@ -125,6 +124,7 @@ require('packer').startup(function(use)
     use 'nvim-treesitter/nvim-treesitter-textobjects'
     -- Collection of configurations for built-in LSP client
     use 'neovim/nvim-lspconfig'
+    use 'NLKNguyen/papercolor-theme'
     use {
         "williamboman/mason.nvim",
         run = ":MasonUpdate" -- :MasonUpdate updates registry contents
@@ -145,11 +145,10 @@ require('packer').startup(function(use)
         end }
     -- Add git related info in the signs columns and popups
     use { 'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' } }
-    use {'akinsho/bufferline.nvim', tag = "v2.*", requires = 'kyazdani42/nvim-web-devicons'}
-    use 'psf/black' -- black formating
+    use {'akinsho/bufferline.nvim', tag = "*", requires = 'nvim-tree/nvim-web-devicons'}
     use 'AaronLasseigne/yank-code' -- yank code with file name and line number
     use 'uga-rosa/ccc.nvim' -- color picker / handling
-    use "lukas-reineke/indent-blankline.nvim" -- visual indentation
+    -- use "lukas-reineke/indent-blankline.nvim" -- visual indentation
     use {'ojroques/nvim-lspfuzzy',
         requires = {
             {'junegunn/fzf'},
@@ -159,51 +158,22 @@ require('packer').startup(function(use)
     use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
     use 'chentoast/marks.nvim' -- visual marks
     use 'LhKipp/nvim-nu' -- nushell support
-    use {
-        "chrisgrieser/nvim-recorder",
-        requires = "rcarriga/nvim-notify", -- optional
-        config = function() require("recorder").setup() end,
-    }
     use 'jose-elias-alvarez/null-ls.nvim'
     use { "flobilosaurus/theme_reloader.nvim" }
+    use({
+        "stevearc/conform.nvim",
+        config = function()
+          require("conform").setup()
+        end,
+      })
+    use 'rcarriga/nvim-notify'
+    use({
+        "stevearc/aerial.nvim",
+        config = function()
+          require("aerial").setup()
+        end,
+      })
 end)
-
--- get current theme
-require("tokyonight").setup({
-  -- your configuration comes here
-  -- or leave it empty to use the default settings
-  style = "night", -- The theme comes in three styles, `storm`, `moon`, a darker variant `night` and `day`
-  light_style = "day", -- The theme is used when the background is set to light
-  transparent = false, -- Enable this to disable setting the background color
-  terminal_colors = true, -- Configure the colors used when opening a `:terminal` in [Neovim](https://github.com/neovim/neovim)
-  styles = {
-    -- Style to be applied to different syntax groups
-    -- Value is any valid attr-list value for `:help nvim_set_hl`
-    comments = { italic = true },
-    keywords = { italic = true },
-    functions = {},
-    variables = {},
-    -- Background styles. Can be "dark", "transparent" or "normal"
-    sidebars = "dark", -- style for sidebars, see below
-    floats = "dark", -- style for floating windows
-  },
-  sidebars = { "qf", "help" }, -- Set a darker background on sidebar-like windows. For example: `["qf", "vista_kind", "terminal", "packer"]`
-  day_brightness = 0.5, -- Adjusts the brightness of the colors of the **Day** style. Number between 0 and 1, from dull to vibrant colors
-  hide_inactive_statusline = false, -- Enabling this option, will hide inactive statuslines and replace them with a thin border instead. Should work with the standard **StatusLine** and **LuaLine**.
-  dim_inactive = false, -- dims inactive windows
-  lualine_bold = false, -- When `true`, section headers in the lualine theme will be bold
-
-  --- You can override specific color groups to use other groups or a hex color
-  --- function will be called with a ColorScheme table
-  ---@param colors ColorScheme
-  on_colors = function(colors) end,
-
-  --- You can override specific highlights to use other groups or a hex color
-  --- function will be called with a Highlights and ColorScheme table
-  ---@param highlights Highlights
-  ---@param colors ColorScheme
-  on_highlights = function(highlights, colors) end,
-})
 
 -- treesitter
 require'nvim-treesitter.configs'.setup {
@@ -232,7 +202,7 @@ require("mason-lspconfig").setup {}
 require('lualine').setup {
     options = {
         icons_enabled = true,
-        theme = 'tokyonight',
+        theme = 'PaperColor',
         component_separators = '|',
         section_separators = '',
         path = 1,
@@ -264,7 +234,7 @@ require('gitsigns').setup {
 --NVimtree shortcuts
 require('nvim-tree').setup {}
 local api = require("nvim-tree.api")
-vim.keymap.set('n', '<leader>t',api.tree.toggle)
+vim.keymap.set('n', '<leader>t', ':NvimTreeFindFile<cr>')
 
 -- Telescope
 local actions = require("telescope.actions")
@@ -441,6 +411,12 @@ require('lspconfig').ruff_lsp.setup {
 
 lspconfig['cssls'].setup{}
 
+lspconfig['html'].setup{
+    on_attach = on_attach,
+    cmd = { 'vscode-html-language-server', '--stdio' },
+    filetypes = {'html', 'htmldjango'},
+}
+
 -- luasnip setup
 local luasnip = require 'luasnip'
 
@@ -525,16 +501,16 @@ cmp.setup.cmdline(':', {
 
 function theme_light(args)
     vim.cmd[[set background=light]]
-    vim.cmd[[colorscheme tokyonight-day]]
+    vim.cmd[[colorscheme PaperColor]]
 end
 function theme_dark(args)
     vim.cmd[[set background=dark]]
-    vim.cmd[[colorscheme tokyonight-night]]
+    vim.cmd[[colorscheme PaperColor]]
 end
 
 require("theme_reloader").setup({
-  light = "tokyonight-day",
-  dark = "tokyonight-night"
+  light = "PaperColor",
+  dark = "PaperColor"
 })
 
 vim.api.nvim_create_user_command('Light', theme_light, {})
@@ -557,10 +533,9 @@ vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
         vim.api.nvim_set_keymap(
             "n",
             "g=",
-            "<cmd>%!pg_format<CR>",
-            { noremap = true, silent = true }
+            ":Format<cr>",
+            { noremap = true, silent = false }
         )
-        vim.o.equalprg=pg_format
     end
 })
 
@@ -568,7 +543,6 @@ vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
 vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
     pattern = {"*.py"},
     callback = function()
-        -- Black formating
         vim.keymap.set(
             "n",
             "g=",
@@ -624,23 +598,23 @@ local highlight = {
     "RainbowCyan",
 }
 
-local hooks = require "ibl.hooks"
--- create the highlight groups in the highlight setup hook, so they are reset
--- every time the colorscheme changes
-hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
-    vim.api.nvim_set_hl(0, "RainbowRed", { fg = "#E06C75" })
-    vim.api.nvim_set_hl(0, "RainbowYellow", { fg = "#E5C07B" })
-    vim.api.nvim_set_hl(0, "RainbowBlue", { fg = "#61AFEF" })
-    vim.api.nvim_set_hl(0, "RainbowOrange", { fg = "#D19A66" })
-    vim.api.nvim_set_hl(0, "RainbowGreen", { fg = "#98C379" })
-    vim.api.nvim_set_hl(0, "RainbowViolet", { fg = "#C678DD" })
-    vim.api.nvim_set_hl(0, "RainbowCyan", { fg = "#56B6C2" })
-end)
+-- local hooks = require "ibl.hooks"
+-- -- create the highlight groups in the highlight setup hook, so they are reset
+-- -- every time the colorscheme changes
+-- hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
+--     vim.api.nvim_set_hl(0, "RainbowRed", { fg = "#E06C75" })
+--     vim.api.nvim_set_hl(0, "RainbowYellow", { fg = "#E5C07B" })
+--     vim.api.nvim_set_hl(0, "RainbowBlue", { fg = "#61AFEF" })
+--     vim.api.nvim_set_hl(0, "RainbowOrange", { fg = "#D19A66" })
+--     vim.api.nvim_set_hl(0, "RainbowGreen", { fg = "#98C379" })
+--     vim.api.nvim_set_hl(0, "RainbowViolet", { fg = "#C678DD" })
+--     vim.api.nvim_set_hl(0, "RainbowCyan", { fg = "#56B6C2" })
+-- end)
 
-require("ibl").setup {
-    indent = { highlight = highlight, char = "▏" },
-    scope = {show_start = false, show_end = false}
-}
+-- require("ibl").setup {
+--     indent = { highlight = highlight, char = "▏" },
+--     scope = {show_start = false, show_end = false}
+-- }
 
 require'marks'.setup {
   -- whether to map keybinds or not. default true
@@ -678,5 +652,54 @@ require'marks'.setup {
 }
 
 require'nu'.setup{}
+
+require("conform").setup({
+  formatters_by_ft = {
+    python = { "ruff" },
+    sql = { "pg_format" },
+  },
+})
+vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
+vim.api.nvim_create_user_command("Format", function(args)
+  local range = nil
+  if args.count ~= -1 then
+    local end_line = vim.api.nvim_buf_get_lines(0, args.line2 - 1, args.line2, true)[1]
+    range = {
+      start = { args.line1, 0 },
+      ["end"] = { args.line2, end_line:len() },
+    }
+  end
+  require("conform").format({ async = true, lsp_fallback = true, range = range })
+end, { range = true })
+
+vim.notify = require("notify")
+local notify = require 'notify'
+vim.lsp.handlers['window/showMessage'] = function(_, result, ctx)
+  local client = vim.lsp.get_client_by_id(ctx.client_id)
+  local lvl = ({
+    'ERROR',
+    'WARN',
+    'INFO',
+    'DEBUG',
+  })[result.type]
+  notify({ result.message }, lvl, {
+    title = 'LSP | ' .. client.name,
+    timeout = 10000,
+    keep = function()
+      return lvl == 'ERROR' or lvl == 'WARN'
+    end,
+  })
+end
+
+require("aerial").setup({
+  -- optionally use on_attach to set keymaps when aerial has attached to a buffer
+  on_attach = function(bufnr)
+    -- Jump forwards/backwards with '{' and '}'
+    vim.keymap.set("n", "{", "<cmd>AerialPrev<CR>", { buffer = bufnr })
+    vim.keymap.set("n", "}", "<cmd>AerialNext<CR>", { buffer = bufnr })
+  end,
+})
+-- You probably also want to set a keymap to toggle aerial
+vim.keymap.set("n", "<leader>a", "<cmd>AerialToggle!<CR>")
 
 vim.opt.secure = true
