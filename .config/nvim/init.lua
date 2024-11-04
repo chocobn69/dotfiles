@@ -110,7 +110,7 @@ vim.opt.conceallevel = 0
 vim.o.termguicolors = true
 
 -- default border style
-local _border = "single"
+local _border = "rounded"
 
 require('packer').startup(function(use)
     use 'wbthomason/packer.nvim' -- Package manager
@@ -208,6 +208,14 @@ require('lualine').setup {
         path = 1,
         shorting_target = 40,
     },
+    sections = {
+    lualine_x = {
+      {
+        "aerial",
+        dense = true,
+      },
+    },
+  },
 }
 
 -- Highlight on yank
@@ -228,6 +236,15 @@ require('gitsigns').setup {
         delete = { text = '_' },
         topdelete = { text = '‾' },
         changedelete = { text = '~' },
+    },
+    current_line_blame = true,
+    current_line_blame_opts = {
+        virt_text = true,
+        virt_text_pos = 'right_align', -- 'eol' | 'overlay' | 'right_align'
+        delay = 1000,
+        ignore_whitespace = false,
+        virt_text_priority = 100,
+        use_focus = true,
     },
 }
 
@@ -271,7 +288,7 @@ local builtin = require("telescope.builtin")
 vim.keymap.set('n', '<C-p>', builtin.find_files)
 vim.keymap.set('n', '<C-n>', builtin.live_grep)
 vim.keymap.set('n', '<C-l>', builtin.current_buffer_fuzzy_find)
-vim.keymap.set('n', '<C-k>', builtin.lsp_document_symbols)
+vim.keymap.set('n', '<C-k>', require("telescope").extensions.aerial.aerial)
 vim.keymap.set('n', '<C-b>', builtin.buffers)
 vim.keymap.set('n', 'gj', builtin.diagnostics)
 
@@ -288,7 +305,6 @@ vim.keymap.set('i', 'kj', '<ESC>')
 -- select previously pasted
 vim.keymap.set('v', 'gp', '`[v`]')
 -- save with spacebarspace
-vim.keymap.set('n', '<space>', ':update<cr>', { silent = true })
 vim.keymap.set('n', '<space>', ':update<cr>', { silent = true })
 -- open config file to tune neovim
 vim.keymap.set('n', '<leader>i', ':e /home/choco/.config/nvim/init.lua<cr>', { silent = true })
@@ -334,6 +350,7 @@ local on_attach = function(client, bufnr)
     vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
     vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
 end
+vim.keymap.set('t', '<Esc>', [[<C-\><C-n>]],{noremap=true})
 
 local lsp_flags = {
     -- This is the default in Nvim 0.7+
@@ -342,7 +359,7 @@ local lsp_flags = {
 
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
     vim.lsp.handlers.hover, {
-        border = _border
+        border = _border,
     }
 )
 vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
@@ -382,7 +399,7 @@ lspconfig['pylsp'].setup{
         }
     }
 }
-lspconfig['tsserver'].setup{
+lspconfig['ts_ls'].setup{
     on_attach = on_attach,
     flags = lsp_flags,
     capabilities = capabilities,
@@ -456,7 +473,6 @@ cmp.setup {
         end, { 'i', 's' }),
     }),
     sources = cmp.config.sources({
-        { name = "copilot", group_index = 2 },
         { name = 'path' },
         { name = 'nvim_lsp' },
         { name = 'luasnip' },
@@ -597,24 +613,6 @@ local highlight = {
     "RainbowViolet",
     "RainbowCyan",
 }
-
--- local hooks = require "ibl.hooks"
--- -- create the highlight groups in the highlight setup hook, so they are reset
--- -- every time the colorscheme changes
--- hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
---     vim.api.nvim_set_hl(0, "RainbowRed", { fg = "#E06C75" })
---     vim.api.nvim_set_hl(0, "RainbowYellow", { fg = "#E5C07B" })
---     vim.api.nvim_set_hl(0, "RainbowBlue", { fg = "#61AFEF" })
---     vim.api.nvim_set_hl(0, "RainbowOrange", { fg = "#D19A66" })
---     vim.api.nvim_set_hl(0, "RainbowGreen", { fg = "#98C379" })
---     vim.api.nvim_set_hl(0, "RainbowViolet", { fg = "#C678DD" })
---     vim.api.nvim_set_hl(0, "RainbowCyan", { fg = "#56B6C2" })
--- end)
-
--- require("ibl").setup {
---     indent = { highlight = highlight, char = "▏" },
---     scope = {show_start = false, show_end = false}
--- }
 
 require'marks'.setup {
   -- whether to map keybinds or not. default true

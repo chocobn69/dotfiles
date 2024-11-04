@@ -2,11 +2,11 @@
     "layer": "top", // Waybar at top layer
     "position": "top", // Waybar position (top|bottom|left|right)
     // Choose the order of the modules
-    "modules-left": [ "clock", "custom/weather", "mpd"],
-    "modules-center": ["sway/workspaces"],
+    "modules-left": [ "clock", "custom/weather"],
+    "modules-center": ["hyprland/workspaces"],
     "modules-right": ["cpu", "memory", "battery", "pulseaudio", "network", "tray"],
     // Modules configuration
-    "sway/workspaces": {
+    "hyprland/workspaces": {
         "disable-scroll": true,
         "all-outputs": true,
         "format": "{name}: {icon}",
@@ -26,10 +26,10 @@
             "default": ""
         }
     },
-    "sway/mode": {
+    "hyprland/mode": {
         "format": "<span style=\"italic\">{}</span>"
     },
-    "sway/window": {
+    "hyprland/window": {
         "format": "{}",
         "max-length": 50,
         "tooltip": false
@@ -44,7 +44,7 @@
         },
         "on-click": "blueberry"
     },
-    "sway/language": {
+    "hyprland/language": {
         "format": "<big></big> {}",
         "max-length": 5,
         "min-length": 5,
@@ -149,36 +149,6 @@
             "perf": "",
             "sched": ""
         },
-    },
-    "mpd": {
-        "server": "/home/choco/.config/mpd/socket",
-        //"port": 6600,
-        "tooltip": true,
-        //"format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) ",
-        "format": "{stateIcon} {consumeIcon}{randomIcon}{artist} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) ",
-        "format-disconnected": "Disconnected ",
-        "format-stopped": "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}Stopped ",
-        "unknown-tag": "N/A",
-        "interval": 2,
-        "max-length": 60,
-        "on-click": "mpc toggle",
-        "consume-icons": {
-            "on": " "
-        },
-        "random-icons": {
-            "off": "<span color=\"#f53c3c\"></span> ",
-            "on": " "
-        },
-        "repeat-icons": {
-            "on": " "
-        },
-        "single-icons": {
-            "on": "1 "
-        },
-        "state-icons": {
-            "paused": "",
-            "playing": ""
-        }
     },
     "idle_inhibitor": {
         "format": "{icon}",
