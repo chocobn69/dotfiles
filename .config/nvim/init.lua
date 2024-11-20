@@ -147,7 +147,6 @@ require('packer').startup(function(use)
     use { 'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' } }
     use {'akinsho/bufferline.nvim', tag = "*", requires = 'nvim-tree/nvim-web-devicons'}
     use 'AaronLasseigne/yank-code' -- yank code with file name and line number
-    use 'uga-rosa/ccc.nvim' -- color picker / handling
     -- use "lukas-reineke/indent-blankline.nvim" -- visual indentation
     use {'ojroques/nvim-lspfuzzy',
         requires = {
@@ -157,7 +156,6 @@ require('packer').startup(function(use)
     }
     use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
     use 'chentoast/marks.nvim' -- visual marks
-    use 'LhKipp/nvim-nu' -- nushell support
     use 'jose-elias-alvarez/null-ls.nvim'
     use { "flobilosaurus/theme_reloader.nvim" }
     use({
@@ -416,7 +414,7 @@ lspconfig['sqlls'].setup{
     single_file_support = true,
 }
 
-require('lspconfig').ruff_lsp.setup {
+require('lspconfig').ruff.setup {
   on_attach = on_attach,
   init_options = {
     settings = {
@@ -589,18 +587,6 @@ vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
     end
 })
 
-local ccc = require("ccc")
-local mapping = ccc.mapping
-
-ccc.setup({
-    -- Your preferred settings
-    -- Example: enable highlighter
-    highlighter = {
-        auto_enable = true,
-        lsp = true,
-    },
-})
-
 require('lspfuzzy').setup {}
 
 -- indent-blankline
@@ -648,8 +634,6 @@ require'marks'.setup {
   },
   mappings = {}
 }
-
-require'nu'.setup{}
 
 require("conform").setup({
   formatters_by_ft = {
