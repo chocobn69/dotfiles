@@ -41,6 +41,7 @@ packer.init {
 vim.cmd [[packadd packer.nvim]]
 
 vim.opt.clipboard = 'unnamedplus'
+vim.api.nvim_set_option("clipboard", "unnamedplus")
 
 vim.opt.hlsearch = true
 vim.opt.cursorline = true
@@ -171,6 +172,7 @@ require('packer').startup(function(use)
           require("aerial").setup()
         end,
       })
+    use 'uga-rosa/ccc.nvim'
 end)
 
 -- treesitter
@@ -235,7 +237,7 @@ require('gitsigns').setup {
         topdelete = { text = '‾' },
         changedelete = { text = '~' },
     },
-    current_line_blame = true,
+    current_line_blame = false,
     current_line_blame_opts = {
         virt_text = true,
         virt_text_pos = 'right_align', -- 'eol' | 'overlay' | 'right_align'
@@ -393,6 +395,7 @@ lspconfig['pylsp'].setup{
                 flake8 = { enabled = false },
                 pycodestyle = { enabled = false },
                 mccabe = { enabled = false },
+                ruff = { enabled = true },
             }
         }
     }
@@ -403,6 +406,7 @@ lspconfig['ts_ls'].setup{
     capabilities = capabilities,
 }
 lspconfig['jsonls'].setup{}
+lspconfig['ruff'].setup{}
 
 lspconfig['sqlls'].setup{
     on_attach = on_attach,
@@ -414,15 +418,6 @@ lspconfig['sqlls'].setup{
     single_file_support = true,
 }
 
-require('lspconfig').ruff.setup {
-  on_attach = on_attach,
-  init_options = {
-    settings = {
-      -- Any extra CLI arguments for `ruff` go here.
-      args = {},
-    }
-  }
-}
 
 lspconfig['cssls'].setup{}
 
@@ -533,6 +528,18 @@ vim.api.nvim_create_user_command('Dark', theme_dark, {})
 vim.api.nvim_create_user_command('Pricing', ':cd /home/choco/projets_locaux/pricing/', {})
 vim.api.nvim_create_user_command('Bo', ':cd /home/choco/projets_locaux/backoffice/', {})
 
+vim.api.nvim_create_user_command("Format", function(args)
+  local range = nil
+  if args.count ~= -1 then
+    local end_line = vim.api.nvim_buf_get_lines(0, args.line2 - 1, args.line2, true)[1]
+    range = {
+      start = { args.line1, 0 },
+      ["end"] = { args.line2, end_line:len() },
+    }
+  end
+  require("conform").format({ async = true, lsp_format = "fallback", range = range })
+end, { range = true })
+
 -- to cleanup postgresql explain plan
 function cleanup(args)
     vim.cmd(':%s/QUERY PLAN | //g')
@@ -544,7 +551,7 @@ vim.api.nvim_create_user_command('CleanExplain', cleanup, {})
 vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
     pattern = {"*.sql"},
     callback = function()
-        vim.api.nvim_set_keymap(
+        vim.keymap.set(
             "n",
             "g=",
             ":Format<cr>",
@@ -560,7 +567,7 @@ vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
         vim.keymap.set(
             "n",
             "g=",
-            function() vim.lsp.buf.format { async = true } end,
+            vim.lsp.buf.format,
             { noremap = true, silent = false }
         )
         -- add breakpoint()
@@ -641,18 +648,12 @@ require("conform").setup({
     sql = { "pg_format" },
   },
 })
-vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
-vim.api.nvim_create_user_command("Format", function(args)
-  local range = nil
-  if args.count ~= -1 then
-    local end_line = vim.api.nvim_buf_get_lines(0, args.line2 - 1, args.line2, true)[1]
-    range = {
-      start = { args.line1, 0 },
-      ["end"] = { args.line2, end_line:len() },
-    }
-  end
-  require("conform").format({ async = true, lsp_fallback = true, range = range })
-end, { range = true })
+vim.api.nvim_create_autocmd("BufWritePre", {
+  pattern = "*.py",
+  callback = function(args)
+    require("conform").format({ bufnr = args.buf })
+  end,
+})
 
 vim.notify = require("notify")
 local notify = require 'notify'
@@ -683,5 +684,18 @@ require("aerial").setup({
 })
 -- You probably also want to set a keymap to toggle aerial
 vim.keymap.set("n", "<leader>a", "<cmd>AerialToggle!<CR>")
+
+local ccc = require("ccc")
+local mapping = ccc.mapping
+
+ccc.setup({
+  -- Your preferred settings
+  -- Example: enable highlighter
+  highlighter = {
+    auto_enable = true,
+    lsp = true,
+  },
+})
+
 
 vim.opt.secure = true

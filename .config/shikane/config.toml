@@ -1,16 +1,27 @@
 [[profile]]
-name = "laptop builtin"
+name = "laptop"
     [[profile.output]]
     search = "eDP-1"
     enable = true
 
 [[profile]]
-name = "no builtin + HDMI"
+name = "dual"
+    [[profile.output]]
+    search = "n=eDP-1"
+    enable = true
+
+    [[profile.output]]
+    search = "n=DP-3"
+    mode = "best"
+    enable = true
+
+[[profile]]
+name = "hdmi"
     [[profile.output]]
     search = "n=eDP-1"
     enable = false
 
     [[profile.output]]
-    search = "n=HDMI-A-1"
+    search = "n=DP-3"
     mode = "best"
     enable = true

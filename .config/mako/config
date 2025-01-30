@@ -1,13 +1,14 @@
 on-button-left=dismiss
-on-notify=exec mpv /usr/share/sounds/freedesktop/stereo/message.oga --no-terminal --quiet
+#on-notify=exec mpv /usr/share/sounds/freedesktop/stereo/message.oga --no-terminal --quiet
 font=FiraMono Nerd Font 12
 width=400
 height=210
 default-timeout=3000
 ignore-timeout=0
+margin=40,10,5
 
 ## Base16 Seti UI
-# Author: 
+# Author:
 #
 # You can use these variables anywhere in the mako configuration file.
 

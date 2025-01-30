@@ -1,13 +1,6 @@
 #zmodload zsh/zprof
 
 GITSTATUS_LOG_LEVEL=INFO
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 export TERM="xterm-256color"
@@ -22,14 +15,22 @@ export TERM="xterm-256color"
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
+# ZSH_THEME="bullet-train"
+# BULLETTRAIN_PROMPT_ORDER=(
+#   git
+#   virtualenv
+#   dir
+# )
+
+zstyle ':omz:alpha:lib:git' async-prompt yes
+
 # Path to your oh-my-zsh installation.
-ZSH=/usr/share/oh-my-zsh/
+ZSH=~/.oh-my-zsh
+export ZSH=~/.oh-my-zsh
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-
-source  /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -74,9 +75,8 @@ ZSH_CUSTOM=~/.oh-my-zsh
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(archlinux common-aliases docker sudo systemd vi-mode pass ssh-agent)
+plugins=(git git-prompt archlinux common-aliases docker sudo systemd vi-mode pass ssh-agent starship)
 # plugins=()
-
 
 # User configuration
 
@@ -107,14 +107,16 @@ fi
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-# ZSH_THEME="nord"
-
 ZSH_CACHE_DIR=$HOME/.oh-my-zsh-cache
 if [[ ! -d $ZSH_CACHE_DIR ]]; then
   mkdir $ZSH_CACHE_DIR
 fi
 
 source $ZSH/oh-my-zsh.sh
+
+
+#bindkey -M menuselect              '^I'         menu-complete
+#bindkey -M menuselect "$terminfo[kcbt]" reverse-menu-complete
 
 setopt VI
 alias vim=nvim
@@ -159,9 +161,9 @@ alias cv='vim ~/.config/nvim/init.vim'
 alias ssh="env TERM=xterm LC_ALL=C ssh"
 
 source $HOME/.profile
-source $HOME/.local_path
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+source <(fzf --zsh)
+#[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 export FZF_DEFAULT_OPTS="--height 50% --ansi --multi --reverse --border --inline-info --preview 'bat --color=always --style=header,grid --line-range :20 {} 2> /dev/null' --preview-window=right:40%"
 export FZF_CTRL_R_OPTS="--no-preview"
@@ -174,7 +176,6 @@ alias gshow="git show \$(git log --pretty=oneline | fzf +m | awk '{print \$1}')"
 
 # autosuggestions
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-bindkey '^ ' autosuggest-accept
 # ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=3"
 # ZSH_AUTOSUGGEST_USE_ASYNC='yes'
 
@@ -192,9 +193,6 @@ export LESS_TERMCAP_ue=$(tput sgr0)
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
-PS1="${CUSTOM_PS1:-default PS1}: "
-export PS1
-
 workpass() {
   PASSWORD_STORE_DIR=$HOME/Dropbox/.password-store/ pass $@
 }
@@ -207,5 +205,9 @@ zle -N edit-command-line
 bindkey '^xe' edit-command-line
 bindkey '^x^e' edit-command-line
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+eval "$(starship init zsh)"
+
+source /usr/share/zsh/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh
+bindkey              '^I'         menu-complete
+bindkey "$terminfo[kcbt]" reverse-menu-complete
+bindkey '^@' autosuggest-accept
